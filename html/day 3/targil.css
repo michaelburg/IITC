@@ -1,0 +1,20 @@
+body{
+    margin: 0;
+    background-color: bisque;
+    text-align: center;
+}
+
+div{
+    width: 500px;
+    border: 10px solid red;
+    background-color: brown;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    margin-inline: auto;
+}
+button{
+    margin-bottom: 10px;
+}
+a{
+    margin-bottom: 10px;
+}
