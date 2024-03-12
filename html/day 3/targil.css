@@ -4,13 +4,16 @@ body{
     text-align: center;
 }
 
-div{
+div.card{
     width: 500px;
     border: 10px solid red;
     background-color: brown;
     margin-bottom: 10px;
     border-radius: 50px;
     margin-inline: auto;
+}
+div{
+    margin-bottom: 10px;
 }
 button{
     margin-bottom: 10px;
