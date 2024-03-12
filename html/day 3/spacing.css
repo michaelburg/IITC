@@ -1,0 +1,14 @@
+.parent{
+    width: 150px;
+    height: 150px;
+    border: 10px solid red;
+    background-color: brown;
+}
+.child{
+    width: 50%;
+    height: 50%;
+    border: 10px solid red;
+    background-color: brown;
+    margin-left: 25px;
+    margin-top: 25px;
+}
