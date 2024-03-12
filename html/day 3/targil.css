@@ -11,6 +11,9 @@ div.card{
     margin-bottom: 10px;
     border-radius: 50px;
     margin-inline: auto;
+    display: inline-block;
+    vertical-align: middle;
+    box-shadow: 0 15px 6px -6px black;
 }
 div{
     margin-bottom: 10px;
