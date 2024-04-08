@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+      }
+
+      p {
+        font-style: italic;
+      }
+
+      @media (min-width: 600px) and (max-width: 800px) {
+        p {
+          color: red;
+        }
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      @media (min-width: 600px) {
+        .container {
+          flex-direction: row;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>Lorem ipsum dolor sit amet consectetur adip</p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint aspernatur
+        quasi veritatis harum. Eos dolor, nesciunt recusandae asperiores
+        sapiente unde nisi eligendi. Nam quaerat velit mollitia nihil, quis
+        accusantium dolor!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint aspernatur
+        quasi veritatis harum. Eos dolor, nesciunt recusandae asperiores
+        sapiente unde nisi eligendi. Nam quaerat velit mollitia nihil, quis
+        accusantium dolor!
+      </p>
+    </div>
+  </body>
+</html>

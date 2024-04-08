@@ -1,0 +1,25 @@
+html{
+    height: 100vh;
+}
+body{
+    margin: 0px;
+    height: 100%;
+}
+
+
+
+.parent{
+    width: 150px;
+    height: 150px;
+    border: 10px solid red;
+    background-color: brown;
+}
+.child{
+    width: 50%;
+    height: 50%;
+    /*border: 10px solid red;*/
+    background-color: white;
+    margin-left: 25px ;
+    margin-top: 25px;
+    padding: 8px;
+}

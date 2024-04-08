@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+    .hide {
+      display: none !important;
+    }
+
+    .grid {
+      margin-inline: 2em;
+      margin-top: 2em;
+      padding: 1em;
+      background-color: rgb(35, 35, 35);
+
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 500px 1fr;
+    }
+
+    .card {
+      text-align: center;
+      background-color: white;
+      display: grid;
+      gap: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .grid :nth-child(4) {
+      color: red;
+
+      /* both are same result (in this case) */
+      /* grid-column:  span 3; */
+
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+
+    .grid > :first-child {
+      color: green;
+      /* grid-row: span 2; */
+
+      grid-row-start: 1;
+      grid-row-end: 3;
+    }
+
+    .auto-grid {
+      margin-inline: 2em;
+      margin-top: 2em;
+      padding: 1em;
+      background-color: rgb(35, 35, 35);
+
+      display: grid;
+      gap: 1rem;
+      /* grid-template-columns: repeat(auto-fit, 200px); */
+      grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
+    }
+  </style>
+  <body>
+    <div class="grid">
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="auto-grid">
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Flex Direction</h4>
+          <p>Control the <span class="italic">flex direction</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      p:not(:nth-child(2)) {
+        background-color: red;
+      }
+
+      p:hover {
+        background-color: pink;
+      }
+
+      p::before {
+        content: "baba";
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione minus
+      illum tempore, consequatur numquam nulla eos minima dolore dignissimos ex,
+      nisi corporis! Dolorem sint sapiente molestiae non consectetur aliquam
+      blanditiis?
+    </p>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione minus
+      illum tempore, consequatur numquam nulla eos minima dolore dignissimos ex,
+      nisi corporis! Dolorem sint sapiente molestiae non consectetur aliquam
+      blanditiis?
+    </p>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione minus
+      illum tempore, consequatur numquam nulla eos minima dolore dignissimos ex,
+      nisi corporis! Dolorem sint sapiente molestiae non consectetur aliquam
+      blanditiis?
+    </p>
+  </body>
+</html>

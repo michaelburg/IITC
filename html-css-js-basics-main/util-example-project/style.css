@@ -1,0 +1,100 @@
+/*  GENERAL */
+@import "css/reset.css";
+@import "css/variables.css";
+
+/*  UTILS */
+@import "css/utils/layout.utils.css";
+@import "css/utils/spacing.utils.css";
+@import "css/utils/typography.utils.css";
+@import "css/utils/flex-grid.utils.css";
+
+/*  COMPONENTS (UI) */
+@import "css/components/button.component.css";
+@import "css/components/input.component.css";
+@import "css/components/card.component.css";
+@import "css/components/reel.component.css";
+
+/*  Specific to this project */
+
+body {
+  background-color: var(--clr-neutral-300);
+  color: var(--clr-neutral-900);
+}
+
+.main-nav {
+  height: var(--nav-height);
+  background-color: var(--clr-neutral-800);
+  color: var(--clr-neutral-100);
+  box-shadow: 0 0 0 1px var(--clr-neutral-800);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: box-shadow 0.3s ease;
+}
+
+.main-nav:hover {
+  box-shadow: 0 0 5px 1px var(--clr-neutral-800);
+}
+
+.main-nav-content {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.logo a span {
+  color: var(--clr-primary-400);
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 16px;
+}
+
+.main-nav ul li a:hover {
+  color: var(--clr-primary-400);
+}
+
+.articles-and-aside {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .articles-and-aside {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aside {
+  position: sticky;
+  top: calc(var(--nav-height) + 2rem);
+  align-self: start;
+}
+
+footer {
+  background-color: var(--clr-neutral-800);
+  color: var(--clr-neutral-100);
+  padding-block: 1rem;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-nav ul {
+  flex: 1;
+}
+
+.footer-nav ul li a:hover {
+  color: var(--clr-primary-400);
+}

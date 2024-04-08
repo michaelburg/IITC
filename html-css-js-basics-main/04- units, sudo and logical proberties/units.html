@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Units</title>
+    <style>
+      * {
+        margin: 0;
+      }
+
+      /* Select all elemnt except the first one */
+      .flow > * + * {
+        margin-top: 1em;
+      }
+      :where(.flow :not(:first-child)) {
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flow">
+      <h3>heading 3</h3>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea adipisci
+        minima sed fuga nisi, unde, dolorem eius
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea adipisci
+        minima sed fuga nisi, unde, dolorem eius
+      </p>
+      <h1>heading 1</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea adipisci
+        minima sed fuga nisi, unde, dolorem eius
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea adipisci
+        minima sed fuga nisi, unde, dolorem eius
+      </p>
+    </div>
+  </body>
+</html>

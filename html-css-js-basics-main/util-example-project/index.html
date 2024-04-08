@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utility & UI Component</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="app">
+      <nav class="main-nav">
+        <div class="main-nav-content wrapper">
+          <div class="logo">
+            <a href="#">Logo<span>.</span></a>
+          </div>
+
+          <ul>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="wrapper">
+        <div class="my-8">
+          <h1>Utility & UI Component Classes Example.</h1>
+          <p class="italic">
+            This is an example of how to use utility classes to style a webpage.
+          </p>
+        </div>
+
+        <div class="articles-and-aside">
+          <section class="articles flow">
+            <article>
+              <h2>Utility Classes:</h2>
+              <div class="flow">
+                <p>
+                  Utility classes are a powerful tool in modern web development
+                  that allow developers to apply styles directly to HTML
+                  elements without writing custom CSS rules. These classes are
+                  designed to perform specific styling tasks, such as setting
+                  margins, padding, text alignment, and more, without the need
+                  for writing repetitive CSS code.
+                </p>
+                <p>
+                  One of the key advantages of utility classes is their ability
+                  to promote code reusability and maintainability. Instead of
+                  duplicating CSS styles or creating separate style sheets for
+                  different components, developers can simply apply utility
+                  classes directly in their HTML markup. This approach not only
+                  reduces the overall codebase but also makes it easier to make
+                  global style changes and updates. Additionally, utility
+                  classes follow a clear naming convention, making it intuitive
+                  for developers to understand their purpose and use them
+                  effectively throughout the project.
+                </p>
+                <p>
+                  Furthermore, utility classes can enhance developer
+                  productivity by providing a standardized set of styling
+                  options. Developers can quickly prototype and iterate on
+                  designs by leveraging utility classes to apply common styles
+                  such as typography, spacing, and alignment. This rapid
+                  development cycle is especially beneficial in agile
+                  development environments where speed and flexibility are
+                  paramount. Overall, utility classes play a crucial role in
+                  modern web development by improving code organization,
+                  promoting consistency, and speeding up the styling process.
+                </p>
+              </div>
+            </article>
+            <article>
+              <h2>UI Component Classes:</h2>
+              <div class="flow">
+                <p>
+                  UI component classes are an integral part of building rich and
+                  interactive user interfaces on the web. These classes
+                  encapsulate styling, behavior, and functionality into reusable
+                  components such as buttons, cards, navigation menus, and more.
+                  By applying UI component classes to HTML elements, developers
+                  can create consistent and visually appealing UI elements
+                  across their web applications. For example, a .btn class might
+                  define styles for buttons with specific padding, colors, and
+                  hover effects, ensuring a cohesive look and feel throughout
+                  the site.
+                </p>
+                <p>
+                  One of the primary benefits of using UI component classes is
+                  their ability to abstract complex styling and interactive
+                  features into modular components. This promotes code
+                  reusability and reduces duplication, as developers can easily
+                  reuse predefined classes to create similar UI elements across
+                  different parts of the application. Additionally, UI component
+                  classes often come with built-in responsive behavior, ensuring
+                  that components adapt gracefully to various screen sizes and
+                  devices, enhancing the overall user experience.
+                </p>
+                <p>
+                  Moreover, UI component classes can improve development
+                  efficiency and maintainability by providing a consistent
+                  design language and reducing the need for custom CSS styles.
+                  Developers can focus on implementing functionality and
+                  application logic, knowing that the UI components are already
+                  styled and ready to use. This separation of concerns between
+                  styling and functionality leads to cleaner, more maintainable
+                  codebases, making it easier to scale and update the
+                  application over time. In summary, UI component classes are
+                  essential tools for creating modern, user-friendly interfaces
+                  while promoting code organization and reusability.
+                </p>
+              </div>
+            </article>
+          </section>
+          <aside class="aside">
+            <div class="card">
+              <div class="flow">
+                <h2>Aside:</h2>
+                <p>
+                  The CSS code makes the aside element stick to the top of its
+                  container after scrolling past a distance defined by the sum
+                  of var(--nav-height) and 2rem, and it aligns itself to the top
+                  within its container using Flexbox.
+                </p>
+                <p class="bold">
+                  Note: that this is also a card! what a great reusable class!
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <section class="my-8 grid grid-columns-2 gap-8">
+          <div class="flow">
+            <h2>Form Example#1:</h2>
+            <form class="form">
+              <div class="card">
+                <div class="flex flex-column">
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="name" />
+                </div>
+                <div class="flex flex-column">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" />
+                </div>
+                <div class="flex flex-column">
+                  <label for="message">Message:</label>
+                  <textarea id="message" name="message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="flow">
+            <h2>Form Example#2:</h2>
+            <form class="form">
+              <div class="card">
+                <div class="flex flex-column">
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="name" />
+                </div>
+                <div class="flex flex-column">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" />
+                </div>
+                <div class="flex flex-column">
+                  <label for="message">Message:</label>
+                  <textarea id="message" name="message"></textarea>
+                </div>
+                <div class="flex flex-justify-space-between">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-danger">Clear</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="my-8 flow">
+          <h2>Reel Example:</h2>
+          <div class="reel pb-4">
+            <div class="card">
+              <img src="img/Flex-direction.png" alt="Flex-direction" />
+              <div>
+                <h4>Flex Direction</h4>
+                <p>Control the <span class="italic">flex direction</span></p>
+              </div>
+            </div>
+            <div class="card selected">
+              <img
+                src="img/Flex-justify-content.png"
+                alt="Flex-justify-content"
+              />
+              <div>
+                <h4>Justify Content</h4>
+                <p>Control the <span class="italic">main</span> axis</p>
+              </div>
+            </div>
+            <div class="card">
+              <img
+                src="img/Flex-align-items-property.png"
+                alt="Flex-align-items"
+              />
+              <div>
+                <h4>Align Iitems</h4>
+                <p>Control the <span class="italic">cross</span> axis</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="img/Flex-direction.png" alt="Flex-direction" />
+              <div>
+                <h4>Flex Direction</h4>
+                <p>Control the <span class="italic">flex direction</span></p>
+              </div>
+            </div>
+            <div class="card">
+              <img
+                src="img/Flex-justify-content.png"
+                alt="Flex-justify-content"
+              />
+              <div>
+                <h4>Justify Content</h4>
+                <p>Control the <span class="italic">main</span> axis</p>
+              </div>
+            </div>
+            <div class="card">
+              <img
+                src="img/Flex-align-items-property.png"
+                alt="Flex-align-items"
+              />
+              <div>
+                <h4>Align Iitems</h4>
+                <p>Control the <span class="italic">cross</span> axis</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="img/Flex-direction.png" alt="Flex-direction" />
+              <div>
+                <h4>Flex Direction</h4>
+                <p>Control the <span class="italic">flex direction</span></p>
+              </div>
+            </div>
+            <div class="card">
+              <img
+                src="img/Flex-justify-content.png"
+                alt="Flex-justify-content"
+              />
+              <div>
+                <h4>Justify Content</h4>
+                <p>Control the <span class="italic">main</span> axis</p>
+              </div>
+            </div>
+            <div class="card">
+              <img
+                src="img/Flex-align-items-property.png"
+                alt="Flex-align-items"
+              />
+              <div>
+                <h4>Align Iitems</h4>
+                <p>Control the <span class="italic">cross</span> axis</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="my-8 flow">
+          <h2>Auto Grid Example:</h2>
+          <div class="auto-grid">
+            <div class="card">
+              <img src="img/Flex-direction.png" alt="Flex-direction" />
+              <div>
+                <h4>Flex Direction</h4>
+                <p>Control the <span class="italic">flex direction</span></p>
+              </div>
+            </div>
+            <div class="card">
+              <img
+                src="img/Flex-justify-content.png"
+                alt="Flex-justify-content"
+              />
+              <div>
+                <h4>Justify Content</h4>
+                <p>Control the <span class="italic">main</span> axis</p>
+              </div>
+            </div>
+            <div class="card">
+              <img
+                src="img/Flex-align-items-property.png"
+                alt="Flex-align-items"
+              />
+              <div>
+                <h4>Align Iitems</h4>
+                <p>Control the <span class="italic">cross</span> axis</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <nav class="footer-nav wrapper">
+          <ul>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#">Terms of Service</a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a href="#">Cookies</a>
+            </li>
+            <li>
+              <a href="#">Accessibility</a>
+            </li>
+            <li>
+              <a href="#">FAQ</a>
+            </li>
+            <li>
+              <a href="#">Support</a>
+            </li>
+            <li>
+              <a href="#">Careers</a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a href="#">Blog</a>
+            </li>
+            <li>
+              <a href="#">Press</a>
+            </li>
+            <li>
+              <a href="#">Partners</a>
+            </li>
+            <li>
+              <a href="#">Advertise</a>
+            </li>
+            <li>
+              <a href="#">Media</a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>

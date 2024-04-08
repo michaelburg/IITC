@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Sizing</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .parent {
+            /* width: 150px; */
+            height: 150px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .child {
+            /* margin-left: 24px; */
+            background-color: blueviolet;
+            width: 100%;
+            padding: 8px;
+            border: 5PX solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        Parent
+        <div class="child">
+            Child
+        </div>
+    </div>
+</body>
+
+</html>

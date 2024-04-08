@@ -1,0 +1,14 @@
+:root {
+  --clr-primary-400: #fc6736;
+  --clr-primary-500: #f94d0d;
+
+  --clr-neutral-100: #ffffff;
+  --clr-neutral-300: #efecec;
+  --clr-neutral-800: #0c2d57;
+  --clr-neutral-900: #000000;
+
+  --large-brakepoint: 960px;
+  --small-brakepoint: 768px;
+
+  --nav-height: 4rem;
+}

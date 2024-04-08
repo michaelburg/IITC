@@ -1,0 +1,28 @@
+/* Make the header stick to the top */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+/* main {
+  position: relative;
+} */
+/* Make the aside stick to the top of its parent container */
+aside {
+  align-self: flex-start;
+  position: sticky;
+  top: 100px;
+}
+/* Make floating button stick to the bottom right of the page */
+button {
+  padding-inline: 1.5rem;
+  padding-block: 0.5rem;
+  border: 0;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  background-color: red;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
