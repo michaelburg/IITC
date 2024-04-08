@@ -1,0 +1,1 @@
+{"michael": {"tag": "work", "location": "tel aviv", "date": "30-12-2001 12:39", "attendee": ["michael", "yosi"]}, "yosi": {"tag": "work", "location": "tel aviv", "date": "30-12-2002 12:39", "attendee": ["michael", "yosi"]}}
