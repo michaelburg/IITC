@@ -1,0 +1,24 @@
+.aa {
+  background-color: red;
+}
+
+.bb {
+  background-color: blue;
+}
+
+.bb p {
+  border: 2px solid black;
+}
+
+.cc {
+  background-color: pink;
+}
+
+p {
+  font-style: italic;
+}
+
+div {
+  border: 5px solid green;
+  margin: 5px;
+}

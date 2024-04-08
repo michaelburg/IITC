@@ -1,0 +1,56 @@
+/* CSS Custom Properties */
+:root {
+  --page-padding: 48px;
+  --brand-color: rgb(193, 145, 140);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  text-transform: uppercase;
+}
+
+nav {
+  background-color: var(--brand-color);
+  display: flex;
+  justify-content: space-between;
+  padding-inline: var(--page-padding);
+  padding-block: 16px;
+}
+
+ul {
+  display: flex;
+  gap: 16px;
+}
+
+.card-wrapper {
+  padding-inline: var(--page-padding);
+  margin-top: 24px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid var(--brand-color);
+  border-radius: 5px;
+  padding: 8px;
+}

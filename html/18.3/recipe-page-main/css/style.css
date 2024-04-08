@@ -1,0 +1,87 @@
+@import "./reset.css";
+
+/* - Nutmeg: hsl(14, 45%, 36%) כותרות
+- Dark Raspberry: hsl(332, 51%, 32%)
+
+### Neutral
+
+- White: hsl(0, 0%, 100%) רקע המתכון
+- Rose White: hsl(330, 100%, 98%)
+- Eggshell: hsl(30, 54%, 90%)רקע הדף
+- Light Grey: hsl(30, 18%, 87%)
+- Wenge Brown: hsl(30, 10%, 34%)
+- Dark Charcoal: hsl(24, 5%, 18%) */
+
+main {
+  /* background-color: hsl(24, 5%, 18%); */
+  /* padding-block: 2rem; !!!!!!!!!!*/
+  padding-inline: 2rem;
+  margin-inline: 50px;
+}
+body {
+  padding-top: 50px;
+}
+div{
+  padding-block: 20px;
+}
+img {
+  margin-top: 20px;
+  border-radius: 5%;
+}
+
+.Preparation-back {
+  background-color: hsl(330, 100%, 98%);
+  border-radius: 5%;
+  padding-bottom: 10px;
+}
+.Preparation{
+  padding-left: 10px;
+}
+.main-head {
+  font-size: 36px;
+
+  color: black;
+}
+
+.Preparation h3 {
+  color: hsl(332, 51%, 32%);
+  padding-left: 10px;
+}
+
+h1 {
+  color: hsl(14, 45%, 36%);
+}
+.nutrition {
+  list-style: none;
+}
+.nutrition li::marker {
+  color: hsl(14, 45%, 36%);
+}
+.br {
+  border-bottom: 1px solid;
+  padding-top: 0px;
+  /* margin-top: 10px; */
+}
+
+/* .nutrition {
+  display: flex;
+  flex-wrap: wrap;
+
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+.nutrition {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+  /* padding-inline: 2rem;
+  padding-block: 1rem; */
+}
+.item-2{
+  color: hsl(14, 45%, 36%);
+  padding: 0;
+}
+.item-1{
+  padding: 0;
+}

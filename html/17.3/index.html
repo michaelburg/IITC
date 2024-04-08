@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            direction: rtl;
+        }
+        *{
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        p{
+            background-color: red;
+            
+            /* margin-inline-start: 50px;
+            /* margin-inline: 50px; */
+            /* margin-block: 50px;  */
+            /* margin-left: 50px; */
+        }
+        p:hover{
+            /* background-color: pink; */
+        }
+        p::before{
+            content: "baba";
+            color: green;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        @media (min-width:400px) {
+            p{
+                background-color: white;
+            }
+            .content{
+                flex-direction: row;
+
+            }
+        }
+        </style>
+</head>
+<body>
+    <div class="content">
+         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In hic, debitis asperiores laboriosam incidunt, aperiam quidem veniam exercitationem quam numquam quibusdam veritatis consectetur voluptate assumenda alias, ea amet. Ad, repellendus?</p>
+         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In hic, debitis asperiores laboriosam incidunt, aperiam quidem veniam exercitationem quam numquam quibusdam veritatis consectetur voluptate assumenda alias, ea amet. Ad, repellendus?</p>
+         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. In hic, debitis asperiores laboriosam incidunt, aperiam quidem veniam exercitationem quam numquam quibusdam veritatis consectetur voluptate assumenda alias, ea amet. Ad, repellendus?</p>
+    </div>
+</body>
+</html>
