@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function get_min_index(array1){
+        let min=0
+        for(let i=0;i<array1.length;i++){
+          if(array1[i]<array1[min]){
+            min=i
+          }
+        }
+        return min
+      }
+      let array1 = [4, 3, 2, 1];
+      console.log(get_min_index(array1));
+    </script>
+  </body>
+</html>

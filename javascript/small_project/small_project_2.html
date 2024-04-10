@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const grid = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"],
+      ];
+      // Function to display the grid using an alert
+      function displayGrid(sub_message) {
+        let message = "";
+        for (let row of grid) {
+          message += row.join(" | ") + "\n";
+          message += "---------\n";
+        }
+        message += sub_message;
+        return message;
+      }
+      // Example usage
+      function get_index(input) {
+        let row = parseInt(input / 3);
+        if (input % 3 == 0) {
+          row--;
+        }
+        let column;
+        if (input % 3 == 0) {
+          column = 2;
+        } else {
+          column = (input % 3) - 1;
+        }
+        return [row, column];
+      }
+
+      function is_input_in_range(input) {
+        return input > 0 && input < 10;
+      }
+
+      function is_input_taken(grid, row, column) {
+        return grid[row][column] == "X" || grid[row][column] == "O";
+      }
+
+      function check_win(grid, row, column) {
+        if (grid[row][0] == grid[row][1] && grid[row][0] == grid[row][2]) {
+          //check row
+          return true;
+        }
+        if (
+          grid[0][column] == grid[1][column] &&
+          grid[0][column] == grid[2][column]
+        ) {
+          //check column
+          return true;
+        }
+        if (row == column) {
+          //check left ro right
+          if (grid[0][0] == grid[1][1] && grid[0][0] == grid[2][2]) {
+            return true;
+          }
+        }
+        if (grid[2][0] == grid[1][1] && grid[2][0] == grid[0][2]) {
+          //check right ro left
+          return true;
+        }
+        return false;
+      }
+
+      function get_user_input() {
+        while (true) {
+          //get chosen sell from use
+          input = parseInt(prompt(message));
+          if (isNaN(input)) {
+            //is input is number
+            invalid_input_message = "invalid input";
+            message = displayGrid(invalid_input_message);
+          } else if (!is_input_in_range(input)) {
+            //is input in range(1-9)
+            not_in_range_message = "input not in range";
+            message = displayGrid(not_in_range_message);
+          } else {
+            index = get_index(input); //convert input to cell
+            taken_message = index;
+            row = index[0];
+            column = index[1];
+            if (is_input_taken(grid, row, column)) {
+              //is cell free
+              taken_message = "cell already taken";
+              message = displayGrid(taken_message);
+            } else {
+              grid[row][column] = turn;
+              break;
+            }
+          }
+        }
+      }
+
+      function new_game() {
+        for (let i = 0; i < 9; i++) {
+          if (i % 2 == 0) {
+            turn = "X";
+          } else {
+            turn = "O";
+          }
+          new_turn_message = `it's ${turn} turn, good luck!`;
+          message = displayGrid(new_turn_message);
+          get_user_input();
+          if (i > 3) {
+            if (check_win(grid, row, column)) {
+              win_message = `${turn} has won`;
+              message = displayGrid(win_message);
+              alert(message);
+              return
+            }
+          }
+        }
+        tie_message = "its a tie";
+        message = displayGrid(tie_message);
+        alert(message);
+      }
+      new_game();
+    </script>
+  </body>
+</html>

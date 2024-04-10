@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function is_in_range(new_num, user_guess) {
+        if (new_num > 0 && new_num < 47) {
+          return true;
+        }
+        return false;
+      }
+      function is_not_taken(number, user_guess) {
+        for (let i = 0; i < user_guess.length; i++) {
+          if (number == user_guess[i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+      function get_user_numbers() {
+        user_guess = [];
+        for (let i = 0; i < 6; i++) {
+          message = "enter new number(1-46): ";
+          while (true) {
+            new_num = parseInt(prompt(message));
+            if (isNaN(new_num)) {
+              message = "not number";
+            } else if (!is_in_range(new_num, user_guess)) {
+              message = "not in range(1-46)";
+            } else if (!is_not_taken(new_num, user_guess)) {
+              message = "already taken";
+            } else {
+              user_guess.push(new_num);
+              break;
+            }
+          }
+        }
+        return user_guess;
+      }
+      function get_comp_numbers() {
+        comp_guess = [];
+        for (let i = 0; i < 6; i++) {
+          while (true) {
+            new_num = Math.random();
+            new_num = Math.floor(new_num * 46) + 1;
+            if (is_not_taken(new_num, comp_guess)) {
+              comp_guess.push(new_num);
+              break;
+            }
+          }
+        }
+        return comp_guess;
+      }
+      function seccuss(user_guess, comp_guess) {
+        count = 0;
+        for (let i = 0; i < user_guess.length; i++) {
+          for (let y = 0; y < user_guess.length; y++) {
+            if (user_guess[i] == comp_guess[y]) {
+              count++;
+              break;
+            }
+          }
+        }
+        return count;
+      }
+      
+      user_name = prompt("enter your name: ");
+      user_guess = get_user_numbers();
+      comp_guess = get_comp_numbers();
+      count = seccuss(user_guess, comp_guess);
+      console.log(user_guess);
+      console.log(comp_guess);
+      message = `Good for you, ${user_name}! You guessed ${count} out of 6!!`;
+      alert(message);
+    </script>
+  </body>
+</html>

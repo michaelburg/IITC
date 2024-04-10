@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function get_val(text,key) {
+        let temp = text.split(",");
+        for (let i = 0; i < temp.length; i++) {
+          value = temp[i].split(":");
+          temp_key=value[0].trim()
+          temp_value=value[1].trim()
+          if(key==temp_key){
+            return temp_value
+          }
+        
+        }
+        return 'cannot find';
+      }
+
+      const text = "name:nathan , family:krasney , city:haifa";
+      const key='city'
+      console.log(get_val(text,key));
+    </script>
+  </body>
+</html>

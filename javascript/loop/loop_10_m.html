@@ -9,7 +9,7 @@
     <script>
       //loop_10_m
       let number = parseInt(prompt("enter number: "));
-      num_digits = parseInt(Math.log10(number));
+      let num_digits = parseInt(Math.log10(number));
       for (let i = num_digits; i >= 0; i--) {
         console.log(parseInt(number / 10 ** i));
         number = number % 10 ** i;

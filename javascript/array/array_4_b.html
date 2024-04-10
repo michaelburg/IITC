@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function combine(array1, array2) {
+        new_arr = [];
+        for (let i = 0; i < array1.length; i++) {
+          new_arr.push(array1[i]);
+        }
+        for (let i = 0; i < array2.length; i++) {
+          new_arr.push(array2[i]);
+        }
+        return new_arr;
+      }
+      let array1 = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+      ];
+      let array2 = [
+        [10, 11, 12, 13],
+        [14, 15, 16, 17],
+      ];
+      console.log(combine(array1, array2));
+    </script>
+  </body>
+</html>
