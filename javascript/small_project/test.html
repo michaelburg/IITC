@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      stat = {};
+      X_player = "X";
+      O_player = "O";
+
+      if (!(X_player in stat)) {
+        stat[X_player] = {};
+        stat[X_player]["win"] = 0;
+        stat[X_player]["lose"] = 0;
+        stat[X_player]["tie"] = 0;
+      }
+      if (!(O_player in stat)) {
+        stat[O_player] = {};
+        stat[O_player]["win"] = 0;
+        stat[O_player]["lose"] = 0;
+        stat[O_player]["tie"] = 0;
+      }
+      let message = "";
+      for (const player in stat) {
+        message += player;
+        message += ": ";
+        for (const property in stat[player]) {
+          message += property;
+          message += ": ";
+          message += stat[player][property];
+          message += ", ";
+        }
+        message += "\n";
+      }
+      alert(message);
+
+      import { readFile } from "fs/promises";
+
+      // await can only be used in an async function
+      (async () => {
+        const file = await readFile("dict.json", { encoding: "utf-8" });
+        const parsed = JSON.parse(file);
+        // log all data
+        console.log(parsed);
+        // log outdoor temperature
+        console.log(parsed.outdoor_temp);
+      })();
+    </script>
+  </body>
+</html>

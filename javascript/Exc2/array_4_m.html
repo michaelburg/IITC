@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function count_isimilar(array1) {
+        let count = 0;
+        for (let i = 0; i < array.length - 1; i++) {
+          let did_find = false;
+          for (let y = 0; y < array.length; y++) {
+            if (i != y) {
+              if (array[i] == array[y]) {
+                did_find = true;
+              }
+            }
+          }
+          if (!did_find) {
+            count++;
+          }
+        }
+        return count;
+      }
+      array = [1, 6, 7, 6, 8, 1];
+      console.log(count_isimilar(array));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function longest(text) {
+        let temp = text.split(",");
+        let max = 0;
+        for (let i = 0; i < temp.length; i++) {
+          value = temp[i].split(":");
+          max = Math.max(value[1].trim().length, max);
+        }
+        return max;
+      }
+
+      const text = "name:nathan , family:krasney , city:haifa";
+      console.log(longest(text));
+    </script>
+  </body>
+</html>

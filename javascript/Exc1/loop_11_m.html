@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //loop_11_m
+      random_num = Math.floor(Math.random() * 99) + 1;
+      console.log(random_num);
+      number = parseInt(prompt("enter number: "));
+      let count = 1;
+      while (number != random_num) {
+        count++;
+        if (number > random_num) {
+          number = parseInt(prompt("lower: "));
+        } else {
+          if (number < random_num) {
+            number = parseInt(prompt("higher: "));
+          }
+        }
+      }
+      console.log("took you ", count, " tries");
+      ////
+    </script>
+  </body>
+</html>

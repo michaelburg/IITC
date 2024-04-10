@@ -7,13 +7,8 @@
   </head>
   <body>
     <script>
-      const grid = [
-        ["1", "2", "3"],
-        ["4", "5", "6"],
-        ["7", "8", "9"],
-      ];
       // Function to display the grid using an alert
-      function displayGrid(sub_message) {
+      function displayGrid(sub_message, grid) {
         let message = "";
         for (let row of grid) {
           message += row.join(" | ") + "\n";
@@ -70,18 +65,18 @@
         return false;
       }
 
-      function get_user_input() {
+      function get_user_input(grid) {
         while (true) {
           //get chosen sell from use
           input = parseInt(prompt(message));
           if (isNaN(input)) {
             //is input is number
             invalid_input_message = "invalid input";
-            message = displayGrid(invalid_input_message);
+            message = displayGrid(invalid_input_message, grid);
           } else if (!is_input_in_range(input)) {
             //is input in range(1-9)
             not_in_range_message = "input not in range";
-            message = displayGrid(not_in_range_message);
+            message = displayGrid(not_in_range_message, grid);
           } else {
             index = get_index(input); //convert input to cell
             taken_message = index;
@@ -90,7 +85,7 @@
             if (is_input_taken(grid, row, column)) {
               //is cell free
               taken_message = "cell already taken";
-              message = displayGrid(taken_message);
+              message = displayGrid(taken_message, grid);
             } else {
               grid[row][column] = turn;
               break;
@@ -99,7 +94,25 @@
         }
       }
 
+      function new_grid() {
+        return [
+          ["1", "2", "3"],
+          ["4", "5", "6"],
+          ["7", "8", "9"],
+        ];
+      }
+
+      function get_player_name(player) {
+        while (true) {
+          player_input = prompt(`${player} player name: `);
+          if (player_input != "") {
+            return player_input;
+          }
+        }
+      }
+
       function new_game() {
+        const grid = new_grid();
         for (let i = 0; i < 9; i++) {
           if (i % 2 == 0) {
             turn = "X";
@@ -107,22 +120,69 @@
             turn = "O";
           }
           new_turn_message = `it's ${turn} turn, good luck!`;
-          message = displayGrid(new_turn_message);
-          get_user_input();
+          message = displayGrid(new_turn_message, grid);
+          get_user_input(grid);
           if (i > 3) {
             if (check_win(grid, row, column)) {
               win_message = `${turn} has won`;
-              message = displayGrid(win_message);
+              message = displayGrid(win_message, grid);
               alert(message);
-              return
+              return turn;
             }
           }
         }
         tie_message = "its a tie";
-        message = displayGrid(tie_message);
+        message = displayGrid(tie_message, grid);
         alert(message);
+        return "tie";
       }
-      new_game();
+
+      function stat_game() {
+        let stat = {};
+        while (true) {
+          X_player = get_player_name("X");
+          O_player = get_player_name("O");
+
+          if (!(X_player in stat)) {
+            stat[X_player] = {};
+            stat[X_player]["win"] = 0;
+            stat[X_player]["lose"] = 0;
+            stat[X_player]["tie"] = 0;
+          }
+          if (!(O_player in stat)) {
+            stat[O_player] = {};
+            stat[O_player]["win"] = 0;
+            stat[O_player]["lose"] = 0;
+            stat[O_player]["tie"] = 0;
+          }
+
+          resault = new_game();
+          if (resault == "X") {
+            stat[X_player]["win"]++;
+            stat[O_player]["lose"]++;
+          } else if (resault == "O") {
+            stat[O_player]["win"]++;
+            stat[X_player]["lose"]++;
+          } else {
+            stat[O_player]["tie"]++;
+            stat[X_player]["tie"]++;
+          }
+          let message = "";
+          for (const player in stat) {
+            message += player;
+            message += ": ";
+            for (const property in stat[player]) {
+              message += property;
+              message += ": ";
+              message += stat[player][property];
+              message += ", ";
+            }
+            message += "\n";
+          }
+          alert(message);
+        }
+      }
+      stat_game();
     </script>
   </body>
 </html>
