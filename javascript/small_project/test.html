@@ -7,47 +7,29 @@
   </head>
   <body>
     <script>
-      stat = {};
-      X_player = "X";
-      O_player = "O";
-
-      if (!(X_player in stat)) {
-        stat[X_player] = {};
-        stat[X_player]["win"] = 0;
-        stat[X_player]["lose"] = 0;
-        stat[X_player]["tie"] = 0;
-      }
-      if (!(O_player in stat)) {
-        stat[O_player] = {};
-        stat[O_player]["win"] = 0;
-        stat[O_player]["lose"] = 0;
-        stat[O_player]["tie"] = 0;
-      }
-      let message = "";
-      for (const player in stat) {
-        message += player;
-        message += ": ";
-        for (const property in stat[player]) {
-          message += property;
-          message += ": ";
-          message += stat[player][property];
-          message += ", ";
+      turn = "X";
+      grid = [
+        ["X", "O", "X"],
+        ["O", "X", "O"],
+        ["7", "8", "9"],
+      ];
+      row = 0;
+      column = 0;
+      let similar;
+      if (row == column) {
+        similar = true;
+        for (let i = 0; i < 3; i++) {
+          if (grid[i][i] != turn) {
+            similar = false;
+            break;
+          }
         }
-        message += "\n";
+        // if (similar) return true;
       }
-      alert(message);
+      console.log(similar);
 
-      import { readFile } from "fs/promises";
-
-      // await can only be used in an async function
-      (async () => {
-        const file = await readFile("dict.json", { encoding: "utf-8" });
-        const parsed = JSON.parse(file);
-        // log all data
-        console.log(parsed);
-        // log outdoor temperature
-        console.log(parsed.outdoor_temp);
-      })();
+      // if (similar) return true;
+      // return false;
     </script>
   </body>
 </html>

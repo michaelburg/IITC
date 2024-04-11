@@ -40,28 +40,43 @@
         return grid[row][column] == "X" || grid[row][column] == "O";
       }
 
-      function check_win(grid, row, column) {
-        if (grid[row][0] == grid[row][1] && grid[row][0] == grid[row][2]) {
-          //check row
+      function check_win(grid, row, column, turn) {
+        //check row
+        for (let c = 0; c < 3; c++) {
+          if (grid[row][c] != turn) break;
           return true;
         }
-        if (
-          grid[0][column] == grid[1][column] &&
-          grid[0][column] == grid[2][column]
-        ) {
-          //check column
+        //check column
+        for (let r = 0; r < 3; r++) {
+          if (grid[r][column] != turn) break;
           return true;
         }
+        //check left to right
+        let similar;
         if (row == column) {
-          //check left ro right
-          if (grid[0][0] == grid[1][1] && grid[0][0] == grid[2][2]) {
-            return true;
+          similar = true;
+          for (let i = 0; i < 3; i++) {
+            if (grid[i][i] != turn) {
+              similar = false;
+              break;
+            }
           }
+          if (similar) return true;
         }
-        if (grid[2][0] == grid[1][1] && grid[2][0] == grid[0][2]) {
-          //check right ro left
-          return true;
+
+        //check right ro left
+        similar = true;
+        let check_row = 0,
+          check_column = 2;
+        for (let i = 0; i < 3; i++) {
+          if (grid[check_row][check_column] != turn) {
+            similar = false;
+            break;
+          }
+          check_row++;
+          check_column--;
         }
+        if (similar) return true;
         return false;
       }
 
@@ -123,7 +138,7 @@
           message = displayGrid(new_turn_message, grid);
           get_user_input(grid);
           if (i > 3) {
-            if (check_win(grid, row, column)) {
+            if (check_win(grid, row, column, turn)) {
               win_message = `${turn} has won`;
               message = displayGrid(win_message, grid);
               alert(message);
@@ -143,30 +158,43 @@
           X_player = get_player_name("X");
           O_player = get_player_name("O");
 
-          if (!(X_player in stat)) {
-            stat[X_player] = {};
-            stat[X_player]["win"] = 0;
-            stat[X_player]["lose"] = 0;
-            stat[X_player]["tie"] = 0;
+          X_player_stat = JSON.parse(localStorage.getItem(X_player));
+          if (X_player_stat == null) {
+            X_player_stat = {
+              win: 0,
+              lose: 0,
+              tie: 0,
+            };
           }
-          if (!(O_player in stat)) {
-            stat[O_player] = {};
-            stat[O_player]["win"] = 0;
-            stat[O_player]["lose"] = 0;
-            stat[O_player]["tie"] = 0;
+          O_player_stat = JSON.parse(localStorage.getItem(O_player));
+          if (O_player_stat == null) {
+            O_player_stat = {
+              win: 0,
+              lose: 0,
+              tie: 0,
+            };
           }
 
           resault = new_game();
           if (resault == "X") {
-            stat[X_player]["win"]++;
-            stat[O_player]["lose"]++;
+            X_player_stat.win++;
+            O_player_stat.lose++;
           } else if (resault == "O") {
-            stat[O_player]["win"]++;
-            stat[X_player]["lose"]++;
+            O_player_stat.win++;
+            X_player_stat.lose++;
           } else {
-            stat[O_player]["tie"]++;
-            stat[X_player]["tie"]++;
+            O_player_stat.tie++;
+            X_player_stat.tie++;
           }
+          localStorage.setItem(O_player, JSON.stringify(O_player_stat));
+          localStorage.setItem(X_player, JSON.stringify(X_player_stat));
+
+          stat = {};
+          (keys = Object.keys(localStorage)), (i = keys.length);
+          while (i--) {
+            stat[keys[i]] = JSON.parse(localStorage.getItem(keys[i]));
+          }
+
           let message = "";
           for (const player in stat) {
             message += player;

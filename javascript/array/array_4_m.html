@@ -9,21 +9,22 @@
     <script>
       function count_isimilar(array1) {
         let count = 0;
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < array.length - 1; i++) {
           let did_find = false;
           for (let y = 0; y < array.length; y++) {
-            if (i != y && array[i] == array[y]) {
-              did_find = true;
+            if (i != y) {
+              if (array[i] == array[y]) {
+                did_find = true;
+              }
             }
           }
           if (!did_find) {
             count++;
-            console.log(array[i]);
           }
         }
         return count;
       }
-      array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 2, 4, 56, 7, 8, 6, 4];
+      array = [1, 6, 7, 6, 8, 1];
       console.log(count_isimilar(array));
     </script>
   </body>
