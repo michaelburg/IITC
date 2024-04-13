@@ -7,27 +7,107 @@
   </head>
   <body>
     <script>
-      turn = "X";
-      grid = [
-        ["X", "O", "X"],
-        ["O", "X", "O"],
-        ["7", "8", "9"],
-      ];
-      row = 0;
-      column = 0;
-      let similar;
-      if (row == column) {
-        similar = true;
-        for (let i = 0; i < 3; i++) {
-          if (grid[i][i] != turn) {
-            similar = false;
-            break;
+      function get_index(input, size) {
+        let row = parseInt(input / size);
+        if (input % size == 0) row--;
+
+        let column;
+        if (input % size == 0) column = size - 1;
+        else column = (input % size) - 1;
+
+        return [row, column];
+      }
+      function win_by_row(grid, row, turn) {
+        for (let column = 0; column < 3; column++) {
+          if (grid[row][column] != turn) {
+            return false;
           }
         }
-        // if (similar) return true;
+        return true;
       }
-      console.log(similar);
+      function win_by_column(grid, column, turn) {
+        for (let row = 0; row < 3; row++) {
+          if (grid[row][column] != turn) {
+            return false;
+          }
+        }
+        return true;
+      }
+      function win_left_to_right(grid, turn) {
+        for (let i = 0; i < 3; i++) {
+          if (grid[i][i] != turn) {
+            return false;
+          }
+        }
+        console.log("here");
+        return true;
+      }
 
+      function win_right_to_left(grid, turn) {
+        let check_column = 2;
+        for (let check_row = 0; check_row < 3; check_row++) {
+          if (grid[check_row][check_column] != turn) return false;
+          check_column--;
+        }
+        return true;
+      }
+
+      function check_win(grid, row, column, turn) {
+        if (win_by_row(grid, row, turn)) return true;
+        if (win_by_column(grid, column, turn)) return true;
+        if (row == column && win_left_to_right(grid, turn)) return true;
+        if (win_right_to_left(grid, turn)) return true;
+        return false;
+      }
+      function prettyPrint2DArray(arr) {
+        for (const row of arr) {
+          console.log(row.join("|")); // Separate elements with a tab
+        }
+      }
+      function createGameBoard(size) {
+        const result = [];
+        let counter = 1; // Start counting from 1
+
+        for (let i = 0; i < size; i++) {
+          const row = [];
+          for (let j = 0; j < size; j++) {
+            if (counter < 10) row.push("00" + counter.toString());
+            else if (counter < 100) row.push("0" + counter.toString());
+            else row.push(counter.toString());
+            counter++;
+          }
+          result.push(row);
+        }
+
+        return result;
+      }
+      function displayGrid(sub_message, grid) {
+        let message = "";
+        for (let row of grid) {
+          message += row.join(" | ") + "\n";
+          // message += "-".repeat(grid.length * 4 + 1);
+          // message += "\n";
+        }
+        message += sub_message;
+        return message;
+      }
+      turn = "X";
+      let grid = [
+        ["X", "O", "X"],
+        ["O", "X", "6"],
+        ["7", "8", "9"],
+      ];
+      row = 1;
+      column = 1;
+      // check_win(grid, row, column, turn);
+      let size = 12;
+      grid = createGameBoard(size);
+      prettyPrint2DArray(grid);
+      input = prompt("choose cell: ");
+      for (let i = 0; i < size * size; i++) {
+        console.log(get_index(i, size));
+      }
+      alert(displayGrid("", grid));
       // if (similar) return true;
       // return false;
     </script>
