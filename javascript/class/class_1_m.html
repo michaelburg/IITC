@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Student {
+        constructor(name, age, gender) {
+          this.name = name;
+          this.age = age;
+          this.gender = gender;
+        }
+        write() {
+          return `Name: ${this.name}, Age: ${this.age}, Gender: ${this.gender}`;
+        }
+        isYoung() {
+          return this.age < 18;
+        }
+      }
+      const Student1 = new Student("Student1", 22, "male");
+      const Student2 = new Student("Student2", 16, "male");
+      const Student3 = new Student("Student3", 30, "male");
+      const Students = [Student1, Student2, Student3];
+      for (const Student of Students) {
+        console.log(Student.isYoung());
+      }
+    </script>
+  </body>
+</html>

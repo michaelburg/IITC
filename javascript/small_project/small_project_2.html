@@ -215,8 +215,8 @@
           O_player_stat.tie++;
           X_player_stat.tie++;
         }
-        localStorage.setItem(O_player, JSON.stringify(O_player_stat));
         localStorage.setItem(X_player, JSON.stringify(X_player_stat));
+        localStorage.setItem(O_player, JSON.stringify(O_player_stat));
 
         stat = {};
         (keys = Object.keys(localStorage)), (i = keys.length);

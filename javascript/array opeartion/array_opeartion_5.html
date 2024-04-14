@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function add(array, number) {
+        const index = array.findIndex((arr) => arr === number);
+        if (index == -1) return false;
+        for (let i = 0; i < array.length; i++) {
+          if (array[i] == number) array[i]++;
+        }
+        return true;
+      }
+
+      const array = [1, 2, 3, 4];
+      const res = add(array, 5);
+      if (!res) console.log("not found");
+      else console.log(array);
+    </script>
+  </body>
+</html>
