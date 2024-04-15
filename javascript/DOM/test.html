@@ -1,0 +1,59 @@
+"מה תדפיס התכנית ל console. חשוב לענות ללא הרצה בדפדפן
+<script>
+  // -- function definition
+  function writeHello() {
+    console.log("hello");
+  }
+
+  // --- call function
+  writeHello();
+
+  // --- call function
+  writeHello();
+
+  let a = 1,
+    b = 2;
+
+  // -- function definition
+  function writeSum() {
+    console.log(a + b);
+  }
+  // -- function definition
+  function computeSum() {
+    return a + b;
+  }
+
+  // --- call function
+  writeSum();
+  a = 3;
+  b = 4;
+  // --- call function
+  writeSum();
+
+  let c;
+  // --- call function
+  c = computeSum();
+  console.log(`c is ${c}`);
+  // -- function definition
+  function writeSumWithArguments(arg1, arg2) {
+    console.log(arg1 + arg2);
+  }
+
+  // --- call function
+  writeSumWithArguments(3, 6);
+  // --- call function
+  writeSumWithArguments(a, b);
+  // --- call function
+  writeSumWithArguments(a, b + 1);
+
+  // -- function definition
+  function computeSumWithArguments(arg1, arg2) {
+    return arg1 + arg2;
+  }
+
+  // --- call function
+  c = computeSumWithArguments(3, 6);
+  console.log(`c is ${c}`);
+</script>
+
+outtput= hello hello 3 7

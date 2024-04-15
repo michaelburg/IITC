@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="js_8-btn" onclick="aplly()">submit</button>
+    <select id="js_8-sel">
+      <option value="apple">apple</option>
+      <option value="banana">banana</option>
+      <option value="orange">orange</option>
+    </select>
+    <script>
+      function aplly() {
+        const elem = document.getElementById("js_8-sel");
+        const choise = elem.value;
+        console.log(choise);
+      }
+    </script>
+  </body>
+</html>

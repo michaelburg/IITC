@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="input1" type="number" />
+    <input id="input2" type="number" />
+    <button id="Div" onclick="action('/')">Div</button>
+    <button id="sub" onclick="action('-')">sub</button>
+    <button id="mul" onclick="action('*')">mul</button>
+    <button id="add" onclick="action('+')">add</button>
+    <p id="res"></p>
+    <h2>history</h2>
+    <table id="history">
+      <thead>
+        <tr>
+          <th>num 1</th>
+          <th>action</th>
+          <th>num 2</th>
+          <th>=</th>
+          <th>resault</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      function action(val) {
+        const num1 = document.getElementById("input1").valueAsNumber;
+        const num2 = document.getElementById("input2").valueAsNumber;
+        const res = document.getElementById("res");
+        let answer = "";
+        if (val == "/") {
+          if (num2 == 0) answer = "cant divide by zero";
+          else answer = num1 / num2;
+        }
+        if (val == "*") answer = num1 * num2;
+        if (val == "+") answer = num1 + num2;
+        if (val == "-") answer = num1 - num2;
+        res.innerText = answer;
+        const table = document
+          .getElementById("history")
+          .getElementsByTagName("tbody")[0];
+        const newRow = table.insertRow(0);
+        const cell1 = newRow.insertCell(0);
+        const cell2 = newRow.insertCell(1);
+        const cell3 = newRow.insertCell(2);
+        const cell4 = newRow.insertCell(3);
+        const cell5 = newRow.insertCell(4);
+        cell1.innerHTML = num1;
+        cell2.innerHTML = val;
+        cell3.innerHTML = num2;
+        cell4.innerHTML = "=";
+        cell5.innerHTML = answer;
+      }
+    </script>
+  </body>
+</html>

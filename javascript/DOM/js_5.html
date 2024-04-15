@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="js_5-p1" onclick="change1()">text1</p>
+    <p id="js_5-p2" onclick="change2()">text2</p>
+    <script>
+      function change1() {
+        const elem1 = document.getElementById("js_5-p1");
+        elem1.innerText = "text2";
+      }
+
+      function change2() {
+        const elem2 = document.getElementById("js_5-p2");
+        elem2.innerText = "text1";
+      }
+    </script>
+  </body>
+</html>

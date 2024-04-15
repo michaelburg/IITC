@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="input1" type="number" />
+    <input id="input2" type="number" />
+    <select id="math">
+      <option value="Div">/</option>
+      <option value="sub">-</option>
+      <option value="mul">*</option>
+      <option value="add">+</option>
+    </select>
+    <button id="calc" onclick="calc()">calc</button>
+    <p id="res"></p>
+    <script>
+      function calc() {
+        const num1 = document.getElementById("input1").valueAsNumber;
+        const num2 = document.getElementById("input2").valueAsNumber;
+        const action = document.getElementById("math").value;
+        const res = document.getElementById("res");
+        res.innerText = "";
+        if (action == "Div") {
+          if (num2 == 0) res.innerText = "cant devide by zero";
+          else res.innerText = num1 / num2;
+        } else if (action == "add") res.innerText = num1 + num2;
+        else if (action == "sub") res.innerText = num1 - num2;
+        else if (action == "mul") res.innerText = num1 * num2;
+      }
+    </script>
+  </body>
+</html>

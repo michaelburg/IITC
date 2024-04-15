@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="js_9-ul" onclick="apply(event)">
+      <li value="subaru">subaru</li>
+      <li value="mercedes">mercedes</li>
+      <li value="ram">ram</li>
+    </ul>
+    <script>
+      function apply(event) {
+        if (event.target.tagName === "LI") {
+          // Print clicked li text
+          console.log(event.target.textContent);
+        }
+      }
+    </script>
+  </body>
+</html>
