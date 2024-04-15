@@ -11,6 +11,18 @@
   display: flex;
   gap: 10px;
 }
+#result {
+  background-color: lightblue;
+}
+.CE {
+  background-color: lightcoral;
+}
+.purple {
+  background-color: lightsteelblue;
+}
+.green {
+  background-color: green;
+}
 .math {
   display: grid;
   grid-template-columns: 1fr;
@@ -39,7 +51,7 @@ button {
   padding: 15px;
   font-size: 20px;
   border: none;
-  border-radius: 50%;
+  border-radius: 50%; /* Make buttons perfectly round */
   background-color: #007bff;
   color: white;
   cursor: pointer;

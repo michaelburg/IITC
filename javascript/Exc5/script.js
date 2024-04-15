@@ -1,12 +1,14 @@
 let num1,math,num2
 function appendToResult(value) {
+    if(math==NaN)document.getElementById('result').value += value;
+    else {
+    document.getElementById('result').value = '';
     document.getElementById('result').value += value;
+    }
 }
 function action(symbol){
     num1=document.getElementById('result').value
     math=symbol
-    document.getElementById('result').value = '';
-
 }
 function clearResult() {
     document.getElementById('result').value = '';
