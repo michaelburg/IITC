@@ -1,13 +1,11 @@
-let num1,math,num2
+let num1,num2
+let math=NaN
 function appendToResult(value) {
-    if(math==NaN)document.getElementById('result').value += value;
-    else {
-    document.getElementById('result').value = '';
     document.getElementById('result').value += value;
     }
-}
 function action(symbol){
     num1=document.getElementById('result').value
+    document.getElementById('result').value=''
     math=symbol
 }
 function clearResult() {
@@ -15,7 +13,6 @@ function clearResult() {
     num1=NaN
     math=NaN
 }
-
 function calculate() {
     num2=document.getElementById('result').value
     if(math=='*') result=num1*num2
@@ -25,7 +22,6 @@ function calculate() {
          if(num2!=0) result=num1/num2
          else result='error'
     }
-
     document.getElementById('result').value = result;
     num1=num2
     num2=NaN
