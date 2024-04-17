@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // --- array
+    //   const array = [1, 2, 3];
+    //   console.log(array);
+
+      // --- object
+      const person = {
+        firstName: "John",
+        lastName: "Deer",
+        age : 33,
+        printThis : function(){
+            // -- print this to the console 
+            console.log(this);
+        },
+        getFullName: function () {
+          return `${this.firstName} ,  ${this.lastName} ,  ${this.age}`;
+        },
+      };
+
+      //const persons = [person , {firstName: }]
+      person.getFullName();
+      console.log('call person.printThis');
+      person.printThis();
+      console.log('console.log(person)');
+      console.log(person);
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+.topbar {
+  display: flex;
+  height: 40px;
+  width: 1000px;
+  font-size: 90%;
+  font-weight: bold;
+}
+.menu-bar1 {
+  display: flex;
+}
+.menu-bar2 {
+  display: flex;
+}
+.topbar-selection {
+  border-left: 1px solid black;
+}

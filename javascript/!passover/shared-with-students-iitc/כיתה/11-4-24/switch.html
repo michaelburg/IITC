@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a=1,b=2;
+        console.log(`a : ${a}, b : ${b}`);
+        function Switch(a,b){
+            let temp = a;
+            a = b;
+            b = temp;
+            console.log(`a : ${a}, b : ${b}`);
+        }
+        function SwitchOk(){
+            let temp = a;
+            a = b;
+            b = temp;
+        }
+        SwitchOk();
+        
+        console.log(`a : ${a}, b : ${b}`);
+    </script>
+</body>
+</html>

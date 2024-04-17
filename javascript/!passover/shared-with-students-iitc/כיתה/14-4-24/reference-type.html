@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {num : 3}
+        function incrementNumByOne(obj1){
+            obj1.num++
+        }
+        incrementNumByOne(obj); // let obj1 = obj
+        console.log(obj);
+        
+        function incrementArrayItemByOne(array,index){
+            array[index]++;
+        }
+        let numbers = [1,2,3];
+        incrementArrayItemByOne(numbers,2);
+        incrementArrayItemByOne(numbers,2);
+        console.log(numbers);
+    </script>
+</body>
+</html>

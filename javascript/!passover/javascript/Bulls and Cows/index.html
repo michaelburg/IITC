@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulls and Cows</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Bulls and Cows</h1>
+    <table id="guessTable">
+      <tr>
+        <th>Your Guess</th>
+        <th>Bulls</th>
+        <th>Cows</th>
+      </tr>
+    </table>
+    <input
+      id="userGuess"
+      placeholder="Enter your guess here"
+      type="number"
+      oninput="javascript: this.value = this.value.replace(/[^0-9]/g, ''); if(this.value.length > 4) this.value = this.value.slice(0, 4);"
+    />
+    <button id="guessbtn" onclick="guess()">Guess</button>
+    <table id="Scores">
+      <tr>
+        <th>name</th>
+        <th>num Guess</th>
+        <th>time</th>
+      </tr>
+    </table>
+    <script src="script.js"></script>
+    <script>
+      resetGame();
+    </script>
+  </body>
+</html>

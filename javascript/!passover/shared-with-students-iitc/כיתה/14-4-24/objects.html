@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const person = {
+        firstName: "John",
+        lastName: "Deer",
+        age: 233,
+      };
+      const person1 = {
+        firstName: "Jim",
+        lastName: "Deer",
+        age: 144,
+      };
+
+      const book = { name: "book1", author: "author1" };
+
+      const badPersons = [
+        person,
+        person1,
+        { firstName: "David", lastName: "Levy", age: 55 },
+        book,
+        2,
+      ];
+      console.log(badPersons);
+      const persons = [
+        person, // age 33
+        person1, // age 44
+        { firstName: "David", lastName: "Levy", age: 55 },
+      ];
+
+      // ---- 1) write a function with persons - an array of person as argument
+      // ---- and return the average age
+      // ---- O(n)
+      function computeAverageAge1(persons) {
+        let sum = 0;
+        for (let index = 0; index < persons.length; index++) {
+          const person = persons[index];
+          sum += person.age;
+        }
+        return sum / persons.length;
+      }
+
+      function computeAverageAge2(persons) {
+        let sum = 0;
+        persons.forEach((person) => {
+          sum += person.age;
+        });
+        return sum / persons.length;
+      }
+
+      const avg = computeAverageAge2(persons);
+      console.log(`persons avg : ${avg}`);
+
+      const person2 = {
+        firstName: "Jim",
+        lastName: "Deer",
+        // age: 44,
+      };
+
+      console.log(person2.age);
+
+      // ---- 2) write a function with persons - an array of person as argument
+      // ---- and return the : oldest age , the object index and person first name
+      function getPersonOldAge1(persons) {
+        const personOld = { age: 0, index: undefined, firstName: undefined };
+
+        for (let index = 0; index < persons.length; index++) {
+          const person = persons[index];
+          if (person.age > personOld.age) {
+            personOld.age = person.age;
+            personOld.index = index;
+            personOld.firstName = person.firstName;
+          }
+        }
+
+        return personOld;
+      }
+
+      function getPersonOldAge2(persons) {
+        const personOld = { age: 0, index: undefined, firstName: undefined };
+
+        persons.forEach((person, index) => {
+          if (person.age > personOld.age) {
+            personOld.age = person.age;
+            personOld.index = index;
+            personOld.firstName = person.firstName;
+          }
+        });
+
+        return personOld;
+      }
+
+      const personOld = getPersonOldAge2(persons);
+      console.log(personOld);
+    </script>
+  </body>
+</html>

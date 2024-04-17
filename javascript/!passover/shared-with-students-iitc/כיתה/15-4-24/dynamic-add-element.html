@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="incrementCounter()">increment counter</button>
+    <div id="id1"></div>
+    <script>
+      let countButtonClicked = 0;
+      const elemDiv = document.querySelector("#id1");
+
+      function incrementCounter() {
+        countButtonClicked++;
+        //elemDiv.innerHTML = elemDiv.innerHTML + `<p>${countButtonClicked}</p>`;
+        elemDiv.innerHTML += `<p>${countButtonClicked}</p>`;
+      }
+    </script>
+  </body>
+</html>

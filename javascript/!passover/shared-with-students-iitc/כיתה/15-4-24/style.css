@@ -1,0 +1,18 @@
+table {
+  border: 1px solid grey;
+  width: 50%;
+  /* מאחד גבולות כך שנראה טוב יותר */
+  border-collapse: collapse;
+}
+
+/* כל שורה זוגית תקבל את הרקע הזה */
+tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid grey;
+}

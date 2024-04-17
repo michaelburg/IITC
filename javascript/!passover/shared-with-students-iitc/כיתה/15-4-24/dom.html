@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="id1">Hello DOM!!!</div>
+    <button onclick="clickMeHandler()">Click me</button>
+    <p id="gemeResult"></p>
+    <script>
+      console.log(this); // windows object
+      window.console.log(123);
+      console.log(window.document);
+      console.log(document); // --- DOM : Document Object Model
+      const divElem = document.querySelector("#id1"); // -- css selector
+      console.log(divElem);
+      const elemGameResult = document.querySelector("#gemeResult");
+
+      function clickMeHandler() {
+        elemGameResult.innerText = "Uri won";
+        // --- toggle color
+        elemGameResult.style.color =
+          elemGameResult.style.color == "red" ? "green" : "red";
+      }
+    </script>
+  </body>
+</html>

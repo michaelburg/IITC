@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let numbers = [3, 5, 13, 21, 5];
+      function findItem(arrayOfNumbers, num) {
+        // arrayOfNumbers.forEach(number => {
+        //     if(num === number){
+        //         return true;
+        //     }
+        // });
+        for (let index = 0; index < arrayOfNumbers.length; index++) {
+          const number = arrayOfNumbers[index];
+          if (num === number) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      function findItem1(arrayOfNumbers, num) {
+        for (const number of arrayOfNumbers) {
+          if (num === number) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function findItem2(arrayOfNumbers, num) {
+        const itemFound = arrayOfNumbers.find((number) => number === num);
+        return itemFound != undefined;
+      }
+      /*console.log(findItem(numbers, 2));
+      console.log(findItem(numbers, 13));
+      console.log(findItem1(numbers, 2));
+      console.log(findItem1(numbers, 13));*/
+      console.log(findItem2(numbers, 13));
+      console.log(findItem2(numbers, 113));
+    </script>
+  </body>
+</html>
