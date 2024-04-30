@@ -1,0 +1,13 @@
+.board {
+  display: grid;
+  grid-template-rows: repeat(var(--grid-rows), 24px);
+  grid-template-columns: repeat(var(--grid-cols), 24px);
+  /* grid-template-columns: repeat(10, 24px);
+  grid-template-rows: repeat(10, 24px); */
+  /* gap: 2px; */
+  /* border: 2px solid #333; */
+}
+.cell {
+  background-color: #ccc;
+  border: 1px solid #999;
+}

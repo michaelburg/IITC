@@ -1,0 +1,17 @@
+body {
+  width: 400px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: 5px;
+}
+.grid-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.unclickable {
+  pointer-events: none; /* Disable pointer events */
+  opacity: 0.5; /* Optionally reduce opacity to indicate it's disabled */
+}

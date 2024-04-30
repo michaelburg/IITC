@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 90%;
+  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  width: 1000px;
+}
+.menu-bar1 {
+  display: flex;
+}
+.menu-bar2 {
+  display: flex;
+}
+.topbar-selection {
+  border-left: 1px solid black;
+  padding: 13px 15px 0 15px;
+}
+.logo {
+  margin-top: 8px;
+  margin-right: 8px;
+  width: 100px;
+  float: left;
+}
+.signIn {
+  width: 25px;
+}
+#bell {
+  height: 25px;
+}
+#wigglyline {
+  height: 40px;
+}
