@@ -1,27 +1,36 @@
-let size = 8;
+firstDraw = NaN;
+secondDraw = NaN;
+let size = 16;
 hight = parseInt(size ** (1 / 2));
 width = parseInt(size / hight);
 count = 0;
 imageFace = [];
 const imageBack = "img/back card.jpg";
-for (let i = 0; i < size / 2; i++) {
-  imageFace.push("img/img" + (i + 1) + ".jpg");
-  imageFace.push("img/img" + (i + 1) + ".jpg");
-}
 shuffle(imageFace);
-gridContainer = document.getElementById("grid-container");
-gridContainer.style.setProperty("--grid-cols", width);
-gridContainer = document.querySelector(".grid");
-for (let i = 0; i < size; i++) {
-  const image = document.createElement("img");
-  image.src = imageBack;
-  image.style.width = "205px"; // Set the width to 50% of its original size
-  image.style.height = "317px";
-  image.id = i;
-  image.alt = "Image";
-  image.classList.add("grid-image");
-  image.onclick = revelImg;
-  gridContainer.appendChild(image);
+createGrid();
+createBackGrid();
+function createBackGrid() {
+  imageFace = [];
+  for (let i = 0; i < size / 2; i++) {
+    imageFace.push("img/img" + (i + 1) + ".png");
+    imageFace.push("img/img" + (i + 1) + ".png");
+  }
+  shuffle(imageFace);
+}
+function createGrid() {
+  gridContainer = document.getElementById("grid-container");
+  gridContainer.style.setProperty("--grid-cols", width);
+  for (let i = 0; i < size; i++) {
+    const image = document.createElement("img");
+    image.src = imageBack;
+    image.style.width = "205px"; // Set the width to 50% of its original size
+    image.style.height = "317px";
+    image.id = i;
+    image.alt = "Image";
+    image.classList.add("grid-image");
+    image.onclick = revelImg;
+    gridContainer.appendChild(image);
+  }
 }
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -30,37 +39,6 @@ function shuffle(array) {
   }
   return array;
 }
-// document.addEventListener("DOMContentLoaded", function () {
-//   const gridContainer = document.getElementById("grid-container");
-//   gridContainer.style.setProperty("--grid-cols", width);
-
-//   // Duplicate image sources to have each image appear twice
-//   const duplicatedImageSources = imageSources.concat(imageSources);
-
-//   // Shuffle the image sources array
-//   duplicatedImageSources.sort(() => Math.random() - 0.5);
-
-//   // Create grid items and append images to them
-//   duplicatedImageSources.forEach((imageSource) => {
-//     const gridItem = document.createElement("div");
-//     gridItem.classList.add("grid-item");
-
-//     const image = document.createElement("img");
-//     image.style.width = "205px"; // Set the width to 50% of its original size
-//     image.style.height = "317px";
-//     image.id = count;
-//     image.src = "img/" + imageSource;
-//     image.alt = "Image";
-//     image.classList.add("grid-image");
-//     image.onclick = revelImg;
-
-//     gridItem.appendChild(image);
-//     gridContainer.appendChild(gridItem);
-//     count++;
-//   });
-// });
-firstDraw = NaN;
-secondDraw = NaN;
 function revelImg() {
   if (isNaN(firstDraw)) {
     image = document.getElementById(this.id);
@@ -72,8 +50,8 @@ function revelImg() {
     image.src = imageFace[this.id];
     secondDraw = this.id;
     if (imageFace[firstDraw] == imageFace[secondDraw]) {
-      document.getElementById(firstDraw).classList.add("unclickable");
-      document.getElementById(secondDraw).classList.add("unclickable");
+      document.getElementById(firstDraw).classList.add("disabled-image");
+      document.getElementById(secondDraw).classList.add("disabled-image");
       firstDraw = NaN;
       secondDraw = NaN;
       count += 2;
@@ -90,4 +68,25 @@ function revelImg() {
     firstDraw = this.id;
   }
   if (count == size) alert("yay");
+}
+function reset() {
+  firstDraw = NaN;
+  secondDraw = NaN;
+  count = 0;
+  let parent = document.getElementById("grid-container");
+  while (parent.firstChild) parent.removeChild(parent.firstChild);
+  shuffle(imageFace);
+  createGrid();
+  createBackGrid();
+}
+function submit() {
+  size = parseInt(document.getElementById("userSize").valueAsNumber);
+  if (size % 2 != 0) {
+    size--;
+  }
+  if (size < 2 || size > 108) return;
+
+  hight = parseInt(size ** (1 / 2));
+  width = parseInt(size / hight);
+  reset();
 }

@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="grid" id="grid-container"></div>
-
-    <script src="script.js"></script>
+    <div id="container">
+      <h1>Memory Matching Game</h1>
+      <div class="input-section">
+        <label for="userSize">Enter grid size (even number from 2 to 108):</label>
+        <input type="number" id="userSize" placeholder="e.g., 16" min="2" max="108">
+        <button id="submit" onclick="submit()">Submit</button>
+      </div>
+      <button id="reset" onclick="reset()">Reset</button>
+      <div class="grid" id="grid-container"></div>
+  
+      <script src="script.js"></script>
   </body>
 </html>
