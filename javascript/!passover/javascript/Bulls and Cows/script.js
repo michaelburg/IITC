@@ -7,7 +7,7 @@ const stopwatchDisplay = document.getElementById("stopwatch");
 
 function start() {
   startTime = new Date().getTime() - elapsedTime;
-  timerInterval = setInterval(updateTime, 10);
+  timerInterval = setInterval(updateTime, 1000);
 }
 
 function stopTime() {
@@ -47,7 +47,7 @@ function resetGame() {
     } while (pc_array.includes(newNumber));
     pc_array.push(newNumber);
   }
-  pc_array = [1, 2, 3, 4];
+  // pc_array = [1, 2, 3, 4];
   console.log(pc_array);
 }
 

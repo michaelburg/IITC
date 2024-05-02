@@ -9,7 +9,6 @@
   <body>
     <div class="topbar">
       <div class="logo">
-
         <img src="images/bbc-logo.png" alt="" />
       </div>
       <div class="topbar-selection">
@@ -21,7 +20,7 @@
         <img id="bell" src="images/bell.png" alt="" />
       </div>
       <div class="topbar-selection">News</div>
-      <div class="topbar-selection" >Sport</div>
+      <div class="topbar-selection">Sport</div>
       <div class="topbar-selection">Weather</div>
       <div class="topbar-selection">iPlayer</div>
       <div class="topbar-selection">TV</div>
@@ -30,14 +29,18 @@
         <img src="images/more-arrow.png" alt="" />
       </div>
     </div>
-    <!--<div class="search">
-      <input type="text" placeholder="Search" />
+    <div class="search">
+      <div class="topbar-selection"></div>
+      <input type="text" placeholder="Search" class="search-bar" />
+      <input type="image" src="./images/magnifying-glass.png" />
     </div>
     <div class="menu-bar-container">
       <div class="menu-bar1">
         <h1>News</h1>
-        <a href="#">Find Local News</a>
-        <img src="images/pointer.png" alt="" />
+        <div class="local-news">
+          <a href="#">Find Local News</a>
+          <img src="images/pointer.png" alt="" />
+        </div>
       </div>
       <div class="menu-bar2">
         <a href="#">Home</a>
@@ -55,30 +58,96 @@
         <img src="images/down-arrow.png" alt="" />
       </div>
     </div>
-    <div class="article-head">Technology</div>
-    <div class="article-content">
-      <h3><a>Asda bug exposed payment details</a></h3>
-      <div class="article-summary">
-        <p>
-          Security vulnerabilities that put customers at risk have affected
-          Asda's website for a couple of years, a security expert has revealed.
-        </p>
-        <p>
-          <img src="images/clock.png" alt="" />
-          19 January 2016
-          <a href="#">Technology</a>
-        </p>
-        <p>
-          <a href="#">Surveillance firm hit in hack attack</a>
-        </p>
-        <p>
-          <a href="#">eBay flaw has existed for months</a>
-        </p>
-        <img src="images/main-article-image.png" alt="" />
+    <div class="article-choise"><h2>Technology</h2></div>
+    <div class="page-content">
+      <div class="article">
+        <div class="article-head">
+          <h3><a>Asda bug exposed payment details</a></h3>
+        </div>
+        <div class="article-content">
+          <div class="article-body">
+            <p>
+              Security vulnerabilities that put customers at risk have affected
+              Asda's website for a couple of years, a security expert has
+              revealed.
+            </p>
+            <p>
+              <img class="clock" src="images/clock.png" alt="" />
+              <span class="date">19 January 2016</span>
+              <a href="#" class="topic-link">Technology</a>
+            </p>
+            <hr class="article-hr" align="left" />
+            <p>
+              <a href="#" class="article-link"
+                >Surveillance firm hit in hack attack</a
+              >
+            </p>
+            <p>
+              <a href="#" class="article-link"
+                >eBay flaw has existed for months</a
+              >
+            </p>
+          </div>
+          <div class="article-img">
+            <img src="images/main-article-image.png" alt="" />
+          </div>
+        </div>
       </div>
-      <div class="watch-listen">
+      <div id="watch-listen">
         <h4>Watch/Listen</h4>
-      </div> -->
- </div>
+        <div class="side-article">
+          <img class="article-side-image" src="images/article1.png" />
+          <div class="article-side-content">
+            <p>
+              <a class="watch-listen-link" href=""
+                >UK science chief backs blockchains</a
+              >
+            </p>
+            <p>
+              <img class="clock" src="images/clock.png" />
+              <span class="date">19 January 2016</span>
+            </p>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <div class="side-article">
+          <img class="article-side-image" src="images/article2.png" />
+          <div class="article-side-content">
+            <p>
+              <a class="watch-listen-link" href=""
+                >Drone register gives 'accountability'</a
+              >
+            </p>
+            <p>
+              <img class="clock" src="images/clock.png" />
+              <span class="date border-right">19 January 2016</span><br /><a
+                class="topic-link no-border"
+                href=""
+                >Technology</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <div class="side-article">
+          <img class="article-side-image" src="images/article3.png" />
+          <div class="article-side-content">
+            <p>
+              <a class="watch-listen-link" href=""
+                >SpaceX rocket explodes during landing</a
+              >
+            </p>
+            <p>
+              <img class="clock" src="images/clock.png" />
+              <span class="date border-right">19 January 2016</span><br /><a
+                class="topic-link no-border"
+                href=""
+                >Science &amp; Environment</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

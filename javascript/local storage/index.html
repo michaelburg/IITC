@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="userInput" />
+    <button onclick="set()">set</button>
+    <button onclick="get()">get</button>
+    <h1 id="res">hello</h1>
+    <script>
+      function set() {
+        newName = document.getElementById("userInput").value;
+        window.localStorage.setItem("name", newName);
+        setH1(newName);
+      }
+      function get() {
+        name = window.localStorage.getItem("name");
+        setH1(name);
+      }
+      function setH1(name) {
+        console.log(name);
+        document.getElementById("res").innerText = "hello" + name;
+      }
+    </script>
+  </body>
+</html>
