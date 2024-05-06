@@ -14,14 +14,14 @@
       let todoList;
       function AddTodo() {
         const elem = document.getElementById("todoInput");
-        const newTodo = elem.value;
+        const newTodo = { value: elem.value, color: null };
         elem.value = "";
-        if (isTaskExist(newTodo)) return;
+        if (isTaskExist(newTodo.value)) return;
         todoList.push(newTodo);
         localStorage.setItem("todo", JSON.stringify(todoList)); // Corrected method name
         const li = document.createElement("li");
-        li.id = newTodo;
-        li.textContent = newTodo;
+        li.id = todoList.length - 1;
+        li.textContent = newTodo.value;
         li.onclick = handleTaskProgress; // Remove the quotes around the function name
         document.body.appendChild(li);
       }
@@ -30,15 +30,29 @@
       }
       function handleTaskProgress() {
         const elem = document.getElementById(this.id);
-        if (elem.style.backgroundColor == "green")
-          elem.style.backgroundColor = null;
-        else elem.style.backgroundColor = "green"; // Corrected property name
+        if (todoList[this.id].color == "green") todoList[this.id].color = null;
+        else todoList[this.id].color = "green";
+        elem.style.backgroundColor = todoList[this.id].color;
+        localStorage.setItem("todo", JSON.stringify(todoList)); // Corrected method name
+        console.log(todoList);
       }
       function showTodos() {
         todoList = JSON.parse(window.localStorage.getItem("todo")) || [];
+        for (let i = 0; i < todoList.length; i++) {
+          const li = document.createElement("li");
+          li.id = i;
+          li.textContent = todoList[i].value;
+          li.style.backgroundColor = todoList[i].color;
+          li.onclick = handleTaskProgress; // Remove the quotes around the function name
+          document.body.appendChild(li);
+        }
       }
       function clearTodos() {
         window.localStorage.clear();
+        for (let i = 0; i < todoList.length; i++) {
+          document.getElementById(i).remove();
+        }
+        todoList = [];
       }
       showTodos();
     </script>

@@ -6,23 +6,9 @@
     <title>Document</title>
   </head>
   <body>
-    <script>
-      function sort(arr) {
-        let temp, min;
-        for (let i = 0; i < arr.length - 1; i++) {
-          min = i;
-          for (let j = i + 1; j < arr.length; j++) {
-            if (arr[min] > arr[j]) min = j;
-          }
-          temp = arr[i];
-          arr[i] = arr[min];
-          arr[min] = temp;
-        }
-      }
-      let arr = [1, 4, 2, 4, 2, 6, 2, 1, 5];
-      sort(arr);
-      console.log(arr);
-      ////o(n^2)/////
-    </script>
+    <h1>welcome to my quiz</h1>
+    <button onclick="submitQuiz()">Submit quiz</button>
+    <button onclick="resetQuiz()">Reset quiz</button>
+    <script src="./Js_local_storage_quiz.js"></script>
   </body>
 </html>

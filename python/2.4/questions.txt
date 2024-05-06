@@ -1,6 +1,5 @@
 {
-    "easy":
-    {
+    "easy":{
         "What is the capital of France?": {
             "A": "Madrid",
             "B": "Berlin",
