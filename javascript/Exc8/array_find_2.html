@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function findAgeInArray(arr, age) {
+        return arr.find((element) => element.age === age) !== undefined;
+      }
+
+      arr = [
+        { name: "Moshe Kupernikos", age: 33 },
+        { name: "Shimon", age: 21 },
+        { name: "Joe", age: 34 },
+      ];
+
+      if (findAgeInArray(arr, 33)) console.log("yes");
+      else console.log("no");
+      if (findAgeInArray(arr, 11)) console.log("yes");
+      else console.log("no");
+    </script>
+  </body>
+</html>

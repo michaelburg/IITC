@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function sort(oldArr) {
+        let arr = oldArr.slice();
+        let temp, min;
+        for (let i = 0; i < arr.length - 1; i++) {
+          min = i;
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[min] > arr[j]) min = j;
+          }
+          temp = arr[i];
+          arr[i] = arr[min];
+          arr[min] = temp;
+        }
+        return arr;
+      }
+      function creat(x) {
+        newPARA = document.createElement("p");
+        newPARA.innerText = x;
+        document.body.appendChild(newPARA);
+      }
+      let oldArr = [1, 4, 2, 4, 2, 6, 2, 1, 5];
+      let arr = sort(oldArr);
+      arr.map((x) => creat(x));
+    </script>
+  </body>
+</html>

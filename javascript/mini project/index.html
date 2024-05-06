@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Avalable budjet for may 2024</h1>
+    <h1 id="totalBudjet">0</h1>
+    <div>
+      <p>income</p>
+      <p id="totalIncome">0</p>
+    </div>
+    <div>
+      <p>expenses</p>
+      <p id="totalExpenses">0</p>
+      <p id="totalPersant">0%</p>
+    </div>
+    <div>
+      <!-- droplist +/- -->
+      <select name="action" id="action">
+        <option value="add">+</option>
+        <option value="reduce">-</option>
+      </select>
+      <input
+        type="text"
+        id="actionDescription"
+        ,placeholder="add Description"
+      />
+      <input type="number" placeholder="value" id="actionValue" />
+      <button id="submitAction" onclick="submitAction()">submit</button>
+    </div>
+    <div id="breakdown">
+      <div id="incomes"></div>
+      <div id="expenses"></div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
