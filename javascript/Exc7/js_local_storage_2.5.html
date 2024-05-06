@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="AddTodo()">Add todo</button>
+    <input id="todoInput" type="text" placeholder="add todo" />
+    <button onclick="showTodos()">Show todos</button>
+    <button onclick="clearTodos()">Clear todos</button>
+    <script>
+      let todoList;
+      function AddTodo() {
+        const elem = document.getElementById("todoInput");
+        const newTodo = elem.value;
+        elem.value = "";
+        if (isTaskExist(newTodo)) return;
+        todoList.push(newTodo);
+        localStorage.setItem("todo", JSON.stringify(todoList)); // Corrected method name
+        const li = document.createElement("li");
+        li.id = newTodo;
+        li.textContent = newTodo;
+        li.onclick = handleTaskProgress; // Remove the quotes around the function name
+        document.body.appendChild(li);
+      }
+      function isTaskExist(newtask) {
+        return todoList.includes(newtask);
+      }
+      function handleTaskProgress() {
+        const elem = document.getElementById(this.id);
+        if (elem.style.backgroundColor == "green")
+          elem.style.backgroundColor = null;
+        else elem.style.backgroundColor = "green"; // Corrected property name
+      }
+      function showTodos() {
+        todoList = JSON.parse(window.localStorage.getItem("todo")) || [];
+      }
+      function clearTodos() {
+        window.localStorage.clear();
+      }
+      showTodos();
+    </script>
+  </body>
+</html>

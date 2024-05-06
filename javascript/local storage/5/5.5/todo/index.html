@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea
+      name="new tast"
+      id="newTask"
+      placeholder="enetr new task"
+    ></textarea>
+    <button id="add" onclick="addTask()">Add</button>
+    <ul id="taksList"></ul>
+    <script>
+      function addTask() {
+        newTask = document.getElementById("newTask").value;
+        let taskList;
+        try {
+          taskList = JSON.parse(localStorage.getItem("todo"));
+        } catch {
+          taskList = [];
+        }
+        taskList.push(newTask);
+        localStorage.setItem("todo", JSON.stringify(taskList));
+
+        for (let i = 0; i < taskList.length; i++) {
+          const li = document.createElement("li");
+          li.innerText = newTask;
+          li.onclick = "removeTask()";
+          li.id = i;
+          document.body.appendChild(li);
+        }
+      }
+      function removeTask() {
+        id = this.id;
+        taskToDel = document.getElementById(id).value;
+        taskList = JSON.parse(localStorage.getItem("todo"));
+        taskList.slise(id, 1);
+        for (let i = 0; i < taskList.length; i++) {
+          const p = document.createElement("p");
+          p.innerText = newTask;
+          p.onclick = "removeTask()";
+          p.id = i;
+          document.body.appendChild(p);
+        }
+      }
+    </script>
+  </body>
+</html>

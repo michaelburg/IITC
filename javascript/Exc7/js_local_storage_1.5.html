@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      p,
+      button {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px; /* Add some spacing between them */
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="updateCount('btn1')">counter1</button>
+    <p id="p_1"></p>
+    <br />
+    <button onclick="updateCount('btn2')">counter2</button>
+    <p id="p_2"></p>
+    <script>
+      let counter1 = 0;
+      let counter2 = 0;
+      function updateCount(btnId) {
+        console.log(btnId);
+        if (btnId == "btn1") {
+          counter1++;
+          document.getElementById("p_1").innerText = counter1;
+          window.localStorage.setItem("c_1", counter1);
+        } else {
+          counter2++;
+          document.getElementById("p_2").innerText = counter2;
+          window.localStorage.setItem("c_2", counter2);
+        }
+      }
+      function setCounter() {
+        counter1 = window.localStorage.getItem("c_1");
+        counter2 = window.localStorage.getItem("c_2");
+        document.getElementById("p_1").innerText = counter1;
+        document.getElementById("p_2").innerText = counter2;
+      }
+      setCounter();
+    </script>
+  </body>
+</html>

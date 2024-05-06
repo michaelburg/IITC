@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const item = { 1: "a", 2: "b" };
+      a = JSON.stringify(item);
+      window.localStorage.setItem("new", item);
+      newItem = window.localStorage.getItem("new");
+      newItem = JSON.stringify(item);
+      console.log(newItem);
+    </script>
+  </body>
+</html>
