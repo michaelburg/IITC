@@ -1,4 +1,18 @@
-totalbudjet = 0;
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+totalbudget = 0;
 totalincome = 0;
 totalexpense = 0;
 data = JSON.parse(window.localStorage.getItem("data")) || {
@@ -7,6 +21,10 @@ data = JSON.parse(window.localStorage.getItem("data")) || {
 };
 loadPage();
 function loadPage() {
+  date = new Date();
+  document.getElementById("headWithDate").innerHTML = `Available budjet in ${
+    months[date.getMonth()] + " " + date.getFullYear()
+  }`;
   for (const key in data.expenses) {
     reduce(key, data.expenses[key].value);
   }
@@ -23,10 +41,11 @@ function submitAction() {
   actionValueText = document.getElementById("actionValue");
   actionDescription = actionDescriptionText.value;
   actionValue = actionValueText.valueAsNumber;
-  actionValue = parseFloat(actionValue);
+  actionValue = Math.round(parseFloat(actionValue) * 100) / 100;
   if (
     actionDescription == "" ||
-    actionValue == 0 ||
+    actionValue <= 0 ||
+    isNaN(actionValue) ||
     data.incomes.hasOwnProperty(actionDescription)
   )
     return;
@@ -37,7 +56,7 @@ function submitAction() {
 }
 function add(actionDescription, actionValue) {
   totalincome += actionValue;
-  totalbudjet += actionValue;
+  totalbudget += actionValue;
   parent = document.getElementById("incomes");
   newAction = document.createElement("div");
   newAction.id = "income";
@@ -54,7 +73,7 @@ function add(actionDescription, actionValue) {
 }
 function reduce(actionDescription, actionValue) {
   totalexpense += actionValue;
-  totalbudjet -= actionValue;
+  totalbudget -= actionValue;
   persante = parseInt((actionValue * 100) / totalincome) || 0;
   parent = document.getElementById("expenses");
   newAction = document.createElement("div");
@@ -72,7 +91,14 @@ function reduce(actionDescription, actionValue) {
   updateLocalStorage();
 }
 function setHead() {
-  document.getElementById("totalBudjet").innerText = totalbudjet;
+  budjet = document.getElementById("totalbudget");
+  if (totalbudget >= 0) {
+    budjet.style.color = "green";
+    budjet.innerText = "+" + totalbudget;
+  } else {
+    budjet.style.color = "red";
+    budjet.innerText = totalbudget;
+  }
   document.getElementById("totalIncome").innerText = totalincome;
   document.getElementById("totalExpenses").innerText = totalexpense;
   document.getElementById("totalPersant").innerText = `${
@@ -95,14 +121,13 @@ function cancelIncome(btn) {
   div = btn.parentNode;
   cancelIncomeDescription = div.querySelector("#description").innerText;
   cancelIncomeAmount = div.querySelector("#income-amount").innerText;
-  totalbudjet -= cancelIncomeAmount;
+  totalbudget -= cancelIncomeAmount;
   totalincome -= cancelIncomeAmount;
   setHead();
   setExpensesPer();
   delete data.incomes[cancelIncomeDescription];
   updateLocalStorage();
 
-  // console.log(income);
   div.remove();
 }
 function cancelExpense(btn) {
@@ -111,7 +136,7 @@ function cancelExpense(btn) {
   cancelexpenseAmount = parseFloat(
     div.querySelector("#expense-amount").innerText
   );
-  totalbudjet += cancelexpenseAmount;
+  totalbudget += cancelexpenseAmount;
   totalexpense -= cancelexpenseAmount;
   setHead();
   setExpensesPer();

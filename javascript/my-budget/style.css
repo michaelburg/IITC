@@ -1,9 +1,9 @@
-/* body {
+body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-} */
+}
 div {
   display: flex;
   justify-content: space-between;
@@ -21,4 +21,26 @@ div {
 }
 #submitAction {
   background-color: green;
+}
+#totalIncomeDiv {
+  background-color: green;
+}
+
+#totalExpensesDiv {
+  background-color: red;
+}
+#incomes {
+  color: green;
+}
+#expenses {
+  color: red;
+}
+#description {
+  color: black;
+}
+#percent {
+  background-color: rgb(255, 135, 135);
+}
+#totalPersant {
+  background-color: rgb(255, 135, 135);
 }
