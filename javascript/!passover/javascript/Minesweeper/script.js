@@ -2,6 +2,7 @@ let backGrid = [];
 let hight = 9;
 let width = 9;
 let mines = 10;
+
 function setSize(newWidth, newHight, newMines) {
   width = newWidth;
   hight = newHight;
@@ -102,6 +103,23 @@ function bombCount(Xindex, Yindex) {
   if (isBomb(Xindex - 1, Yindex + 1)) count++;
   return count;
 }
+function isFlag(Xindex, Yindex) {
+  try {
+    return backGrid[Xindex][Yindex] == "F";
+  } catch {}
+}
+function FlagCount(Xindex, Yindex) {
+  let count = 0;
+  if (isFlag(Xindex + 1, Yindex)) count++;
+  if (isFlag(Xindex - 1, Yindex)) count++;
+  if (isFlag(Xindex, Yindex + 1)) count++;
+  if (isFlag(Xindex, Yindex - 1)) count++;
+  if (isFlag(Xindex + 1, Yindex + 1)) count++;
+  if (isFlag(Xindex - 1, Yindex - 1)) count++;
+  if (isFlag(Xindex + 1, Yindex - 1)) count++;
+  if (isFlag(Xindex - 1, Yindex + 1)) count++;
+  return count;
+}
 function revelCellRequrs(Xindex, Yindex) {
   button = document.getElementById(Xindex + "_" + Yindex);
   if (button.innerText == "F") return;
@@ -145,6 +163,7 @@ function revelCellRequrs(Xindex, Yindex) {
   }
 }
 function revelCell() {
+  console.log("here");
   const newId = this.id.split("_");
   const Xindex = parseInt(newId[0]); // "9"
   const Yindex = parseInt(newId[1]);
@@ -159,3 +178,6 @@ function flag() {
   else button.innerText = "";
 }
 generateGrid();
+document.addEventListener("contextmenu", function (event) {
+  event.preventDefault();
+});

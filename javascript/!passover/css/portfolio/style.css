@@ -67,6 +67,7 @@ textarea {
 }
 .projects {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 .projects h3 {
@@ -77,6 +78,7 @@ textarea {
 .earth-project {
   background-image: url("img/earth.jpeg");
   background-size: cover;
+  background-position: center;
   height: 400px;
   width: 400px;
   margin: 20px;
@@ -86,6 +88,7 @@ textarea {
 .bbc-project {
   background-image: url("img/bbcnews.png");
   background-size: cover;
+  background-position: center;
 
   height: 400px;
   width: 400px;
@@ -95,12 +98,13 @@ textarea {
 }
 .project-content {
   background-color: white;
-  width: 400px;
+  /* width: 400px; */
   overflow: hidden;
   height: 65px;
   position: absolute;
   bottom: 0;
   left: 0;
+  right: 0;
 }
 
 .hidden-project-content a {
@@ -115,17 +119,67 @@ textarea {
 .contact {
   background-color: rgba(3, 3, 3, 45%);
   color: white;
+  padding-top: 75px;
+  padding-bottom: 50px;
 }
 .contact-form {
-  display: flex;
-  align-items: center;
-}
-.contact-form label {
-  display: block;
   text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  max-width: 1100px;
+  width: 90%;
+  margin-inline: auto;
+  gap: 50px;
 }
-.contact-form input {
+.contact-details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.message textarea {
+  max-width: 500px;
+  max-height: 300px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+.contact-details input {
+  max-width: 400px;
   border-radius: 5px;
-  width: 100%;
   padding: 15px 20px;
+}
+.message button {
+  color: #1d3d5f;
+  border: 0;
+  border-radius: 5px;
+  background: lightblue;
+  width: 140px;
+  height: 40px;
+  margin-top: 40px;
+  margin-left: auto;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.fa {
+  display: inline-block;
+
+  font: normal normal normal 14px/1 FontAwesome;
+  width: 200px;
+  text-rendering: auto;
+}
+.buttom {
+  display: flex;
+  justify-content: space-between;
+  height: 90px;
+  background-color: #1f2027;
+  color: white;
+  align-items: center;
 }

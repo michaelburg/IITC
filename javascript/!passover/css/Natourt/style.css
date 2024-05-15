@@ -4,8 +4,12 @@ body {
   font-weight: 400;
   line-height: 1.7;
   color: #777;
+  box-sizing: border-box;
+  padding: 27px;
 }
+
 .header {
+  color: white;
   background-image: linear-gradient(
       to right bottom,
       rgba(126, 213, 111, 0.8),
@@ -14,4 +18,32 @@ body {
     url(./img/hero-small.jpg);
   height: 520px;
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+.navigation__button {
+  background-color: #fff;
+  height: 7rem;
+  width: 7rem;
+  position: fixed;
+  top: 6rem;
+  right: 6rem;
+  border-radius: 50%;
+  z-index: 2000;
+  -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+}
+.logo {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+.logo img {
+  width: 100px;
+}
+.heading-main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
 }
