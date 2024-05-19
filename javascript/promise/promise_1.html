@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="clicked('success')">success</button>
+    <button onclick="clicked('failure')">Failure</button>
+    <p class="res"></p>
+    <script>
+        let promise
+        function createPromise(stat){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    stat === 'success' ? resolve('success') : reject('failure');
+                }, 3000); 
+            });
+        }
+        function clicked(stat){
+            promise = createPromise(stat)
+            promise.then(resolveHandler).catch(rejectHandler);
+        }
+        function resolveHandler(resolved){document.querySelector('.res').innerHTML=resolved}
+        function rejectHandler(error) {document.querySelector('.res').innerHTML=error}
+</script>
+</body>
+</html>
