@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="start()">start</button>
+    <div class="progress-bar" id="progress-bar">0%</div>
+    <script>
+        let interval
+        function start(){
+        const progressBar = document.getElementById('progress-bar');
+        progressBar.innerText='0%'
+        clearInterval(interval);
+        inisiateCount()
+        }
+        function updateProgressBar(progress) {
+        const progressBar = document.getElementById('progress-bar');
+        progressBar.style.width = progress + '%';
+        progressBar.textContent = progress + '%';
+    }
+
+    function inisiateCount(){
+    let progress = 0;
+     interval = setInterval(() => {
+        if (progress < 100) {
+            progress += 1;
+            updateProgressBar(progress);
+        } else {
+            clearInterval(interval);
+        }
+    }, 2000/100);
+}
+    </script>
+</body>
+</html>

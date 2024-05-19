@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="UserInput">
+    <button onclick="submit()">submit</button>
+    <br>
+    <label>success res: </label>
+    <p class="evenNum"></p>
+    <script>
+        function submit(){
+            document.querySelector('.evenNum').innerHTML=''
+            document.querySelector('.evenNum').innerHTML=''
+            let num=document.querySelector('.UserInput').value
+            const promise = isEvenAsync(num)
+            promise.then(resolveHandler).catch(rejectHandler);
+        }
+        function isEvenAsync(num){
+        return new Promise((resolve, reject) => {
+            Number(num)?resolve(num%2==0):reject()
+        });}
+        function resolveHandler(resolved){document.querySelector('.evenNum').innerHTML=resolved}
+        function rejectHandler(error) {document.querySelector('.evenNum').innerHTML='not number'}
+</script>
+</body>
+</html>
