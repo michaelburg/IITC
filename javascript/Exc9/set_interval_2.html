@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="start()">Start</button>
+    <script>
+      let arr = [4, 5, 7, 4, 3, 2, 4, 5, 7, 8, 9];
+      function myFunction() {
+        console.log("Waited for 1 second!");
+      }
+
+      // Call myFunction after 1 second
+      function start() {
+        // setTimeout(myFunction, 1000);
+        sort();
+      }
+      function sort() {
+        for (let i = 0; i < arr.length - 1; i++) {
+          minIndex = i;
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[minIndex] > arr[j]) minIndex = j;
+          }
+          [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+          setTimeout(printMinNum, 1000);
+        }
+      }
+      function printMinNum() {
+        const newElem = document.createElement("div");
+        newElem.innerText = arr;
+        document.body.appendChild(newElem);
+      }
+    </script>
+  </body>
+</html>
