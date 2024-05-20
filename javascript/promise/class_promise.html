@@ -55,25 +55,25 @@
 
 <ul class="myUL"></ul>
 <script>
-    todoList=[]
-    for(let i=0;i<10;i++){
-        todoList.push(i)
-    }
+    let todoList=[]
     const todoUL=document.querySelector('.myUL')
+    createList()
     function createList(){
-        todoList.forEach(element => {
+        for(let i=0;i<10;i++){
+            todoList.push(i)
+
             const li=document.createElement('li')
-            li.textContent=element
+            li.textContent=i
             li.onclick=deleteItem
+            
             todoUL.appendChild(li)
-        });
+        }
     }
     function deleteItem(){
-        const index=Array.prototype.indexOf.call(todoUL.children,this)
+        const index = Array.from(todoUL.children).indexOf(this);
         this.remove()
         todoList.splice(index,1)
     }
-    createList()
 </script>
 </body>
 </html>
