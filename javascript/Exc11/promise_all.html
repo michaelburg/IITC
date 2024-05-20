@@ -1,0 +1,54 @@
+promise_3
+Write a function getUser that returns a Promise which resolves to the object
+{ id: 1, name: 'John Doe' } after 1 second.
+Then chain another.
+then to log the user's name.
+promise chaining
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+    </style>
+</head>
+<body>
+    <button onclick="clickHandler()">start</button>
+    <p class="res">res: </p>
+    <script>
+        function clickHandler(){
+            const loader=document.createElement('div')
+            loader.className='loader'
+            document.body.appendChild(loader)
+            const promise=new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve() 
+                }, 2000); 
+            });
+            promise.then(resolveHandler)
+        }
+        
+        function resolveHandler(){
+            document.querySelector('.loader').remove()
+            document.querySelector('.res').innerHTML='res: succcess' 
+        }
+    </script>
+</body>
+</html>
