@@ -53,6 +53,27 @@
 </script> -->
 
 
+<ul class="myUL"></ul>
+<script>
+    todoList=[]
+    for(let i=0;i<10;i++){
+        todoList.push(i)
+    }
+    const todoUL=document.querySelector('.myUL')
+    function createList(){
+        todoList.forEach(element => {
+            const li=document.createElement('li')
+            li.textContent=element
+            li.onclick=deleteItem
+            todoUL.appendChild(li)
+        });
+    }
+    function deleteItem(){
+        const index=Array.prototype.indexOf.call(todoUL.children,this)
+        this.remove()
+        todoList.splice(index,1)
+    }
+    createList()
 </script>
 </body>
 </html>
