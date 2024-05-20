@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td{
+          border: 1px solid black;  
+        }
+    </style>
+</head>
+<body>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+<script>
+    const url = "https://jsonplaceholder.typicode.com/posts";
+    
+    axios.get(url)
+    .then(function (response) {
+        // handle success
+        const table=document.createElement('table')
+        const row = table.insertRow()
+        let cell = row.insertCell();
+        cell.innerText='userId'
+        cell = row.insertCell();
+       cell.innerText='id'
+             cell = row.insertCell();
+            cell.innerText='body'
+             cell = row.insertCell();
+            cell.innerText='title'
+        response.data.forEach(element => {
+            const row = table.insertRow()
+            cell = row.insertCell();
+           cell.innerText=element.userId
+            cell = row.insertCell();
+           cell.innerText=element.id
+            cell = row.insertCell();
+            cell.innerText=element.body
+             cell = row.insertCell();
+            cell.innerText=element.title
+            
+        });
+        document.body.appendChild(table);
+    })
+    .catch(function (error) {
+        // handle error
+        console.error(error);
+    });
+</script>
+</body>
+</html>

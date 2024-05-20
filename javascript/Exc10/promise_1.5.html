@@ -4,35 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+    </style>
 </head>
 <body>
-    <button onclick="start()">start</button>
-    <div class="progress-bar" id="progress-bar">0%</div>
+    <button onclick="clickHandler()">start</button>
+    <p class="res">res: </p>
     <script>
-        let interval
-        function start(){
-        const progressBar = document.getElementById('progress-bar');
-        progressBar.innerText='0%'
-        clearInterval(interval);
-        inisiateCount()
+        function clickHandler(){
+            const loader=document.createElement('div')
+            loader.className='loader'
+            document.body.appendChild(loader)
+            const promise=new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve() 
+                }, 2000); 
+            });
+            promise.then(resolveHandler)
         }
-        function updateProgressBar(progress) {
-        const progressBar = document.getElementById('progress-bar');
-        progressBar.style.width = progress + '%';
-        progressBar.textContent = progress + '%';
-    }
-
-    function inisiateCount(){
-    let progress = 0;
-     interval = setInterval(() => {
-        if (progress < 100) {
-            progress += 1;
-            updateProgressBar(progress);
-        } else {
-            clearInterval(interval);
+        
+        function resolveHandler(){
+            document.querySelector('.loader').remove()
+            document.querySelector('.res').innerHTML='res: succcess' 
         }
-    }, 2000/100);
-}
     </script>
 </body>
 </html>
