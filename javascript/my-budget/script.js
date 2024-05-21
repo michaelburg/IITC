@@ -154,9 +154,9 @@ function updateBudgetDisplay(budget) {
 function setExpensesPer() {
   const expenseDiv = document.querySelectorAll(".expenseWrapper");
   for (let i = 0; i < expenseDiv.length; i++) {
-   const foundTransaction=transactions.filter(num => num.value < 0)[i]
+    const expenseValue=parseFloat(expenseDiv[i].querySelector(".transactionAmount").innerText.replace(/[\s,-]/g, ''));
     const percent =
-      parseInt((foundTransaction["value"] * 100) / totalIncome) * -1 || 0;
+      parseInt((expenseValue * 100) / totalIncome) || 0;
     expenseDiv[i].querySelector(".percent").innerText=`${percent}%`;
   }
 }
