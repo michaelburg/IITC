@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "firstName": "Alice",
+      "lastName": "Smith"
+    },
+    {
+      "id": "1",
+      "firstName": "1",
+      "lastName": "1"
+    }
+  ],
+  "books": [
+    {
+      "id": "1",
+      "name": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "numPages": 180
+    },
+    {
+      "id": "2",
+      "name": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "numPages": 281
+    }
+  ]
+}
