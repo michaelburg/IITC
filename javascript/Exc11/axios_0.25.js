@@ -11,7 +11,7 @@ const loader=document.createElement('div')
 loader.className='loader'
 document.body.appendChild(loader)
 
-const promise=new Promise((resolve) => {setTimeout(() => {resolve()}, 2000); });
+            const promise=new Promise((resolve) => {setTimeout(() => {resolve()}, 2000); });
 promise.then(resolveHandler)
 
 

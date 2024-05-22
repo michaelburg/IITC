@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        using axios: <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+        trart live json-server: 'json-server --watch data.json --port 8001'
+        url to work on:  url='http://localhost:8001/posts'
+        to prevent refresh use this: "event.preventDefault(); "
+        read the json: axios.get(url).then(function (response) {console.log(response)})
+        post data to json: axios.post(url,post)##post is the object to upload
+        delete post from json:  axios.delete(url+'/'+post)
+     -->
+     <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <form class="inputs">
+        <input type="number" placeholder="userId" class='userId'>
+        <input type="number" placeholder="id" class='id'>
+        <input type="text" placeholder="title" class='title'>
+        <input type="text" placeholder="body" class='body'>
+        <button onclick="newPost()">post</button>
+    </form>
+    <form>
+        <input type="number" placeholder="id" class="id-to-remove">
+        <button onclick="removePost()">remove</button>
+    </form>
+    <script>
+        url='http://localhost:8001/posts'
+        function newPost(){
+            formData=new FormData(document.querySelector('.userId'))
+            event.preventDefault(); 
+            try{
+                post={
+                    "userId": document.querySelector('.userId').value,
+                    "id": document.querySelector('.id').value,
+                    "title": document.querySelector('.title').value,
+                    "body": document.querySelector('.body').value,
+                }
+                axios.post(url,post)
+                alert('yay')
+            }
+            catch{alert('nope')}
+        }
+        function removePost(){
+            event.preventDefault(); 
+            try{
+                axios.delete(url+'/'+document.querySelector('.id-to-remove').value)
+                alert('removed');
+            }
+            catch{alert('not found')}
+        }
+        axios.get(url).then(function (response) {console.log(response)})
+    </script>
+</body>
+</html>
