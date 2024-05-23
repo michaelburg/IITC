@@ -1,63 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        td{
-          border: 1px solid black;  
-        }
-        .loader {
-  border: 16px solid #f3f3f3; 
-  border-top: 16px solid #3498db; 
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
+      td {
+        border: 1px solid black;
+      }
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
     <script>
-        const urlPost = "https://jsonplaceholder.typicode.com/posts/"
-        const urlusers = "https://jsonplaceholder.typicode.com/users/"
-        const table=document.createElement('table')
-        table.innerHTML+=`
+      const urlPost = "https://jsonplaceholder.typicode.com/posts/";
+      const urlusers = "https://jsonplaceholder.typicode.com/users/";
+      const table = document.createElement("table");
+      table.innerHTML += `
         <th>userName</th>
         <th>id</th>
         <th>title</th>
-        <th>body</th>`
-        const loader=document.createElement('div')
-        loader.className='loader'
-        document.body.appendChild(loader)
+        <th>body</th>`;
+      const loader = document.createElement("div");
+      loader.className = "loader";
+      document.body.appendChild(loader);
 
-        const promise=new Promise((resolve) => {setTimeout(() => {resolve()}, 2000); });
-        promise.then(resolveHandler)
+      const promise = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      });
+      promise.then(resolveHandler);
 
-
-        function resolveHandler(){
-            document.querySelector('.loader').remove()
-            axios.get(urlPost).then(function (posts) {
-                axios.get(urlusers).then(function (users) {
-                    posts.data.forEach(post => {
-                        table.innerHTML+=`<tr>
-                            <td>${users.data[post.userId-1].username}</td>
+      function resolveHandler() {
+        document.querySelector(".loader").remove();
+        axios.get(urlPost).then(function (posts) {
+          axios
+            .get(urlusers)
+            .then(function (users) {
+              posts.data.forEach((post) => {
+                table.innerHTML += `<tr>
+                            <td>${users.data[post.userId - 1].username}</td>
                             <td>${post.id}</td>
                             <td>${post.title}</td>
-                            <td>${post.body}</td></tr>`
-                        });
-                    }).catch(function (error) {console.error(error)})
-                .catch(function (error) {console.error(error)})
+                            <td>${post.body}</td></tr>`;
+              });
             })
-        document.body.appendChild(table)  
-        }
+            .catch(function (error) {
+              console.error(error);
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
+        });
+        document.body.appendChild(table);
+      }
     </script>
-</body>
+  </body>
 </html>

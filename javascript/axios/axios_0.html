@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        td{
-          border: 1px solid black;  
-        }
+      td {
+        border: 1px solid black;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1 class="comments"></h1>
     <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
     <script>
-        const url = "https://jsonplaceholder.typicode.com/comments";
-        axios.get(url)
+      const url = "https://jsonplaceholder.typicode.com/comments";
+      axios
+        .get(url)
         .then(function (response) {
-            document.querySelector('.comments').innerText=response.data.length+' comments'
-            console.log(response.data);
-            const table=document.createElement('table')
-            response.data.forEach(element => {
-            const row = table.insertRow()
+          document.querySelector(".comments").innerText =
+            response.data.length + " comments";
+          console.log(response.data);
+          const table = document.createElement("table");
+          response.data.forEach((element) => {
+            const row = table.insertRow();
             let cell = row.insertCell();
-            cell.innerText=element.body
-                
-            });
-            document.body.appendChild(table);
+            cell.innerText = element.body;
+          });
+          document.body.appendChild(table);
         })
         .catch(function (error) {
-            console.error(error);
-        });
-</script>
-</body>
+          console.error(error);
+        });
+    </script>
+  </body>
 </html>

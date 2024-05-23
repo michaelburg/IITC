@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
     <script>
-        function ctreatGetPromise(url){
-            return new Promise((resolve) => 
-            axios
-            .get(url)
-            .then(function (response) 
-            {resolve(response.data.length)
-            }))}
-            
-        const posts = "https://jsonplaceholder.typicode.com/posts";
-        const users = "https://jsonplaceholder.typicode.com/users";
-        const comments = "https://jsonplaceholder.typicode.com/comments";
-        
-        const postsResolve=ctreatGetPromise(posts)
-        const usersResolve=ctreatGetPromise(users)
-        const commentsResolve=ctreatGetPromise(comments)
-        async function fetchData() { 
-            let message
-            try{message=await postsResolve+await usersResolve+await commentsResolve}
-            catch{message='error'}
-            createElementWithCount(message)
+      function ctreatGetPromise(url) {
+        return new Promise((resolve) =>
+          axios.get(url).then(function (response) {
+            resolve(response.data.length);
+          })
+        );
+      }
+
+      const posts = "https://jsonplaceholder.typicode.com/posts";
+      const users = "https://jsonplaceholder.typicode.com/users";
+      const comments = "https://jsonplaceholder.typicode.com/comments";
+
+      const postsResolve = ctreatGetPromise(posts);
+      const usersResolve = ctreatGetPromise(users);
+      const commentsResolve = ctreatGetPromise(comments);
+      async function fetchData() {
+        let message;
+        try {
+          message =
+            (await postsResolve) +
+            (await usersResolve) +
+            (await commentsResolve);
+        } catch {
+          message = "error";
         }
-        fetchData()
-        function createElementWithCount(count){
-            const h1=document.createElement('h1')
-            h1.innerText=count
-            document.body.appendChild(h1)
-        }
+        createElementWithCount(message);
+      }
+      fetchData();
+      function createElementWithCount(count) {
+        const h1 = document.createElement("h1");
+        h1.innerText = count;
+        document.body.appendChild(h1);
+      }
     </script>
-</body>
+  </body>
 </html>

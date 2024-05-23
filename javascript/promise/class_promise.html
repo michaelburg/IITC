@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    
-</head>
-<body>
-    <input type="text" class="UserInput">
+  </head>
+  <body>
+    <input type="text" class="UserInput" />
     <button onclick="submit()">submit</button>
-    <br>
+    <br />
     <label>success res: </label>
     <p class="evenNum"></p>
-    <br>
+    <br />
     <label>nim index: </label>
     <p class="min-index"></p>
-    
+
     <!-- <script>
          function submit(){
              document.querySelector('.evenNum').innerHTML=''
@@ -52,28 +51,27 @@
     minPromise()
 </script> -->
 
+    <ul class="myUL"></ul>
+    <script>
+      let todoList = [];
+      const todoUL = document.querySelector(".myUL");
+      createList();
+      function createList() {
+        for (let i = 0; i < 10; i++) {
+          todoList.push(i);
 
-<ul class="myUL"></ul>
-<script>
-    let todoList=[]
-    const todoUL=document.querySelector('.myUL')
-    createList()
-    function createList(){
-        for(let i=0;i<10;i++){
-            todoList.push(i)
+          const li = document.createElement("li");
+          li.textContent = i;
+          li.onclick = deleteItem;
 
-            const li=document.createElement('li')
-            li.textContent=i
-            li.onclick=deleteItem
-            
-            todoUL.appendChild(li)
+          todoUL.appendChild(li);
         }
-    }
-    function deleteItem(){
+      }
+      function deleteItem() {
         const index = Array.from(todoUL.children).indexOf(this);
-        this.remove()
-        todoList.splice(index,1)
-    }
-</script>
-</body>
+        this.remove();
+        todoList.splice(index, 1);
+      }
+    </script>
+  </body>
 </html>
