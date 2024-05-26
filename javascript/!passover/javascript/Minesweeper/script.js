@@ -10,6 +10,7 @@ function setSize(newWidth, newHight, newMines) {
   resetGrid();
   generateGrid();
 }
+
 function customSize() {
   setSize(
     document.getElementById("customWidth").valueAsNumber,
@@ -17,20 +18,24 @@ function customSize() {
     document.getElementById("customMines").valueAsNumber
   );
 }
+
 function resetGrid() {
   backGrid = [];
   let parent = document.getElementById("board");
   while (parent.firstChild) parent.removeChild(parent.firstChild);
 }
+
 function reset() {
   resetGrid();
   generateGrid();
 }
+
 function generateGrid() {
   const parent = document.getElementById("board");
   parent.style.display = "grid";
-  parent.style.setProperty("--grid-rows", width);
-  parent.style.setProperty("--grid-cols", hight);
+  parent.style.gridTemplateRows = `repeat(${hight}, 24px)`;
+  parent.style.gridTemplateColumns = `repeat(${width}, 24px)`;
+
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < hight; j++) {
       const button = document.createElement("button");
@@ -43,6 +48,7 @@ function generateGrid() {
   }
   createBackGrid();
 }
+
 function createBackGrid() {
   for (let i = 0; i < width; i++) {
     backGrid.push([]);
@@ -51,32 +57,36 @@ function createBackGrid() {
     }
   }
   for (let i = 0; i < mines; i++) {
-    let randomNumber;
+    let randomNumberX, randomNumberY;
     do {
-      // Generate a random number
       randomNumberX = Math.floor(Math.random() * width);
       randomNumberY = Math.floor(Math.random() * hight);
     } while (backGrid[randomNumberX][randomNumberY] == "M");
     backGrid[randomNumberX][randomNumberY] = "M";
   }
 }
+
 function showMines() {
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < hight; j++) {
-      if (backGrid[i][j] == "M")
+      if (backGrid[i][j] == "M") {
         document.getElementById(i + "_" + j).innerText = "M";
-      document.getElementById(i + "_" + j).disabled = true;
+        document.getElementById(i + "_" + j).disabled = true;
+      }
     }
   }
 }
+
 function gameLost() {
   showMines();
-  alert("shit");
+  alert("You lost! Better luck next time.");
 }
+
 function gameWon() {
   showMines();
-  alert("Yay");
+  alert("Congratulations! You won!");
 }
+
 function didWin() {
   let count = 0;
   for (let i = 0; i < width; i++) {
@@ -86,11 +96,15 @@ function didWin() {
   }
   return count == mines;
 }
+
 function isBomb(Xindex, Yindex) {
   try {
     return backGrid[Xindex][Yindex] == "M";
-  } catch {}
+  } catch {
+    return false;
+  }
 }
+
 function bombCount(Xindex, Yindex) {
   let count = 0;
   if (isBomb(Xindex + 1, Yindex)) count++;
@@ -103,80 +117,64 @@ function bombCount(Xindex, Yindex) {
   if (isBomb(Xindex - 1, Yindex + 1)) count++;
   return count;
 }
-function isFlag(Xindex, Yindex) {
-  try {
-    return backGrid[Xindex][Yindex] == "F";
-  } catch {}
-}
-function FlagCount(Xindex, Yindex) {
-  let count = 0;
-  if (isFlag(Xindex + 1, Yindex)) count++;
-  if (isFlag(Xindex - 1, Yindex)) count++;
-  if (isFlag(Xindex, Yindex + 1)) count++;
-  if (isFlag(Xindex, Yindex - 1)) count++;
-  if (isFlag(Xindex + 1, Yindex + 1)) count++;
-  if (isFlag(Xindex - 1, Yindex - 1)) count++;
-  if (isFlag(Xindex + 1, Yindex - 1)) count++;
-  if (isFlag(Xindex - 1, Yindex + 1)) count++;
-  return count;
-}
+
 function revelCellRequrs(Xindex, Yindex) {
-  button = document.getElementById(Xindex + "_" + Yindex);
-  if (button.innerText == "F") return;
-  if (button.disabled) return;
+  const button = document.getElementById(Xindex + "_" + Yindex);
+  if (button.innerText == "F" || button.disabled) return;
+
   if (backGrid[Xindex][Yindex] == "M") {
     gameLost();
     return;
   }
-  let bombs = bombCount(Xindex, Yindex);
+
+  const bombs = bombCount(Xindex, Yindex);
   backGrid[Xindex][Yindex] = bombs;
 
   if (bombs != 0) {
     button.innerText = bombs;
+    if (bombs == 1) button.style.color = "blue";
+    if (bombs == 2) button.style.color = "green";
+    if (bombs == 3) button.style.color = "red";
   }
-  if (bombs == 1) {
-    button.style.color = "blue";
-  }
-  if (bombs == 2) {
-    button.style.color = "green";
-  }
-  if (bombs == 3) {
-    button.style.color = "red";
-  }
+
   button.disabled = true;
+  button.style.backgroundColor = "#a9a9a9";
 
   if (bombs == 0) {
-    button.style.backgroundColor = "black";
-
-    if (Xindex + 1 < width) revelCellRequrs(Xindex + 1, Yindex);
-    if (Xindex - 1 >= 0) revelCellRequrs(Xindex - 1, Yindex);
-    if (Yindex + 1 < hight) revelCellRequrs(Xindex, Yindex + 1);
-    if (Yindex - 1 >= 0) revelCellRequrs(Xindex, Yindex - 1);
-    if (Xindex + 1 < width && Yindex + 1 < hight)
-      revelCellRequrs(Xindex + 1, Yindex + 1);
-    if (Xindex - 1 >= 0 && Yindex - 1 >= 0)
-      revelCellRequrs(Xindex - 1, Yindex - 1);
-    if (Xindex + 1 < width && Yindex - 1 >= 0)
-      revelCellRequrs(Xindex + 1, Yindex - 1);
-    if (Xindex - 1 >= 0 && Yindex + 1 < hight)
-      revelCellRequrs(Xindex - 1, Yindex + 1);
+    const directions = [
+      [1, 0],
+      [-1, 0],
+      [0, 1],
+      [0, -1],
+      [1, 1],
+      [-1, -1],
+      [1, -1],
+      [-1, 1],
+    ];
+    directions.forEach(([dx, dy]) => {
+      const newX = Xindex + dx,
+        newY = Yindex + dy;
+      if (newX >= 0 && newX < width && newY >= 0 && newY < hight) {
+        revelCellRequrs(newX, newY);
+      }
+    });
   }
 }
+
 function revelCell() {
-  console.log("here");
   const newId = this.id.split("_");
-  const Xindex = parseInt(newId[0]); // "9"
+  const Xindex = parseInt(newId[0]);
   const Yindex = parseInt(newId[1]);
   revelCellRequrs(Xindex, Yindex);
   if (didWin()) gameWon();
 }
 
 function flag() {
-  button = document.getElementById(this.id);
+  const button = document.getElementById(this.id);
   if (button.innerText == "") button.innerText = "F";
-  else if (button.disabled) return;
-  else button.innerText = "";
+  else if (!button.disabled) button.innerText = "";
 }
+
 generateGrid();
 document.addEventListener("contextmenu", function (event) {
   event.preventDefault();

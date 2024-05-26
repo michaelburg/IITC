@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>books</h1>
+    <button id="goToUsers">Go to Users</button>
+    <script>
+      document
+        .getElementById("goToUsers")
+        .addEventListener("click", function () {
+          window.location.href = "user.html";
+        });
+    </script>
+    <!-- 
+        using axios: <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+        trart live json-server: 'json-server --watch data.json --port 8001'
+        url to work on:  url='http://localhost:8001/posts'
+        to prevent refresh use this: "event.preventDefault(); "
+        read the json: axios.get(url).then(function (response) {console.log(response)})
+        post data to json: axios.post(url,post)##post is the object to upload
+        delete post from json:  axios.delete(url+'/'+post)
+     -->
+    <form class="addUser">
+      <input type="number" placeholder="id" class="add-id" />
+      <input type="text" placeholder="firstName" class="add-firstName" />
+      <input type="text" placeholder="lastName" class="add-lastName" />
+      <button onclick="addUser()">addUser</button>
+    </form>
+    <form class="updateUser">
+      <input type="number" placeholder="id" class="id" />
+      <input type="text" placeholder="firstName" class="firstName" />
+      <input type="text" placeholder="lastName" class="lastName" />
+      <button onclick="updateUser()">updateUser</button>
+    </form>
+    <form class="deleteUser">
+      <input type="number" placeholder="id" class="id-to-remove" />
+      <button onclick="removePost()">remove</button>
+    </form>
+    <button onclick="GetAll()">GetAll</button>
+    <table class="booksTable">
+      <th>id</th>
+      <th>name</th>
+      <th>author</th>
+      <th>numPages</th>
+    </table>
+
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <!-- <script src="./async_await_1.js"></script> -->
+    <!-- <script src="./async_await_2.js"></script> -->
+    <!-- <script src="./async_await_3.js"></script> -->
+    <!-- <script src="./json_server_1.js"></script> -->
+    <!-- <script src="./json_server_2.js"></script> -->
+    <!-- <script src="./ajax_crud_1.js"></script> -->
+    <script src="./books.js"></script>
+  </body>
+</html>

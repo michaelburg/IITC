@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Smith"
+    },
+    {
+      "id": 3,
+      "firstName": "Alice",
+      "lastName": "Johnson"
+    },
+    {
+      "id": 4,
+      "firstName": "Robert",
+      "lastName": "Brown"
+    },
+    {
+      "id": 5,
+      "firstName": "Emily",
+      "lastName": "Davis"
+    },
+    {
+      "id": 6,
+      "firstName": "Michael",
+      "lastName": "Miller"
+    },
+    {
+      "id": 7,
+      "firstName": "Emma",
+      "lastName": "Wilson"
+    },
+    {
+      "id": 8,
+      "firstName": "William",
+      "lastName": "Moore"
+    },
+    {
+      "id": 9,
+      "firstName": "Olivia",
+      "lastName": "Taylor"
+    },
+    {
+      "id": 10,
+      "firstName": "James",
+      "lastName": "Anderson"
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "name": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "numPages": 281
+    },
+    {
+      "id": 2,
+      "name": "1984",
+      "author": "George Orwell",
+      "numPages": 328
+    },
+    {
+      "id": 3,
+      "name": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "numPages": 180
+    },
+    {
+      "id": 4,
+      "name": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "numPages": 214
+    },
+    {
+      "id": 5,
+      "name": "Moby-Dick",
+      "author": "Herman Melville",
+      "numPages": 635
+    },
+    {
+      "id": 6,
+      "name": "War and Peace",
+      "author": "Leo Tolstoy",
+      "numPages": 1225
+    },
+    {
+      "id": 7,
+      "name": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "numPages": 279
+    },
+    {
+      "id": 8,
+      "name": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "numPages": 310
+    },
+    {
+      "id": 9,
+      "name": "Crime and Punishment",
+      "author": "Fyodor Dostoevsky",
+      "numPages": 430
+    },
+    {
+      "id": 10,
+      "name": "The Odyssey",
+      "author": "Homer",
+      "numPages": 541
+    }
+  ]
+}

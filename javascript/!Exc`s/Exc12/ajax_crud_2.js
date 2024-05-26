@@ -1,28 +1,22 @@
-const url = "http://localhost:8001/users";
+const url = "http://localhost:8001/books";
 
-const generateRandomUser = async (id) => {
+const generateBooks = async (count) => {
   try {
-    const response = await axios.get("https://randomuser.me/api/");
-    const user = response.data.results[0];
-    return {
-      id: id.toString(),
-      firstName: user.name.first,
-      lastName: user.name.last,
-    };
+    const response = await axios.get(
+      `https://fakerapi.it/api/v1/books?_locale=en_US&_quantity=${count}`
+    );
+    const books = response.data.data.map((book, index) => ({
+      id: (index + 1).toString(),
+      name: book.title,
+      author: book.author,
+      numPages: book.pages,
+    }));
+    console.log(books);
+    return { books };
   } catch (error) {
-    console.error(`Error fetching user data for ID ${id}:`, error);
-    return null;
+    console.error(`Error fetching book data:`, error);
+    return { books: [] };
   }
-};
-
-const generateUsers = async (count) => {
-  const users = [];
-  for (let i = 1; i <= count; i++) {
-    console.log(`Generating user ${i}`);
-    const user = await generateRandomUser(i);
-    if (user) users.push(user);
-  }
-  return { users };
 };
 
 const postJSONData = async (data, url) => {
@@ -35,8 +29,8 @@ const postJSONData = async (data, url) => {
 };
 
 const main = async () => {
-  const userData = await generateUsers(500);
-  await postJSONData(userData, url);
+  const bookData = await generateBooks(500);
+  await postJSONData(bookData, url);
 };
 
 main();
