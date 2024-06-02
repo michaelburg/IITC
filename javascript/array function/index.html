@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const persons = [
+        {
+          _id: "1",
+          name: "baba",
+          age: 30,
+          hobbies: ["sing", "work"],
+        },
+        {
+          _id: "2",
+          name: "mama",
+          age: 80,
+          hobbies: ["sing", "smoke"],
+        },
+        {
+          _id: "3",
+          name: "lulu",
+          age: 12,
+          hobbies: ["TV"],
+        },
+      ];
+
+      function findPersonById(id) {
+        return persons.find((element) => element._id === id);
+      }
+      function findAllSingers() {
+        return persons.filter((element) =>
+          element.hobbies.find((elem) => elem === "sing")
+        );
+      }
+
+      function findAllSingers() {
+        return persons.filter((element) =>
+          element.hobbies.find((elem) => elem === "sing")
+        );
+      }
+
+      function findOldPerson() {
+        return persons.some((element) => element.age > 70);
+      }
+      function findNotMinor() {
+        return !persons.some((element) => element.age < 18);
+      }
+      function getAllId() {
+        return persons.map((element) => element._id);
+      }
+      function getAllHobbies() {
+        return persons.reduce(
+          (hobbiesList, element) => [...hobbiesList, ...element.hobbies],
+          []
+        );
+      }
+      function sumAges() {
+        return persons.reduce(
+          (ages, element) => ages + parseInt(element.age),
+          0
+        );
+      }
+      function replacePerson() {
+        const person = {
+          _id: "2",
+          name: "aaa",
+          age: 111,
+          hobbies: ["aaa", "bbb"],
+        };
+        const oldPersonIndex = persons.findIndex(
+          (element) => element._id === person._id
+        );
+        persons.splice(oldPersonIndex, 1, person);
+      }
+    </script>
+  </body>
+</html>

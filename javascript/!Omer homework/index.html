@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Exercise 1: Basic Array Manipulation
+      function Exercise1() {
+        // Create an array named fruits containing the following elements: "apple", "banana", "mango".
+        const fruits = ["apple", "banana", "mango"];
+        // Use the push method to add "orange" to the end of the array.
+        fruits.push("orange");
+        // Use the pop method to remove the last element from the array.
+        fruits.pop();
+        // Use the unshift method to add "strawberry" to the beginning of the array.
+        fruits.unshift("strawberry");
+        // Use the shift method to remove the first element from the array.
+        fruits.shift();
+        // Log the final state of the fruits array.
+        console.log(fruits);
+      }
+      /////////////////////////////////////////////
+      // Exercise 2: Array Iteration and Transformation
+      function Exercise2() {
+        // Create an array named numbers containing the numbers 1 through 5.
+        const numbers = [1, 2, 3, 4, 5];
+        // Use the forEach method to log each number and its index in the numbers array to the console.
+        numbers.forEach((element, index) =>
+          console.log(`number:${element} / index:${index}`)
+        );
+        // Use the map method to create a new array where each number is doubled.
+        const doubled = numbers.map((element) => element * 2);
+        // Use the filter method to create a new array that only contains even numbers from the numbers array.
+        const even = numbers.filter((element) => element % 2 == 0);
+        // Use the reduce method to calculate the sum of all numbers in the numbers array.
+        const sum = numbers.reduce((sum, element) => sum + element, 0);
+      }
+      ////////////////////////////////
+      // Exercise 3: Finding and Checking Elements
+      function Exercise3() {
+        // Create an array named students containing the names of some students: "Omer", "Jane", "Biden", "Jill".
+        const students = ["Omer", "Jane", "Biden", "Jill"];
+        // Use the find method to locate the first name that starts with the letter "J".
+        const FirstJName = students.find((element) => {
+          return element[0] == "J";
+        });
+        // Use the some method to check if at least one name in the students array starts with the letter "J".
+        const JName = students.some((element) => element[0] == "J");
+        // Use the every method to check if all names in the students array start with the letter "J".
+        const AllJName = !students.some((element) => element[0] != "J");
+      }
+      //////////////////////////////////
+      // Exercise 4: Slicing and Splicing
+      function Exercise4() {
+        // Create an array named colors containing the elements: "red", "blue", "green", "yellow", "purple".
+        const colors = ["red", "blue", "green", "yellow", "purple"];
+        // Use the slice method to create a new array that contains the first three elements of the colors array.
+        const slicedColors = colors.slice(0, 3);
+        // Use the splice method to remove the last two elements from the colors array and replace them with "pink" and "orange".
+        const splicedColors = colors.splice(3, 2, ...["pink", "orange"]);
+      }
+      /////////////////////////////////
+      // Exercise 5: Advanced Array Methods
+      function Exercise5() {
+        // Create an array named products containing objects with name and price properties, e.g:
+        const products = [
+          { name: "laptop", price: 1000 },
+          { name: "phone", price: 500 },
+          { name: "tablet", price: 800 },
+          { name: "watch", price: 200 },
+        ];
+        // Use the map method to create an array of product names.
+        const names = products.map((element) => element.name);
+        // Use the filter method to create an array of products that cost more than $500.
+        const expensive = products.filter((element) => element.price > 500);
+        // Use the reduce method to calculate the total cost of all products.
+        const allPrices = products.reduce(
+          (sum, element) => sum + element.price,
+          0
+        );
+      }
+      ///////////////////////////////////
+      // Challenge 1: Array to Object Mapping
+      function Challenge1() {
+        // Write a function arrayToObject that takes an array of objects and a key, and returns an object where each key is a unique value from the array of objects and the corresponding value is the object that contains that key. Example:
+        function arrayToObject(inventory) {
+          return inventory.reduce((obj, element) => {
+            const key = element.id;
+            obj[key] = element;
+            return obj;
+          }, {});
+        }
+        const inventory = [
+          { id: 1, name: "Laptop", price: 1000 },
+          { id: 2, name: "Phone", price: 500 },
+          { id: 3, name: "Tablet", price: 800 },
+        ];
+        const newInventory = arrayToObject(inventory);
+        console.log(newInventory);
+        // Output:
+        // {
+        //   1: { id: 1, name: 'Laptop', price: 1000 },
+        //   2: { id: 2, name: 'Phone', price: 500 },
+        //   3: { id: 3, name: 'Tablet', price: 800 }
+        // }
+        // Hint: Use reduce to create the final object.
+      }
+      ////////////////////////////////////////
+      // Challenge 4: Intersection of Arrays
+      function Challenge4() {
+        // Write a function intersectArrays that takes two arrays and returns an array containing the elements that are present in both arrays. Example:
+        function intersectArrays(arr1, arr2) {
+          return arr1.filter(
+            (element) => element === arr2.find((elem) => elem == element)
+          );
+        }
+        const array1 = [1, 2, 3, 4, 5];
+        const array2 = [3, 4, 5, 6, 7];
+        console.log(intersectArrays(array1, array2));
+        // // Output: [3, 4, 5]
+        // Hint: Use filter and includes.
+      }
+      ///////////////////////////////////////
+      // Challenge 5: Unique Values
+      // Write a function uniqueValues that takes an array and returns a new array with only the unique values from the original array. Example:
+      function Challenge5() {
+        function uniqueValues(duplicates) {
+          return duplicates.reduce((uniqueList, element) => {
+            if (!uniqueList.some((elem) => elem === element)) {
+              uniqueList.push(element);
+            }
+            return uniqueList;
+          }, []);
+        }
+        const duplicates = [1, 2, 2, 3, 4, 4, 5];
+        console.log(uniqueValues(duplicates));
+        // // Output: [1, 2, 3, 4, 5]
+        // Hint: Use reduce and includes. do not use Set.
+      }
+      //////////////////////////////
+      // Challenge 6: Group Employees by Key (Bonus)
+      function Challenge6() {
+        // Write a function groupBy that takes an array of employees and a key, and returns an object where each key is a unique value from the employees array and the corresponding value is an array containing the employees that belong to that key.
+        function groupBy(employees) {
+          return employees.reduce((obj, element) => {
+            const key = element.department;
+            try {
+              obj[key].push(element);
+            } catch {
+              obj[key] = [element];
+            }
+            return obj;
+          }, {});
+        }
+        // Example:
+        const employees = [
+          { name: "John Doe", department: "Engineering", yearsOfExp: 5 },
+          { name: "Jane Smith", department: "Marketing", yearsOfExp: 8 },
+          { name: "Peter Johnson", department: "Engineering", yearsOfExp: 5 },
+          { name: "Lucy Brown", department: "Marketing", yearsOfExp: 10 },
+          { name: "Mike Davis", department: "Engineering", yearsOfExp: 3 },
+          { name: "Sara Wilson", department: "Marketing", yearsOfExp: 8 },
+        ];
+        console.log(groupBy(employees));
+        /*
+      {
+        Engineering: [
+          { name: 'John Doe', department: 'Engineering', yearsOfExp: 5 },
+          { name: 'Peter Johnson', department: 'Engineering', yearsOfExp: 5 },
+          { name: 'Mike Davis', department: 'Engineering', yearsOfExp: 3 }
+        ],
+        Marketing: [
+          { name: 'Jane Smith', department: 'Marketing', yearsOfExp: 8 },
+          { name: 'Lucy Brown', department: 'Marketing', yearsOfExp: 10 },
+          { name: 'Sara Wilson', department: 'Marketing', yearsOfExp: 8 }
+        ]
+      }
+      */
+        // Hint: Use reduce to create the final object.
+      }
+      ///////////////////////////////////////
+    </script>
+  </body>
+</html>
