@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <h1>BlackJack</h1>
+      <p class="house-count">house count</p>
+      <div class="house-hand"></div>
+      <br>
+      <div class="player-hand"></div>
+      <p class="player-count">player count</p>
+      <button id="Hit" onclick="Hit()">Hit</button>
+      <button id="Stand" onclick="Stand()">Stand</button>
+      <button id="Double" onclick="Double()">Double</button>
+      <button id="Split" onclick="Split()">Split</button>
+      <label class="balance"></label>
+      <label class="bet"></label>
+      <input type="text" oninput=" this.value = this.value.replace(/[^0-9]*/g, '')" placeholder="place bet" class='betInput'>
+      <button id="Deal" onclick="Deal()">Deal</button>
+      <div class="grid" id="grid-container"></div>
+  
+      <script src="script.js"></script>
+  </body>
+</html>
