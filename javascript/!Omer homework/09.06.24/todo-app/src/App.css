@@ -1,48 +1,23 @@
-#Progress {
-  width: 100%;
-  background-color: grey;
-}
-
-#Bar {
-  width: 50%;
-  height: 30px;
-  background-color: green;
-}
-
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   margin: 0;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  /* width: 1000px; */
 }
-
 button {
   background-color: #4caf50;
   color: white;
   border: none;
   padding: 10px 20px;
-  margin: 10px 5px;
+  /* margin: 10px 5px; */
   cursor: pointer;
   border-radius: 5px;
 }
 
 button:hover {
   background-color: #45a049;
-}
-
-#Progress {
-  background-color: #ddd;
-  border-radius: 20px;
-  margin: 20px 0;
-  overflow: hidden;
-}
-
-#Bar {
-  height: 20px;
-  background-color: #4caf50;
-  text-align: center;
-  color: white;
-  line-height: 20px; /* same as height if you want text vertically centered */
 }
 
 ul {
@@ -56,6 +31,7 @@ li {
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  width: 500px;
   display: flex;
   align-items: center;
 }
@@ -72,4 +48,22 @@ label {
 
 li button {
   margin-left: 5px;
+}
+progress {
+  border-radius: 7px;
+  width: 80%;
+  height: 22px;
+  /* margin-left: -11.5%; */
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+progress::-webkit-progress-bar {
+  background-color: grey;
+  border-radius: 7px;
+}
+progress::-webkit-progress-value {
+  background-color: green;
+  border-radius: 7px;
+}
+progress::-moz-progress-bar {
+  /* style rules */
 }
