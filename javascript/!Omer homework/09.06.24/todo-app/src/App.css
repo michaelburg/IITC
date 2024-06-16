@@ -6,19 +6,6 @@ body {
   justify-content: center;
   /* width: 1000px; */
 }
-button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  /* margin: 10px 5px; */
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
 
 ul {
   list-style-type: none;
@@ -48,22 +35,4 @@ label {
 
 li button {
   margin-left: 5px;
-}
-progress {
-  border-radius: 7px;
-  width: 80%;
-  height: 22px;
-  /* margin-left: -11.5%; */
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-}
-progress::-webkit-progress-bar {
-  background-color: grey;
-  border-radius: 7px;
-}
-progress::-webkit-progress-value {
-  background-color: green;
-  border-radius: 7px;
-}
-progress::-moz-progress-bar {
-  /* style rules */
 }

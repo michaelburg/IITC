@@ -1,4 +1,13 @@
 import React, { forwardRef } from "react";
+import {
+  Button,
+  TextField,
+  Checkbox,
+  Tooltip,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+} from "@mui/material";
 
 const TodoItem = forwardRef(
   (
@@ -13,38 +22,66 @@ const TodoItem = forwardRef(
     ref
   ) => {
     return (
-      <li key={task.id}>
-        <input
-          type="checkbox"
-          id={task.id}
-          checked={task.isComplete}
-          onChange={() => toggleTaskCompletion(task.id)}
-        />
+      <ListItem key={task.id} divider>
+        <Tooltip title={task.isComplete ? "Uncompleted" : "Completed"}>
+          <Checkbox
+            size="small"
+            checked={task.isComplete}
+            onChange={() => toggleTaskCompletion(task.id)}
+          />
+        </Tooltip>
         {!task.isEditing ? (
           <>
-            <label htmlFor={task.id}>{task.title}</label>
-            <button onClick={() => toggleTaskEditing(task.id)}>Edit</button>
+            <ListItemText
+              primary={task.title}
+              onClick={() => toggleTaskEditing(task.id)}
+              style={{
+                cursor: "pointer",
+                textDecoration: task.isComplete ? "line-through" : "none",
+              }}
+            />
+            <ListItemSecondaryAction>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => toggleTaskEditing(task.id)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => removeTask(task.id)}
+                style={{ marginLeft: 8 }}
+              >
+                Delete
+              </Button>
+            </ListItemSecondaryAction>
           </>
         ) : (
           <>
-            <input
-              type="text"
-              placeholder="New task title"
-              ref={ref}
+            <TextField
+              id={`task-${task.id}`}
+              label="New task title"
+              variant="standard"
+              inputRef={ref}
               value={task.title}
               onChange={(e) => updateTaskTitle(e.target.value, task.id)}
             />
-            <button
+            <Button
+              variant="contained"
+              color="primary"
               onClick={() => saveTask(task.id)}
               disabled={task.title === ""}
+              style={{ marginLeft: 8 }}
             >
               Save
-            </button>
+            </Button>
           </>
         )}
-        <button onClick={() => removeTask(task.id)}>Delete</button>
-      </li>
+      </ListItem>
     );
   }
 );
+
 export default TodoItem;

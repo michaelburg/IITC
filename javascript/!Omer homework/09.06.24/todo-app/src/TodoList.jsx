@@ -1,34 +1,30 @@
 import React from "react";
 import TodoItem from "./TodoItem";
+import { List } from "@mui/material";
 
-const TodoList = React.forwardRef(
-  (
-    {
-      tasks,
-      toggleTaskCompletion,
-      toggleTaskEditing,
-      updateTaskTitle,
-      saveTask,
-      removeTask,
-    },
-    ref
-  ) => {
-    return (
-      <ul>
-        {tasks.map((task) => (
-          <TodoItem
-            key={task.id}
-            task={task}
-            ref={ref}
-            toggleTaskCompletion={toggleTaskCompletion}
-            toggleTaskEditing={toggleTaskEditing}
-            updateTaskTitle={updateTaskTitle}
-            saveTask={saveTask}
-            removeTask={removeTask}
-          />
-        ))}
-      </ul>
-    );
-  }
-);
+const TodoList = ({
+  tasks,
+  toggleTaskCompletion,
+  toggleTaskEditing,
+  updateTaskTitle,
+  saveTask,
+  removeTask,
+}) => {
+  return (
+    <List>
+      {tasks.map((task) => (
+        <TodoItem
+          key={task.id}
+          task={task}
+          toggleTaskCompletion={toggleTaskCompletion}
+          toggleTaskEditing={toggleTaskEditing}
+          updateTaskTitle={updateTaskTitle}
+          saveTask={saveTask}
+          removeTask={removeTask}
+        />
+      ))}
+    </List>
+  );
+};
+
 export default TodoList;

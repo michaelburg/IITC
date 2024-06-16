@@ -1,8 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import TodoList from "./TodoList";
 import TodoStatistics from "./TodoStatistics";
 import Filter from "./Filter";
+import AppBarComponent from "./appBar";
+import { Button, Typography } from "@mui/material";
 
 function generateId(length) {
   const characters =
@@ -15,40 +17,38 @@ function generateId(length) {
 }
 
 async function getData(filter = "") {
-  const apiUrl = `http://localhost:3000/tasks?title_like=${filter}`;
-  try {
-    const response = await fetch(apiUrl);
-    return response.json();
-  } catch {
-    return [];
-  }
+  const apiUrl = `http://localhost:3000/tasks?${filter}`;
+  const response = await fetch(apiUrl);
+  return response.json();
 }
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filterText, setFilterText] = useState("");
+  const [filterStatus, setFilterStatus] = useState("All");
   const inputRef = useRef(null);
-  const filterRef = {
-    name: useRef(null),
-    complete: useRef(false),
-    all: useRef(true),
-    uncomplete: useRef(false),
-  };
 
   useEffect(() => {
     async function fetchTasks() {
-      const tasksData = await getData();
-      setTasks(tasksData);
+      try {
+        const tasksData = await getData();
+        setTasks(tasksData);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
     }
     fetchTasks();
   }, []);
 
   useEffect(() => {
-    console.log("Updated tasks:", tasks);
+    const uniqueCategories = [...new Set(tasks.map((task) => task.category))];
+    const categoriesWithSelected = uniqueCategories.map((category) => ({
+      id: category,
+      selected: false,
+    }));
+    setCategories(categoriesWithSelected);
   }, [tasks]);
-
-  useEffect(() => {
-    console.log("hello");
-  }, []);
 
   function toggleTaskCompletion(id) {
     const updatedTasks = tasks.map((task) =>
@@ -96,6 +96,34 @@ function App() {
     }, 0);
   }
 
+  async function filterTask() {
+    let filters = [];
+    if (filterText) {
+      filters.push(`title_like=${filterText}`);
+    }
+    if (filterStatus === "Completed") {
+      filters.push("isComplete=true");
+    } else if (filterStatus === "Not Completed") {
+      filters.push("isComplete=false");
+    }
+    const query = filters.join("&");
+    try {
+      const tasksData = await getData(query);
+      setTasks(tasksData);
+    } catch (error) {
+      console.error("Error filtering tasks:", error);
+    }
+  }
+
+  function categoryFilter(selectedCategory) {
+    const updatedCategories = categories.map((category) =>
+      category.id === selectedCategory
+        ? { ...category, selected: !category.selected }
+        : category
+    );
+    setCategories(updatedCategories);
+  }
+
   function saveTask(id) {
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, isEditing: false } : task
@@ -103,33 +131,34 @@ function App() {
     setTasks(updatedTasks);
   }
 
-  async function filterTask() {
-    let filters = filterRef.name.current.value || "";
-
-    if (filterRef.complete.current.checked) {
-      filters += "&isComplete=true";
-    } else if (filterRef.uncomplete.current.checked) {
-      filters += "&isComplete=false";
-    }
-    const tasksData = await getData(filters);
-    setTasks(tasksData);
-  }
-
   return (
     <>
-      <h1>To-Do App</h1>
+      <AppBarComponent />
+      <Typography variant="h4" gutterBottom>
+        To-Do App
+      </Typography>
       {tasks.length === 0 && <p>No tasks found</p>}
-      <button onClick={addNewTask}>Create new task</button>
+      <Button variant="contained" onClick={addNewTask}>
+        Create new task
+      </Button>
       <TodoStatistics tasks={tasks} />
-      <Filter filterTask={filterTask} ref={filterRef} />
+      <Filter
+        filterText={filterText}
+        setFilterText={setFilterText}
+        filterStatus={filterStatus}
+        setFilterStatus={setFilterStatus}
+        filterTask={filterTask}
+        categories={categories}
+        categoryFilter={categoryFilter}
+      />
       <TodoList
         tasks={tasks}
-        ref={inputRef}
         toggleTaskCompletion={toggleTaskCompletion}
         toggleTaskEditing={toggleTaskEditing}
         updateTaskTitle={updateTaskTitle}
         saveTask={saveTask}
         removeTask={removeTask}
+        inputRef={inputRef}
       />
     </>
   );

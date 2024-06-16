@@ -1,37 +1,73 @@
-import React, { forwardRef } from "react";
+import React from "react";
+import {
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  TextField,
+  Chip,
+} from "@mui/material";
 
-const Filter = forwardRef(({ filterTask, resetFilter }, filterRef) => {
+const Filter = ({
+  filterText,
+  setFilterText,
+  filterStatus,
+  setFilterStatus,
+  filterTask,
+  categories,
+  categoryFilter,
+}) => {
+  const handleTextChange = (event) => {
+    setFilterText(event.target.value);
+    filterTask();
+  };
+
+  const handleStatusChange = (event) => {
+    setFilterStatus(event.target.value);
+    filterTask();
+  };
+
   return (
     <>
-      <input
-        ref={filterRef.name}
-        type="text"
-        placeholder="Filter"
-        onChange={filterTask}
+      <TextField
+        id="standard-basic"
+        label="Filter"
+        variant="standard"
+        value={filterText}
+        onChange={handleTextChange}
       />
-      <label>Completed</label>
-      <input
-        name="completeFilter"
-        ref={filterRef.complete}
-        type="radio"
-        onClick={filterTask}
-      />
-      <label>not Completed</label>
-      <input
-        name="completeFilter"
-        ref={filterRef.uncomplete}
-        type="radio"
-        onClick={filterTask}
-      />
-      <label>all</label>
-      <input
-        name="completeFilter"
-        ref={filterRef.all}
-        type="radio"
-        onClick={filterTask}
-      />
+      <FormControl>
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          value={filterStatus}
+          onChange={handleStatusChange}
+        >
+          <FormControlLabel
+            value="Completed"
+            control={<Radio />}
+            label="Completed"
+          />
+          <FormControlLabel
+            value="Not Completed"
+            control={<Radio />}
+            label="Not Completed"
+          />
+          <FormControlLabel value="All" control={<Radio />} label="All" />
+        </RadioGroup>
+      </FormControl>
+      <br />
+      {categories.map((category) => (
+        <Chip
+          key={category.id}
+          label={category.id}
+          variant={category.selected ? "filled" : "outlined"}
+          onClick={() => categoryFilter(category.id)}
+        />
+      ))}
     </>
   );
-});
+};
 
 export default Filter;

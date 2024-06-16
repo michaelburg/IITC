@@ -2,54 +2,63 @@
   "tasks": [
     {
       "id": "1",
+      "category": "school",
       "title": "Learn React",
       "isComplete": false,
       "isEditing": false
     },
     {
       "id": "2",
+      "category": "work",
       "title": "Build a Todo App",
       "isComplete": false,
       "isEditing": false
     },
     {
       "id": "3",
+      "category": "home",
       "title": "Read JavaScript Documentation",
       "isComplete": true,
       "isEditing": false
     },
     {
       "id": "4",
+      "category": "school",
       "title": "Write Unit Tests",
       "isComplete": false,
       "isEditing": false
     },
     {
       "id": "5",
+      "category": "work",
       "title": "Implement Context",
       "isComplete": true,
       "isEditing": false
     },
     {
       "id": "6",
+      "category": "home",
       "title": "Create Portfolio Website",
       "isComplete": false,
       "isEditing": false
     },
     {
       "id": "7",
+      "category": "school",
       "title": "Learn TypeScript",
       "isComplete": false,
       "isEditing": false
     },
     {
       "id": "8",
+      "category": "work",
       "title": "Refactor Codebase",
       "isComplete": true,
       "isEditing": false
     },
     {
       "id": "9",
+      "category": "home",
       "title": "Optimize Performance",
       "isComplete": false,
       "isEditing": false
