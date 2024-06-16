@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import Question from "./question";
+import QuestionsList from "./questions-list";
 const FAQ = [
   {
     title: "What is Frontend Mentor, and how will it help me?",
@@ -36,15 +36,11 @@ function App() {
     <div className="background-image-div">
       <div className="card">
         <h1>FAQs</h1>
-        <ul>
-          {faq.map((item, index) => (
-            <Question
-              question={item}
-              index={index}
-              reduceItem={reduceItem}
-            ></Question>
-          ))}
-        </ul>
+        <QuestionsList>
+          question={item}
+          index={index}
+          reduceItem={reduceItem}
+        </QuestionsList>
       </div>
     </div>
   );

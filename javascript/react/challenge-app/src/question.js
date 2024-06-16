@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
+import React from "react";
 
-const Question = forwardRef(({ question, index, reduceItem }) => {
+const Question = ({ question, index, reduceItem }) => {
   return (
     <li key={index}>
       {question.isopen ? (
@@ -26,5 +26,5 @@ const Question = forwardRef(({ question, index, reduceItem }) => {
       )}
     </li>
   );
-});
+};
 export default Question;
