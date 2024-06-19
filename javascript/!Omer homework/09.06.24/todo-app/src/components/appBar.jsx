@@ -1,5 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Button, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const AppBarComponent = () => {
   return (
@@ -7,27 +8,37 @@ const AppBarComponent = () => {
       <AppBar position="static">
         <Toolbar>
           <Button sx={{ color: "white", flexGrow: 1 }}>
-            <a href="/" style={{ textDecoration: "none", color: "white" }}>
-              Home
-            </a>
-          </Button>
-          <Button sx={{ color: "white", flexGrow: 1 }}>
-            <a href="/about" style={{ textDecoration: "none", color: "white" }}>
-              About
-            </a>
-          </Button>
-          <Button sx={{ color: "white", flexGrow: 1 }}>
-            <a href="/todo" style={{ textDecoration: "none", color: "white" }}>
-              Todo
-            </a>
-          </Button>
-          <Button sx={{ color: "white", flexGrow: 1 }}>
-            <a
-              href="/activity"
+            <Link
+              to="/HomePage"
               style={{ textDecoration: "none", color: "white" }}
             >
-              Activity
-            </a>
+              Home
+            </Link>
+          </Button>
+          <Button sx={{ color: "white", flexGrow: 1 }}>
+            <Link
+              to="/TodoPage"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Todo
+            </Link>
+          </Button>
+          <Button sx={{ color: "white", flexGrow: 1 }}>
+            <Link
+              to="/CreateTodoPage"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Create Todo
+            </Link>
+          </Button>
+
+          <Button sx={{ color: "white", flexGrow: 1 }}>
+            <Link
+              to="/NotFoundPage"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              NotFoundPage
+            </Link>
           </Button>
         </Toolbar>
       </AppBar>

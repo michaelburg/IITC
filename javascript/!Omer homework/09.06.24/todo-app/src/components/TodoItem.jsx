@@ -8,6 +8,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const TodoItem = forwardRef(
   (
@@ -32,14 +33,16 @@ const TodoItem = forwardRef(
         </Tooltip>
         {!task.isEditing ? (
           <>
-            <ListItemText
-              primary={task.title}
-              onClick={() => toggleTaskEditing(task.id)}
-              style={{
-                cursor: "pointer",
-                textDecoration: task.isComplete ? "line-through" : "none",
-              }}
-            />
+            <Link to={`/TodoDetailsPage/${task.id}`}>
+              <ListItemText
+                primary={task.title}
+                onClick={() => toggleTaskEditing(task.id)}
+                style={{
+                  cursor: "pointer",
+                  textDecoration: task.isComplete ? "line-through" : "none",
+                }}
+              />
+            </Link>
             <ListItemSecondaryAction>
               <Button
                 variant="contained"

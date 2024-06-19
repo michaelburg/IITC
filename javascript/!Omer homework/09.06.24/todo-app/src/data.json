@@ -62,6 +62,12 @@
       "title": "Optimize Performance",
       "isComplete": false,
       "isEditing": false
+    },
+    {
+      "title": "Sleep",
+      "isComplete": false,
+      "category": "Home",
+      "id": "7L3sHkU"
     }
   ]
 }
