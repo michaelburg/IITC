@@ -5,12 +5,10 @@ import CreatePost from "./pages/CreatePostPage";
 import PostFeedPage from "./pages/PostFeedPage";
 import UserProfile from "./pages/UserProfilePage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AppBarComponent from "./components/appBar";
 
 function App() {
   return (
     <>
-      {/* <AppBarComponent /> */}
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
