@@ -1,191 +1,146 @@
 import React, { useEffect, useState } from "react";
-
+import ProductFormModal from "./components/ProductFormModal";
+import ProductList from "./components/ProductList";
+import Pagination from "./components/Pagination";
+import FilterForm from "./components/FilterForm";
+import { getFilterProduct } from "./CRUD";
 const url = "http://localhost:3000/api/product/";
-
-async function getProducts() {
-  const response = await fetch(url);
-  const products = await response.json();
-  return products;
-}
-
-async function getProductById(id) {
-  const response = await fetch(url + id);
-  const product = await response.json();
-  return product;
-}
-
-async function deleteProductById(id) {
-  const response = await fetch(url + id, {
-    method: "DELETE",
-  });
-  return response.json();
-}
-
-async function createProduct(data) {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return response.json();
-}
-
-async function updateProduct(id, data) {
-  const response = await fetch(url + id, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return response.json();
-}
 
 function App() {
   const [productData, setProductData] = useState([]);
-  const [productInput, setProductInput] = useState({
-    _id: "",
+  const [filterInput, setFilterInput] = useState({
+    name: "",
+    minPrice: "",
+    maxPrice: "",
+    category: "",
+  });
+  const [pagination, setPagination] = useState({
+    currentPage: 0,
+    totalPages: 0,
+    totalProducts: 0,
+    productsPerPage: 5,
+  });
+  const [sort, setSort] = useState({
+    column: "createdAt",
+    order: "desc",
+  });
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({
     name: "",
     price: "",
     category: "",
+    quantity: "",
   });
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const products = await getProducts();
-        setProductData(products);
+        const filteredProducts = await getFilterProduct(
+          filterInput,
+          pagination.currentPage,
+          pagination.productsPerPage,
+          sort.column,
+          sort.order
+        );
+        setProductData(filteredProducts.products);
+        setPagination((prevPagination) => ({
+          ...prevPagination,
+          totalPages: filteredProducts.totalPages,
+          totalProducts: filteredProducts.totalProducts,
+        }));
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
     }
     fetchData();
-  }, []);
+  }, [filterInput, pagination.currentPage, pagination.productsPerPage, sort]);
 
-  async function showDetails(_id) {
-    try {
-      const product = await getProductById(_id);
-      setProductInput(product);
-    } catch (error) {
-      console.error("Error fetching product data:", error);
+  const handlePreviousPage = () => {
+    if (pagination.currentPage > 0) {
+      setPagination((prevPagination) => ({
+        ...prevPagination,
+        currentPage: prevPagination.currentPage - 1,
+      }));
     }
-  }
+  };
 
-  async function searchProduct() {
-    try {
-      const product = await getProductById(productInput._id);
-      setProductData([product]);
-    } catch (error) {
-      console.error("Error fetching product data:", error);
+  const handleNextPage = () => {
+    if (pagination.currentPage < pagination.totalPages - 1) {
+      setPagination((prevPagination) => ({
+        ...prevPagination,
+        currentPage: prevPagination.currentPage + 1,
+      }));
     }
-  }
+  };
 
-  async function deleteProduct() {
-    try {
-      await deleteProductById(productInput._id);
-      setProductData(
-        productData.filter((item) => item._id !== productInput._id)
-      );
-    } catch (error) {
-      console.error("Error deleting product:", error);
-    }
-  }
+  const handleProductsPerPageChange = (e) => {
+    const value =
+      e.target.value === "All" ? Infinity : parseInt(e.target.value, 10);
+    setPagination((prevPagination) => ({
+      ...prevPagination,
+      productsPerPage: value,
+      currentPage: 0,
+    }));
+  };
 
-  async function createProductHandler() {
-    try {
-      const newProduct = await createProduct(productInput);
-      setProductData([...productData, newProduct]);
-      setProductInput({
-        _id: "",
-        name: "",
-        price: "",
-        category: "",
-      });
-    } catch (error) {
-      console.error("Error creating product:", error);
-    }
-  }
+  const handleSort = (column) => {
+    const order =
+      sort.column === column && sort.order === "asc" ? "desc" : "asc";
+    setSort({ column, order });
+  };
 
-  async function editProduct() {
-    try {
-      const updatedProduct = await updateProduct(
-        productInput._id,
-        productInput
-      );
-      setProductData(
-        productData.map((item) =>
-          item._id === updatedProduct._id ? updatedProduct : item
-        )
-      );
-    } catch (error) {
-      console.error("Error updating product:", error);
-    }
-  }
+  const openModal = (
+    product = { name: "", price: "", category: "", quantity: "" }
+  ) => {
+    setCurrentProduct(product);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const handleSubmit = async () => {
+    setModalIsOpen(false);
+    setFilterInput({ ...filterInput });
+  };
+
+  const handleDelete = async (id) => {
+    setModalIsOpen(false);
+    setFilterInput({ ...filterInput });
+  };
 
   return (
     <>
-      <form>
-        <input
-          type="text"
-          placeholder="_id"
-          value={productInput._id}
-          onChange={(e) =>
-            setProductInput({ ...productInput, _id: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="name"
-          value={productInput.name}
-          onChange={(e) =>
-            setProductInput({ ...productInput, name: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="price"
-          value={productInput.price}
-          onChange={(e) =>
-            setProductInput({ ...productInput, price: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="category"
-          value={productInput.category}
-          onChange={(e) =>
-            setProductInput({ ...productInput, category: e.target.value })
-          }
-        />
-      </form>
+      <FilterForm
+        filterInput={filterInput}
+        setFilterInput={setFilterInput}
+        handleProductsPerPageChange={handleProductsPerPageChange}
+      />
 
-      <button onClick={searchProduct}>search</button>
-      <button onClick={deleteProduct}>delete</button>
-      <button onClick={createProductHandler}>create</button>
-      <button onClick={editProduct}>edit</button>
+      <button onClick={() => openModal()}>Create</button>
 
-      <table>
-        <thead>
-          <tr>
-            <th>_ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {productData.map((item) => (
-            <tr key={item._id}>
-              <td>{item._id}</td>
-              <td onClick={() => showDetails(item._id)}>{item.name}</td>
-              <td>{item.price}</td>
-              <td>{item.category}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ProductList
+        productData={productData}
+        openModal={openModal}
+        handleSort={handleSort}
+        sort={sort}
+      />
+
+      <Pagination
+        pagination={pagination}
+        handlePreviousPage={handlePreviousPage}
+        handleNextPage={handleNextPage}
+      />
+
+      <ProductFormModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        onSubmit={handleSubmit}
+        onDelete={() => handleDelete(currentProduct._id)}
+        product={currentProduct}
+        setProduct={setCurrentProduct}
+      />
     </>
   );
 }

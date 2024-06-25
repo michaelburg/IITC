@@ -1,12 +1,10 @@
-// controllers/robotController.js
 const Product = require("../models/products.model");
 
-// Get products count
 async function getProductsCount(req, res) {
   const name = req.query.name || "";
   try {
     const count = await Product.countDocuments({
-      name: { $regex: name, $options: "i" }, // "i" for case-insensitive
+      name: { $regex: name, $options: "i" },
     });
     res.json({ count });
   } catch (err) {
@@ -18,24 +16,6 @@ async function getProductsCount(req, res) {
   }
 }
 
-// Get all products
-async function getProducts(req, res) {
-  const name = req.query.name || "";
-  try {
-    const products = await Product.find({
-      name: { $regex: name, $options: "i" }, // "i" for case-insensitive
-    });
-    res.json(products);
-  } catch (err) {
-    console.log(
-      "product.controller, getProducts. Error while getting products",
-      err
-    );
-    res.status(500).json({ message: err.message });
-  }
-}
-
-// Get single product
 async function getProductById(req, res) {
   const { id } = req.params;
   try {
@@ -62,9 +42,9 @@ async function getProductById(req, res) {
   }
 }
 
-// Delete product
 async function deleteProduct(req, res) {
   const { id } = req.params;
+  console.log(id);
   try {
     const deletedProduct = await Product.findByIdAndDelete(id);
 
@@ -85,7 +65,6 @@ async function deleteProduct(req, res) {
   }
 }
 
-// Create new product
 async function createProduct(req, res) {
   const productToAdd = req.body;
   const newProduct = new Product(productToAdd);
@@ -100,27 +79,24 @@ async function createProduct(req, res) {
     );
 
     if (err.name === "ValidationError") {
-      // Mongoose validation error
       console.log(`product.controller, createProduct. ${err.message}`);
       res.status(400).json({ message: err.message });
     } else {
-      // Other types of errors
       console.log(`product.controller, createProduct. ${err.message}`);
       res.status(500).json({ message: "Server error while creating product" });
     }
   }
 }
 
-// Update product
 async function updateProduct(req, res) {
   const { id } = req.params;
-  const { name, manufacturer, model, battery } = req.body;
+  const { name, price, quantity, category } = req.body;
 
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       id,
-      { name, manufacturer, model, battery },
-      { new: true, runValidators: true } // validate before updating
+      { name, price, quantity, category },
+      { new: true, runValidators: true }
     );
 
     if (!updatedProduct) {
@@ -138,22 +114,74 @@ async function updateProduct(req, res) {
     );
 
     if (err.name === "ValidationError") {
-      // Mongoose validation error
       console.log(`product.controller, updateProduct. ${err.message}`);
       res.status(400).json({ message: err.message });
     } else {
-      // Other types of errors
       console.log(`product.controller, updateProduct. ${err.message}`);
       res.status(500).json({ message: "Server error while updating product" });
     }
   }
 }
+async function getFilteredProducts(req, res) {
+  const { name, minPrice, maxPrice, category, sortColumn, sortOrder } =
+    req.query;
+  let page = parseInt(req.query.page) || 0;
+  const productsPerPage = parseInt(req.query.perPage) || Infinity;
+  let filter = {};
+
+  if (name) {
+    filter.name = { $regex: name, $options: "i" };
+  }
+
+  if (minPrice || maxPrice) {
+    filter.price = {};
+    if (minPrice) {
+      filter.price.$gte = parseFloat(minPrice);
+    }
+    if (maxPrice) {
+      filter.price.$lte = parseFloat(maxPrice);
+    }
+  }
+
+  if (category) {
+    filter.category = { $regex: category, $options: "i" };
+  }
+
+  try {
+    const totalProducts = await Product.countDocuments(filter);
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+    if (page < 0 || page >= totalPages) {
+      page = 0;
+    }
+
+    const sort = {};
+    if (sortColumn) {
+      sort[sortColumn] = sortOrder === "desc" ? -1 : 1;
+    }
+
+    const products = await Product.find(filter)
+      .sort(sort)
+      .skip(productsPerPage * page)
+      .limit(productsPerPage);
+
+    res.json({
+      totalProducts,
+      currentPage: page,
+      totalPages,
+      products,
+    });
+  } catch (err) {
+    console.error("Error while getting filtered products:", err);
+    res.status(500).json({ message: err.message });
+  }
+}
 
 module.exports = {
   getProductsCount,
-  getProducts,
   getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
+  getFilteredProducts,
 };
