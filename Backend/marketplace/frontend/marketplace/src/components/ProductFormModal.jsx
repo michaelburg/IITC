@@ -1,8 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
+import { TextField, Button, Box, Typography } from "@mui/material";
 import { deleteProductById, updateProduct, createProduct } from "../CRUD";
-
-const url = "http://localhost:3000/api/product/";
 
 Modal.setAppElement("#root");
 
@@ -40,58 +39,81 @@ const ProductFormModal = ({
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <h2>{product._id ? "Edit Product" : "Create Product"}</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          p: 4,
+        }}
+      >
+        <Typography variant="h4" component="h2" gutterBottom>
+          {product._id ? "Edit Product" : "Create Product"}
+        </Typography>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: "100%",
+            maxWidth: 400,
+          }}
+        >
+          <TextField
+            label="Name"
+            variant="outlined"
             name="name"
             value={product.name}
             onChange={handleChange}
+            fullWidth
           />
-        </label>
-        <label>
-          Price:
-          <input
+          <TextField
+            label="Price"
             type="number"
+            variant="outlined"
             name="price"
             value={product.price}
             onChange={handleChange}
+            fullWidth
           />
-        </label>
-        <label>
-          Category:
-          <input
-            type="text"
+          <TextField
+            label="Category"
+            variant="outlined"
             name="category"
             value={product.category}
             onChange={handleChange}
+            fullWidth
           />
-        </label>
-        <label>
-          Quantity:
-          <input
+          <TextField
+            label="Quantity"
             type="number"
+            variant="outlined"
             name="quantity"
             value={product.quantity}
             onChange={handleChange}
+            fullWidth
           />
-        </label>
-        {product._id ? (
-          <>
-            <button type="submit">Save Changes</button>
-            <button type="button" onClick={handleDelete}>
-              Delete
-            </button>
-          </>
-        ) : (
-          <button type="submit">Create Product</button>
-        )}
-        <button type="button" onClick={onRequestClose}>
-          Cancel
-        </button>
-      </form>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Button variant="contained" color="primary" type="submit">
+              {product._id ? "Save Changes" : "Create Product"}
+            </Button>
+            {product._id && (
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
+            )}
+            <Button variant="outlined" color="inherit" onClick={onRequestClose}>
+              Cancel
+            </Button>
+          </Box>
+        </Box>
+      </Box>
     </Modal>
   );
 };
