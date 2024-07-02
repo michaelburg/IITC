@@ -1,15 +1,14 @@
-// seed.js
-// This script seeds the database with sample data.
-// This is for development purposes only and should not be used in production.
-
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const Products = require("./models/products.model");
+const User = require("./models/user.model");
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
-// Sample data
+const SALT_ROUNDS = 10;
+
 const products = [
   {
     name: "Wireless Headphones",
@@ -193,17 +192,45 @@ const products = [
   },
 ];
 
-// Insert sample data into the database
+const users = [
+  {
+    username: "omer_mazig",
+    password: "1234",
+    firstName: "Omer",
+    lastName: "Mazig",
+  },
+  {
+    username: "baba_bubu",
+    password: "5678",
+    firstName: "Baba",
+    lastName: "BuBu",
+  },
+];
+
 async function seedDB() {
-  await connectDB(); // Connect to the database
+  await connectDB();
   try {
+    // Clear existing data
     await Products.deleteMany({});
+    await User.deleteMany({});
+
+    // Insert new products
     await Products.insertMany(products);
-    console.log("Database seeded");
+    console.log("Products data seeded");
+
+    // Insert new users with hashed passwords
+    const hashedUsers = await Promise.all(
+      users.map(async (user) => {
+        const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS);
+        return { ...user, password: hashedPassword };
+      })
+    );
+    await User.insertMany(hashedUsers);
+    console.log("Users data seeded");
   } catch (err) {
     console.error(err);
   } finally {
-    mongoose.connection.close(); // Close the database connection
+    mongoose.connection.close();
   }
 }
 

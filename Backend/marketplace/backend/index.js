@@ -1,31 +1,31 @@
+// index.js
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
 
-const PORT = process.env.PORT || 3000;
 const connectDB = require("./config/db");
 
 dotenv.config(); // Load config
 
+const PORT = process.env.PORT || 3000;
+
 async function main() {
-  // Connect to database
   await connectDB();
 
-  // MIDDLEWARES
-  // parse json body in request (for POST, PUT, PATCH requests)
   app.use(express.json());
 
-  // allow CORS for local development (for production, you should configure it properly)
   app.use(
     cors({
       origin: "http://localhost:5173",
     })
   );
 
-  // Routes
   const productRoutes = require("./routes/product.route");
+  const authRoutes = require("./routes/auth.route"); // Add this line
+
   app.use("/api/product", productRoutes);
+  app.use("/api/auth", authRoutes); // Add this line
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

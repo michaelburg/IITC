@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Input,
-  Container,
-  Box,
-  Typography,
-  TextField,
-} from "@mui/material";
+import React, { useState, useContext } from "react";
+import { Button, Container, Box, Typography, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { register } from "../CRUD";
+import { LoggedInUser } from "../App";
 
 function RegisterPage() {
   const [userData, setUserData] = useState({});
+  const [loggedInUser, setLoggedInUser] = useContext(LoggedInUser);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -21,10 +17,24 @@ function RegisterPage() {
     }));
   };
 
-  const verify = () => {
-    if (userData.UserName === "1" && userData.Password === "1") {
+  const verify = async () => {
+    const res = await register(
+      userData.username,
+      userData.Password,
+      userData.FirstName,
+      userData.LastName
+    );
+    if (res.token === undefined) {
+      handleInvalidRegister();
+    } else {
+      localStorage.setItem("user", JSON.stringify(res));
+      setLoggedInUser(res);
       navigate("/MarketPlace");
     }
+  };
+
+  const handleInvalidRegister = () => {
+    alert("Registration failed. Please try again.");
   };
 
   const handleLoginClick = () => {
@@ -49,6 +59,25 @@ function RegisterPage() {
           fullWidth
           margin="normal"
           variant="outlined"
+          label="User Name"
+          name="username"
+          value={userData.username || ""}
+          onChange={handleInputChange}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          variant="outlined"
+          label="Password"
+          type="password"
+          name="Password"
+          value={userData.Password || ""}
+          onChange={handleInputChange}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          variant="outlined"
           label="First Name"
           name="FirstName"
           value={userData.FirstName || ""}
@@ -61,25 +90,6 @@ function RegisterPage() {
           label="Last Name"
           name="LastName"
           value={userData.LastName || ""}
-          onChange={handleInputChange}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          variant="outlined"
-          label="User Name"
-          name="UserName"
-          value={userData.UserName || ""}
-          onChange={handleInputChange}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          variant="outlined"
-          label="Password"
-          type="password"
-          name="Password"
-          value={userData.Password || ""}
           onChange={handleInputChange}
         />
         <Button

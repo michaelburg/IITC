@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Container, Box, Typography, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { login } from "../CRUD";
+import { LoggedInUser } from "../App";
 
 function LoginPage() {
   const [userData, setUserData] = useState({});
+  const [loggedInUser, setLoggedInUser] = useContext(LoggedInUser);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -14,10 +17,19 @@ function LoginPage() {
     }));
   };
 
-  const verify = () => {
-    if (userData.UserName === "1" && userData.Password === "1") {
+  const verify = async () => {
+    const res = await login(userData.username, userData.Password);
+    if (res.token === undefined) {
+      handleInvalidLogin();
+    } else {
+      setLoggedInUser(res);
+      localStorage.setItem("user", JSON.stringify(res));
       navigate("/MarketPlace");
     }
+  };
+
+  const handleInvalidLogin = () => {
+    alert("Invalid username or password");
   };
 
   const handleRegisterClick = () => {
@@ -43,8 +55,8 @@ function LoginPage() {
           margin="normal"
           variant="outlined"
           label="User Name"
-          name="UserName"
-          value={userData.UserName || ""}
+          name="username"
+          value={userData.username || ""}
           onChange={handleInputChange}
         />
         <TextField
