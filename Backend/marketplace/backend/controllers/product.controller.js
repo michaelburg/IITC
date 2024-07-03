@@ -122,8 +122,84 @@ async function updateProduct(req, res) {
   }
 }
 async function getFilteredProducts(req, res) {
-  const { name, minPrice, maxPrice, category, sortColumn, sortOrder } =
-    req.query;
+  const {
+    name,
+    minPrice,
+    maxPrice,
+    category,
+    sortColumn,
+    sortOrder,
+    _id,
+    not_id,
+  } = req.query;
+  let page = parseInt(req.query.page) || 0;
+  const productsPerPage = parseInt(req.query.perPage) || Infinity;
+  let filter = {};
+  if (_id) {
+    filter.user = _id; // Assuming userId is a valid ObjectId
+  }
+  if (not_id) {
+    filter.user = { $ne: not_id }; // Exclude products associated with not_user
+  }
+  if (name) {
+    filter.name = { $regex: name, $options: "i" };
+  }
+
+  if (minPrice || maxPrice) {
+    filter.price = {};
+    if (minPrice) {
+      filter.price.$gte = parseFloat(minPrice);
+    }
+    if (maxPrice) {
+      filter.price.$lte = parseFloat(maxPrice);
+    }
+  }
+
+  if (category) {
+    filter.category = { $regex: category, $options: "i" };
+  }
+
+  try {
+    const totalProducts = await Product.countDocuments(filter);
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+    if (page < 0 || page >= totalPages) {
+      page = 0;
+    }
+
+    const sort = {};
+    if (sortColumn) {
+      sort[sortColumn] = sortOrder === "desc" ? -1 : 1;
+    }
+
+    // Find products matching the filter and sort criteria
+    const productsQuery = Product.find(filter)
+      .sort(sort)
+      .skip(productsPerPage * page)
+      .limit(productsPerPage);
+
+    // Execute products query
+    const products = await productsQuery.exec();
+    // Get all distinct prices matching the filter
+    const distinctPrices = await Product.distinct("price", filter);
+
+    // Get all distinct categories matching the filter
+    const distinctCategories = await Product.distinct("category", filter);
+    res.json({
+      totalProducts,
+      currentPage: page,
+      totalPages,
+      products,
+      distinctPrices,
+      distinctCategories,
+    });
+  } catch (err) {
+    console.error("Error while getting filtered products:", err);
+    res.status(500).json({ message: err.message });
+  }
+}
+async function getuserProducts(req, res) {
+  const { token } = req.query;
   let page = parseInt(req.query.page) || 0;
   const productsPerPage = parseInt(req.query.perPage) || Infinity;
   let filter = {};
@@ -193,4 +269,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getFilteredProducts,
+  getuserProducts,
 };

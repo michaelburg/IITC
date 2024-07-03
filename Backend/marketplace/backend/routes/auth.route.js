@@ -8,6 +8,5 @@ const {
 
 router.post("/register", register);
 router.post("/login", login);
-router.get("/getUserByToken", getUserByToken);
 
 module.exports = router;

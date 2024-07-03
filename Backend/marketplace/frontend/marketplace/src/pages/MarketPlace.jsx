@@ -46,7 +46,9 @@ function MarketPlace() {
           pagination.currentPage,
           pagination.productsPerPage,
           sort.column,
-          sort.order
+          sort.order,
+          "",
+          JSON.parse(localStorage.getItem("user")).id
         );
         setProductData(filteredProducts.products);
         setPagination((prevPagination) => ({
@@ -127,13 +129,6 @@ function MarketPlace() {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        onClick={handleCreate}
-        sx={{ marginBottom: 2 }}
-      >
-        Create
-      </Button>
       <FilterForm
         filterInput={filterInput}
         setFilterInput={setFilterInput}
@@ -144,6 +139,7 @@ function MarketPlace() {
         openModal={openModal}
         handleSort={handleSort}
         sort={sort}
+        page={"market"}
       />
       <Pagination
         pagination={pagination}

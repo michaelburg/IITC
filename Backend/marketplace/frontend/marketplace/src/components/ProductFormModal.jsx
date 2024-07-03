@@ -96,6 +96,7 @@ const ProductFormModal = ({
             onChange={handleChange}
             fullWidth
           />
+
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Button variant="contained" color="primary" type="submit">
               {product._id ? "Save Changes" : "Create Product"}

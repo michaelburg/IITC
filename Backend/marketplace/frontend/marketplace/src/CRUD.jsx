@@ -18,24 +18,28 @@ export async function updateProduct(id, data) {
 }
 
 export async function createProduct(data) {
+  const id = JSON.parse(localStorage.getItem("user")).id;
+  const productData = { ...data, user: id }; // Add user ID to data
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(productData),
   });
   return response.json();
 }
 
 export async function getFilterProduct(
-  filterInput,
-  currentPage,
-  productsPerPage,
-  sortColumn,
-  sortOrder
+  filterInput = {},
+  currentPage = 0,
+  productsPerPage = 6,
+  sortColumn = "",
+  sortOrder = "asc",
+  id = "",
+  not_id = ""
 ) {
-  const filterUrl = `${url}?name=${filterInput.name}&minPrice=${filterInput.minPrice}&maxPrice=${filterInput.maxPrice}&category=${filterInput.category}&page=${currentPage}&perPage=${productsPerPage}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`;
+  const filterUrl = `${url}?name=${filterInput.name}&minPrice=${filterInput.minPrice}&maxPrice=${filterInput.maxPrice}&category=${filterInput.category}&page=${currentPage}&perPage=${productsPerPage}&sortColumn=${sortColumn}&sortOrder=${sortOrder}&_id=${id}&not_id=${not_id}`;
   const response = await fetch(filterUrl);
   const product = await response.json();
   return product;

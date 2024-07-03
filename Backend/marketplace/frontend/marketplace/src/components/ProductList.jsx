@@ -3,7 +3,7 @@ import React from "react";
 import { Grid, Button } from "@mui/material";
 import ProductCard from "./ProductListItem";
 
-const ProductList = ({ productData, openModal, handleSort, sort }) => {
+const ProductList = ({ productData, openModal, handleSort, sort, page }) => {
   return (
     <div>
       <Grid container spacing={2}>
@@ -26,7 +26,7 @@ const ProductList = ({ productData, openModal, handleSort, sort }) => {
         </Grid>
         {productData.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item._id}>
-            <ProductCard item={item} openModal={openModal} />
+            <ProductCard item={item} openModal={openModal} page={page} />
           </Grid>
         ))}
       </Grid>

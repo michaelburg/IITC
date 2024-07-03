@@ -2,7 +2,6 @@ import React from "react";
 import { Box, TextField } from "@mui/material";
 
 const FilterForm = ({ filterInput, setFilterInput, filteredData }) => {
-  console.log(filteredData);
   const handleKeyDown = (e) => {
     if (
       e.key !== "Backspace" &&

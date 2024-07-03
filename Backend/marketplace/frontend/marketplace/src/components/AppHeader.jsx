@@ -13,6 +13,7 @@ function AppHeader() {
   const GoRegisterPage = () => {
     navigate("/RegisterPage");
   };
+
   const GoProfilePage = () => {
     navigate("/ProfilePage");
   };
@@ -26,13 +27,17 @@ function AppHeader() {
     setLoggedInUser(null);
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <>
-      {loggedInUser ? (
+      {user ? (
         <>
           <button onClick={GoMarketPlace}>MarketPlace</button>
           <button onClick={logout}>LogOut</button>
-          <button onClick={GoProfilePage}>profilePage</button>
+          <button onClick={GoProfilePage}>
+            {user.firstName + " " + user.lastName}
+          </button>
         </>
       ) : (
         <>
