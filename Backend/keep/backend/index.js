@@ -13,6 +13,7 @@ const app = express();
 connectDB();
 
 // Middleware
+app.use(express.static("public"));
 app.use(cors({ origin: "http://localhost:5173" })); // Add the correct origin
 
 app.use(express.json());
