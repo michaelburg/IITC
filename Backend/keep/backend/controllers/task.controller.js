@@ -16,6 +16,8 @@ const createTask = async (req, res) => {
   const task = new Task({
     title: req.body.title,
     body: req.body.body,
+    isPinned: req.body.isPinned,
+    todoList: req.body.todoList,
     user: req.user._id,
   });
 
@@ -41,7 +43,6 @@ const updateTask = async (req, res) => {
     task.isPinned = req.body.isPinned;
     task.todoList = req.body.todoList;
     // Update other fields as necessary
-
     const updatedTask = await task.save();
     res.json(updatedTask);
   } catch (error) {
@@ -51,6 +52,7 @@ const updateTask = async (req, res) => {
 
 // Delete a task
 const deleteTask = async (req, res) => {
+  console.log(req.params.id);
   try {
     const deletedTask = await Task.findByIdAndDelete(req.params.id);
     if (!deletedTask) {
