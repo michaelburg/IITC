@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-modal";
 import { useTasks } from "../TasksContext";
 import {
@@ -24,7 +24,7 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     width: "80%",
     maxWidth: "500px",
-    maxHeight: "400px", // Max height
+    maxHeight: "400px",
     fontFamily: "Google Sans, Roboto, Arial, sans-serif",
     fontSize: "16px",
   },
@@ -33,19 +33,26 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function TaskModal({ isOpen, onRequestClose, task }) {
-  const { updateTaskContext } = useTasks();
+  const { updateTaskContext, createTaskContext } = useTasks();
   const [editedTask, setEditedTask] = useState(null);
   const [hoveredTodoId, setHoveredTodoId] = useState(null);
-  const [collapseCompleted, setCollapseCompleted] = useState(true); // State for collapsing completed todos
+  const [collapseCompleted, setCollapseCompleted] = useState(true);
+  const newTodoRef = useRef(null);
 
   useEffect(() => {
     if (task) {
       const sortedTodoList = [
         ...task.todoList.filter((todo) => !todo.isComplete),
-        { _id: "new", title: "", isComplete: false }, // Placeholder for new todo
+        { _id: "new", title: "", isComplete: false },
         ...task.todoList.filter((todo) => todo.isComplete),
       ];
       setEditedTask({ ...task, todoList: sortedTodoList });
+    } else {
+      setEditedTask({
+        title: "",
+        body: "",
+        todoList: [{ _id: "new", title: "", isComplete: false }],
+      });
     }
   }, []);
 
@@ -68,7 +75,6 @@ function TaskModal({ isOpen, onRequestClose, task }) {
   };
 
   const handleAddTodo = () => {
-    // Add a new todo only if the last todo is not already empty
     if (
       !editedTask.todoList.length ||
       editedTask.todoList[editedTask.todoList.length - 1].title.trim() !== ""
@@ -78,6 +84,11 @@ function TaskModal({ isOpen, onRequestClose, task }) {
         ...prevTask,
         todoList: [...prevTask.todoList, newTodo],
       }));
+      setTimeout(() => {
+        if (newTodoRef.current) {
+          newTodoRef.current.focus();
+        }
+      }, 0);
     }
   };
 
@@ -87,9 +98,7 @@ function TaskModal({ isOpen, onRequestClose, task }) {
         todo._id === todoId ? { ...todo, title: value } : todo
       );
 
-      // Check if the last todo is being edited and add a new placeholder if necessary
       if (todoId === "new" && value.trim() !== "") {
-        // Remove the current placeholder if its value is being edited
         const newTodo = { _id: Date.now(), title: value, isComplete: false };
         const newUpdatedTodoList = updatedTodoList.filter(
           (todo) => todo._id !== "new"
@@ -97,7 +106,11 @@ function TaskModal({ isOpen, onRequestClose, task }) {
 
         return {
           ...prevTask,
-          todoList: [...newUpdatedTodoList, { _id: "new", title: "" }, newTodo],
+          todoList: [
+            ...newUpdatedTodoList,
+            { _id: "new", title: "", isComplete: false },
+            newTodo,
+          ],
         };
       }
 
@@ -109,7 +122,6 @@ function TaskModal({ isOpen, onRequestClose, task }) {
   };
 
   const handleDeleteTodo = (todoId) => {
-    // Remove the todo completely
     setEditedTask((prevTask) => ({
       ...prevTask,
       todoList: prevTask.todoList.filter((todo) => todo._id !== todoId),
@@ -117,13 +129,21 @@ function TaskModal({ isOpen, onRequestClose, task }) {
   };
 
   const handleCloseModal = () => {
-    updateTaskContext(editedTask);
+    if (!editedTask) {
+      onRequestClose();
+      return;
+    }
+
+    if (editedTask._id) {
+      updateTaskContext(editedTask);
+    } else {
+      createTaskContext(editedTask);
+    }
     onRequestClose();
   };
 
   if (!editedTask) return null;
 
-  // Separate todos into uncompleted, placeholders, and completed todos
   const uncompletedTodos = editedTask.todoList.filter(
     (todo) => !todo.isComplete && todo._id !== "new"
   );
@@ -157,7 +177,7 @@ function TaskModal({ isOpen, onRequestClose, task }) {
           margin="normal"
           InputProps={{
             sx: {
-              fontSize: "22px", // Title font size
+              fontSize: "22px",
               fontFamily: "Google Sans, Roboto, Arial, sans-serif",
             },
           }}
@@ -165,11 +185,11 @@ function TaskModal({ isOpen, onRequestClose, task }) {
         <TextField
           fullWidth
           name="body"
+          placeholder="Body"
           value={editedTask.body}
           onChange={handleChange}
           margin="normal"
           multiline
-          rows={4}
         />
 
         {uncompletedTodos.map((todo) => (
@@ -195,9 +215,8 @@ function TaskModal({ isOpen, onRequestClose, task }) {
                 }
               }}
               InputProps={{
-                disableUnderline: true,
                 sx: {
-                  "& fieldset": { border: "none" }, // Remove default border
+                  "& fieldset": { border: "none" },
                   "&:hover": {
                     borderTop: "1px solid #ccc",
                     borderBottom: "1px solid #ccc",
@@ -215,12 +234,10 @@ function TaskModal({ isOpen, onRequestClose, task }) {
           </Box>
         ))}
 
-        {/* Divider between new todo and completed todos */}
-
         <Box display="flex" alignItems="center">
           <IconButton
             aria-label="Add"
-            onClick={handleAddTodo} // Ensure handleAddTodo is called
+            onClick={handleAddTodo}
             style={{ display: newTodoPlaceholder.title ? "none" : "block" }}
           >
             <AddIcon />
@@ -230,9 +247,14 @@ function TaskModal({ isOpen, onRequestClose, task }) {
             placeholder="Add a todo"
             value=""
             onChange={(e) => handleTodoChange("new", e.target.value)}
+            inputRef={newTodoRef}
             InputProps={{
               sx: {
-                "& fieldset": { border: "none" }, // Remove default border
+                "& fieldset": { border: "none" },
+                "&:hover": {
+                  borderTop: "1px solid #ccc",
+                  borderBottom: "1px solid #ccc",
+                },
               },
             }}
           />
@@ -241,7 +263,6 @@ function TaskModal({ isOpen, onRequestClose, task }) {
         {completedTodos.length > 0 ? (
           <>
             <Divider sx={{ my: 2 }} />
-            {/* Collapsible Completed Todos */}
             <Typography
               variant="subtitle1"
               onClick={() => setCollapseCompleted(!collapseCompleted)}
@@ -269,16 +290,14 @@ function TaskModal({ isOpen, onRequestClose, task }) {
                     onChange={(e) => handleTodoChange(todo._id, e.target.value)}
                     InputProps={{
                       sx: {
-                        "& fieldset": { border: "none" }, // Remove default border
+                        "& fieldset": { border: "none" },
                       },
                     }}
                   />
                 </Box>
               ))}
           </>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </Box>
     </Modal>
   );

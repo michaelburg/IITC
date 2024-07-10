@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../CRUD";
-import { useNavigate } from "react-router-dom";
-import {
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  Box,
-} from "@mui/material";
+import { useNavigate, Link } from "react-router-dom";
+import { Container, Typography, TextField, Button, Box } from "@mui/material";
 
 function LoginPage() {
   const [details, setDetails] = useState({
@@ -83,6 +76,7 @@ function LoginPage() {
             Login
           </Button>
         </Box>
+        <Link to="/RegisterPage">Don't have an account? Register here</Link>
       </Box>
     </Container>
   );

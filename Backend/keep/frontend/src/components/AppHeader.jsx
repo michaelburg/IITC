@@ -46,20 +46,14 @@ function AppHeader() {
             sx={{ cursor: "pointer", flexGrow: 1 }}
             onClick={GoHomePage}
           >
-            HomePage
+            Home
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Button color="inherit" onClick={GoLoginPage}>
-              Login
-            </Button>
-            <Button color="inherit" onClick={GoRegisterPage}>
-              Register
-            </Button>
             <Button color="inherit" onClick={GoTasksPage}>
-              TasksPage
+              Tasks
             </Button>
             <Button color="inherit" onClick={GoAboutPage}>
-              AboutPage
+              About us
             </Button>
             <IconButton color="inherit" onClick={logout}>
               <AccountCircle />

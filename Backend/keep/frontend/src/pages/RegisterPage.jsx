@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { register } from "../CRUD";
-import { useNavigate } from "react-router-dom";
-import {
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  Box,
-} from "@mui/material";
+import { useNavigate, Link } from "react-router-dom";
+import { Container, Typography, TextField, Button, Box } from "@mui/material";
 
 function RegisterPage() {
   const [details, setDetails] = useState({
@@ -86,7 +79,6 @@ function RegisterPage() {
               setDetails({ ...details, password: e.target.value })
             }
           />
-
           <Button
             type="submit"
             fullWidth
@@ -96,6 +88,7 @@ function RegisterPage() {
             Register
           </Button>
         </Box>
+        <Link to="/LoginPage">Already have an account? Login here</Link>
       </Box>
     </Container>
   );

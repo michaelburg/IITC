@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import App from "./App.jsx"; // Adjust the file extension as per your setup
+import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { TasksProvider } from "./TasksContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <TasksProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <TasksProvider>
         <App />
-      </BrowserRouter>
-    </TasksProvider>
+      </TasksProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

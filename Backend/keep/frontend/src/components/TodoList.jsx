@@ -35,7 +35,7 @@ function TodoList({ todos, task }) {
               width: "18px",
               height: "18px",
               mr: 1,
-              paddingLeft: "16px", // Adding left padding to the Checkbox
+              paddingLeft: "16px",
             }}
           />
           <Typography
