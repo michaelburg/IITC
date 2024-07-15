@@ -52,6 +52,7 @@ function TaskModal({ isOpen, onRequestClose, task }) {
         title: "",
         body: "",
         todoList: [{ _id: "new", title: "", isComplete: false }],
+        isPinned: false,
       });
     }
   }, []);
@@ -155,65 +156,102 @@ function TaskModal({ isOpen, onRequestClose, task }) {
   );
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={handleCloseModal}
-      style={customStyles}
-    >
-      <Box
-        sx={{
-          maxHeight: "600px",
-          overflowY: "auto",
-          mb: 2,
-          fontFamily: "Google Sans, Roboto, Arial, sans-serif",
-        }}
+    <>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={handleCloseModal}
+        style={customStyles}
       >
-        <TextField
-          fullWidth
-          name="title"
-          placeholder="Title"
-          value={editedTask.title}
-          onChange={handleChange}
-          margin="normal"
-          InputProps={{
-            sx: {
-              fontSize: "22px",
-              fontFamily: "Google Sans, Roboto, Arial, sans-serif",
-            },
+        <Box
+          sx={{
+            maxHeight: "600px",
+            overflowY: "auto",
+            mb: 2,
+            fontFamily: "Google Sans, Roboto, Arial, sans-serif",
           }}
-        />
-        <TextField
-          fullWidth
-          name="body"
-          placeholder="Body"
-          value={editedTask.body}
-          onChange={handleChange}
-          margin="normal"
-          multiline
-        />
+        >
+          <TextField
+            fullWidth
+            name="title"
+            placeholder="Title"
+            value={editedTask.title}
+            onChange={handleChange}
+            margin="normal"
+            InputProps={{
+              sx: {
+                fontSize: "22px",
+                fontFamily: "Google Sans, Roboto, Arial, sans-serif",
+              },
+            }}
+          />
+          <TextField
+            fullWidth
+            name="body"
+            placeholder="Body"
+            value={editedTask.body}
+            onChange={handleChange}
+            margin="normal"
+            multiline
+          />
 
-        {uncompletedTodos.map((todo) => (
-          <Box
-            key={todo._id}
-            display="flex"
-            alignItems="center"
-            onMouseEnter={() => setHoveredTodoId(todo._id)}
-            onMouseLeave={() => setHoveredTodoId(null)}
-          >
-            <Checkbox
-              checked={todo.isComplete}
-              onChange={() => handleToggleComplete(todo._id)}
-              sx={{ marginRight: 1 }}
-            />
+          {uncompletedTodos.map((todo) => (
+            <Box
+              key={todo._id}
+              display="flex"
+              alignItems="center"
+              onMouseEnter={() => setHoveredTodoId(todo._id)}
+              onMouseLeave={() => setHoveredTodoId(null)}
+            >
+              <Checkbox
+                checked={todo.isComplete}
+                onChange={() => handleToggleComplete(todo._id)}
+                sx={{ marginRight: 1 }}
+              />
+              <TextField
+                fullWidth
+                value={todo.title}
+                onChange={(e) => handleTodoChange(todo._id, e.target.value)}
+                onBlur={() => {
+                  if (todo.title.trim() === "") {
+                    handleDeleteTodo(todo._id);
+                  }
+                }}
+                InputProps={{
+                  sx: {
+                    "& fieldset": { border: "none" },
+                    "&:hover": {
+                      borderTop: "1px solid #ccc",
+                      borderBottom: "1px solid #ccc",
+                    },
+                  },
+                }}
+              />
+              <IconButton
+                aria-label="Delete"
+                onClick={() => handleDeleteTodo(todo._id)}
+                style={{
+                  display: hoveredTodoId === todo._id ? "block" : "none",
+                }}
+              >
+                <ClearIcon />
+              </IconButton>
+            </Box>
+          ))}
+
+          <Box display="flex" alignItems="center">
+            <IconButton
+              aria-label="Add"
+              onClick={handleAddTodo}
+              style={{ display: newTodoPlaceholder.title ? "none" : "block" }}
+            >
+              <AddIcon />
+            </IconButton>
             <TextField
               fullWidth
-              value={todo.title}
-              onChange={(e) => handleTodoChange(todo._id, e.target.value)}
-              onBlur={() => {
-                if (todo.title.trim() === "") {
-                  handleDeleteTodo(todo._id);
-                }
-              }}
+              placeholder="Add a todo"
+              value=""
+              onChange={(e) => handleTodoChange("new", e.target.value)}
+              inputRef={newTodoRef}
               InputProps={{
                 sx: {
                   "& fieldset": { border: "none" },
@@ -224,82 +262,51 @@ function TaskModal({ isOpen, onRequestClose, task }) {
                 },
               }}
             />
-            <IconButton
-              aria-label="Delete"
-              onClick={() => handleDeleteTodo(todo._id)}
-              style={{ display: hoveredTodoId === todo._id ? "block" : "none" }}
-            >
-              <ClearIcon />
-            </IconButton>
           </Box>
-        ))}
 
-        <Box display="flex" alignItems="center">
-          <IconButton
-            aria-label="Add"
-            onClick={handleAddTodo}
-            style={{ display: newTodoPlaceholder.title ? "none" : "block" }}
-          >
-            <AddIcon />
-          </IconButton>
-          <TextField
-            fullWidth
-            placeholder="Add a todo"
-            value=""
-            onChange={(e) => handleTodoChange("new", e.target.value)}
-            inputRef={newTodoRef}
-            InputProps={{
-              sx: {
-                "& fieldset": { border: "none" },
-                "&:hover": {
-                  borderTop: "1px solid #ccc",
-                  borderBottom: "1px solid #ccc",
-                },
-              },
-            }}
-          />
+          {completedTodos.length > 0 ? (
+            <>
+              <Divider sx={{ my: 2 }} />
+              <Typography
+                variant="subtitle1"
+                onClick={() => setCollapseCompleted(!collapseCompleted)}
+                style={{
+                  cursor: "pointer",
+                  mt: 1,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                Completed Todos ({completedTodos.length}){" "}
+                {collapseCompleted ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+              </Typography>
+              {collapseCompleted &&
+                completedTodos.map((todo) => (
+                  <Box key={todo._id} display="flex" alignItems="center">
+                    <Checkbox
+                      checked={todo.isComplete}
+                      onChange={() => handleToggleComplete(todo._id)}
+                      sx={{ marginRight: 1 }}
+                    />
+                    <TextField
+                      fullWidth
+                      value={todo.title}
+                      onChange={(e) =>
+                        handleTodoChange(todo._id, e.target.value)
+                      }
+                      InputProps={{
+                        sx: {
+                          "& fieldset": { border: "none" },
+                        },
+                      }}
+                    />
+                  </Box>
+                ))}
+            </>
+          ) : null}
         </Box>
-
-        {completedTodos.length > 0 ? (
-          <>
-            <Divider sx={{ my: 2 }} />
-            <Typography
-              variant="subtitle1"
-              onClick={() => setCollapseCompleted(!collapseCompleted)}
-              style={{
-                cursor: "pointer",
-                mt: 1,
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              Completed Todos ({completedTodos.length}){" "}
-              {collapseCompleted ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-            </Typography>
-            {collapseCompleted &&
-              completedTodos.map((todo) => (
-                <Box key={todo._id} display="flex" alignItems="center">
-                  <Checkbox
-                    checked={todo.isComplete}
-                    onChange={() => handleToggleComplete(todo._id)}
-                    sx={{ marginRight: 1 }}
-                  />
-                  <TextField
-                    fullWidth
-                    value={todo.title}
-                    onChange={(e) => handleTodoChange(todo._id, e.target.value)}
-                    InputProps={{
-                      sx: {
-                        "& fieldset": { border: "none" },
-                      },
-                    }}
-                  />
-                </Box>
-              ))}
-          </>
-        ) : null}
-      </Box>
-    </Modal>
+      </Modal>
+    </>
   );
 }
 

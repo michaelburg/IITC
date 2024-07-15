@@ -21,15 +21,7 @@ function NotePlaceholder() {
         variant="outlined"
         placeholder="Take a note..."
       />
-      <TaskModal
-        isOpen={isModalOpen}
-        onRequestClose={handleCloseModal}
-        task={{
-          title: "",
-          body: "",
-          todoList: [{ _id: "new", title: "", isComplete: false }],
-        }}
-      />
+      <TaskModal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
   );
 }
