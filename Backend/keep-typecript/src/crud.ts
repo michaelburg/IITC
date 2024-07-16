@@ -1,4 +1,6 @@
-export async function getTasks() {
+import { Task } from "./types";
+
+export async function getTasks(): Promise<Task[]> {
   const token = (localStorage.getItem("token") || "").replace(/"/g, "");
   const url = "http://localhost:3000/api/tasks";
 
@@ -23,29 +25,34 @@ export async function getTasks() {
   }
 }
 
-export async function updateTask(updatedTask) {
-  const token = localStorage.getItem("token").replace(/"/g, "");
+export async function updateTask(updatedTask: Task): Promise<Task> {
+  const token = localStorage.getItem("token")?.replace(/"/g, "");
   const url = "http://localhost:3000/api/tasks";
 
   const cleanedTodoList = updatedTask.todoList
     .filter((todo) => todo.title.trim() !== "")
     .map((todo) => {
-      const { _id, ...rest } = todo;
-      return rest;
+      // Preserve _id property
+      return {
+        ...todo,
+        _id: todo._id || new Date().toISOString(), // Add _id if it's missing
+      };
     });
 
-  const cleanedTask = {
+  const cleanedTask: Task = {
     ...updatedTask,
     todoList: cleanedTodoList,
   };
+
   if (
-    cleanedTask.title == "" &&
-    cleanedTask.body == "" &&
-    cleanedTask.todoList.length == 0
+    cleanedTask.title === "" &&
+    cleanedTask.body === "" &&
+    cleanedTask.todoList.length === 0
   ) {
-    deleteTask(cleanedTask);
-    return;
+    await deleteTask(cleanedTask);
+    return updatedTask;
   }
+
   try {
     const response = await fetch(`${url}/${updatedTask._id}`, {
       method: "PUT",
@@ -60,33 +67,40 @@ export async function updateTask(updatedTask) {
       throw new Error("Failed to update task");
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     throw error;
   }
 }
 
-export async function createTask(newTask) {
-  const token = localStorage.getItem("token").replace(/"/g, "");
+export async function createTask(newTask: Task): Promise<Task> {
+  console.log(newTask);
+  
+  const token = localStorage.getItem("token")?.replace(/"/g, "");
   const url = "http://localhost:3000/api/tasks";
+
   const cleanedTodoList = newTask.todoList
     .filter((todo) => todo.title.trim() !== "")
     .map((todo) => {
-      const { _id, ...rest } = todo;
-      return rest;
+      // Preserve _id property
+      return {
+        ...todo,
+        _id: todo._id || new Date().toISOString(), // Add _id if it's missing
+      };
     });
 
-  const cleanedTask = {
+  const cleanedTask: Task = {
     ...newTask,
     todoList: cleanedTodoList,
   };
+
   if (
-    cleanedTask.title == "" &&
-    cleanedTask.body == "" &&
-    cleanedTask.todoList.length == 0
+    cleanedTask.title === "" &&
+    cleanedTask.body === "" &&
+    cleanedTask.todoList.length === 0
   )
-    return;
+    return newTask;
+
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -107,8 +121,8 @@ export async function createTask(newTask) {
   }
 }
 
-export async function deleteTask(task) {
-  const token = localStorage.getItem("token").replace(/"/g, "");
+export async function deleteTask(task: Task): Promise<Task> {
+  const token = localStorage.getItem("token")?.replace(/"/g, "");
   const url = `http://localhost:3000/api/tasks/${task._id}`;
 
   try {
@@ -124,14 +138,13 @@ export async function deleteTask(task) {
       throw new Error("Failed to delete task");
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     throw error;
   }
 }
 
-export async function register(details) {
+export async function register(details: Record<string, any>): Promise<any> {
   const url = "http://localhost:3000/api/auth/register";
   const response = await fetch(url, {
     method: "POST",
@@ -143,7 +156,7 @@ export async function register(details) {
   return response.json();
 }
 
-export async function login(details) {
+export async function login(details: Record<string, any>): Promise<any> {
   const url = "http://localhost:3000/api/auth/login";
   const response = await fetch(url, {
     method: "POST",

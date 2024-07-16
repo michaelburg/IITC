@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPgae";
+import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import TasksPage from "./pages/TasksPage";
 import AboutPage from "./pages/AboutPage";
 import AppHeader from "./components/AppHeader";
 import NotFoundPage from "./pages/NotFoundPage";
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <AppHeader />

@@ -1,19 +1,29 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { getTasks, updateTask, createTask, deleteTask } from "./CRUD";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { getTasks, updateTask, createTask, deleteTask } from "./crud";
 import { useNavigate } from "react-router-dom";
+import { Task } from "./types";
 
-const TasksContext = createContext();
+interface TasksContextType {
+  tasks: Task[];
+  error: string | null;
+  fetchTasks: () => Promise<void>;
+  updateTaskContext: (updatedTask: Task) => Promise<void>;
+  createTaskContext: (newTask: Task) => Promise<void>;
+  deleteTaskContext: (taskToDelete: Task) => Promise<void>;
+}
 
-export const TasksProvider = ({ children }) => {
-  const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState(null);
+const TasksContext = createContext<TasksContextType | undefined>(undefined);
+
+export const TasksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const fetchTasks = async () => {
     try {
       const tasks = await getTasks();
       setTasks(tasks);
-    } catch (error) {
+    } catch (error: any) {
       if (error.message === "Unauthorized") {
         navigate("/LoginPage");
       } else {
@@ -26,7 +36,7 @@ export const TasksProvider = ({ children }) => {
     fetchTasks();
   }, []);
 
-  const updateTaskContext = async (updatedTask) => {
+  const updateTaskContext = async (updatedTask: Task) => {
     try {
       await updateTask(updatedTask);
       setTasks((prevTasks) =>
@@ -34,7 +44,7 @@ export const TasksProvider = ({ children }) => {
           task._id === updatedTask._id ? updatedTask : task
         )
       );
-    } catch (error) {
+    } catch (error: any) {
       if (error.message === "Unauthorized") {
         navigate("/LoginPage");
       } else {
@@ -43,11 +53,11 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const createTaskContext = async (newTask) => {
+  const createTaskContext = async (newTask: Task) => {
     try {
       const createdTask = await createTask(newTask);
       setTasks((prevTasks) => [...prevTasks, createdTask]);
-    } catch (error) {
+    } catch (error: any) {
       if (error.message === "Unauthorized") {
         navigate("/LoginPage");
       } else {
@@ -56,13 +66,13 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const deleteTaskContext = async (taskToDelete) => {
+  const deleteTaskContext = async (taskToDelete: Task) => {
     try {
       await deleteTask(taskToDelete);
       setTasks((prevTasks) =>
         prevTasks.filter((task) => task._id !== taskToDelete._id)
       );
-    } catch (error) {
+    } catch (error: any) {
       if (error.message === "Unauthorized") {
         navigate("/LoginPage");
       } else {
@@ -87,4 +97,10 @@ export const TasksProvider = ({ children }) => {
   );
 };
 
-export const useTasks = () => useContext(TasksContext);
+export const useTasks = () => {
+  const context = useContext(TasksContext);
+  if (!context) {
+    throw new Error("useTasks must be used within a TasksProvider");
+  }
+  return context;
+};
