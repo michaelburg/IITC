@@ -8,6 +8,8 @@ import MarketPlace from "./pages/MarketPlace";
 import NotFound from "./pages/NotFound";
 import AppHeader from "./components/AppHeader";
 import ProfilePage from "./pages/ProfilePage";
+import MyProductsPage from "./pages/MyProductsPage";
+import ShoppingCartPage from "./pages/ShoppingCartPage";
 export const LoggedInUser = React.createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -21,6 +23,8 @@ function App() {
           <Route path="/RegisterPage" element={<RegisterPage />} />
           <Route path="/MarketPlace" element={<MarketPlace />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
+          <Route path="/MyProductsPage" element={<MyProductsPage />} />
+          <Route path="/ShoppingCartPage" element={<ShoppingCartPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </LoggedInUser.Provider>

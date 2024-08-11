@@ -41,6 +41,9 @@ function MarketPlace() {
   useEffect(() => {
     async function fetchData() {
       try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user ? user.id : "";
+
         const filteredProducts = await getFilterProduct(
           filterInput,
           pagination.currentPage,
@@ -48,7 +51,7 @@ function MarketPlace() {
           sort.column,
           sort.order,
           "",
-          JSON.parse(localStorage.getItem("user")).id
+          userId
         );
         setProductData(filteredProducts.products);
         setPagination((prevPagination) => ({
@@ -121,10 +124,6 @@ function MarketPlace() {
   const handleDelete = async (id) => {
     setModalIsOpen(false);
     setFilterInput({ ...filterInput });
-  };
-
-  const handleCreate = () => {
-    openModal();
   };
 
   return (

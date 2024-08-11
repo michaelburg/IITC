@@ -23,8 +23,10 @@ async function main() {
 
   const productRoutes = require("./routes/product.route");
   const authRoutes = require("./routes/auth.route"); // Add this line
+  const cartRoutes = require("./routes/cart.route"); // Add this line
 
   app.use("/api/product", productRoutes);
+  app.use("/api/cart", cartRoutes); // Add this line
   app.use("/api/auth", authRoutes); // Add this line
 
   app.listen(PORT, () => {

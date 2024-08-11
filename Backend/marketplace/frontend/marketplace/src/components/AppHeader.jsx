@@ -21,10 +21,17 @@ function AppHeader() {
   const GoMarketPlace = () => {
     navigate("/MarketPlace");
   };
+  const goMyProductsPage = () => {
+    navigate("/MyProductsPage");
+  };
+  const goShoppingCartPage = () => {
+    navigate("/ShoppingCartPage");
+  };
 
   const logout = () => {
     localStorage.removeItem("user");
     setLoggedInUser(null);
+    navigate("/MarketPlace");
   };
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -35,6 +42,8 @@ function AppHeader() {
         <>
           <button onClick={GoMarketPlace}>MarketPlace</button>
           <button onClick={logout}>LogOut</button>
+          <button onClick={goMyProductsPage}>my products</button>
+          <button onClick={goShoppingCartPage}>shopping cart</button>
           <button onClick={GoProfilePage}>
             {user.firstName + " " + user.lastName}
           </button>

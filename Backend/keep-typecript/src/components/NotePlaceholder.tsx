@@ -10,7 +10,6 @@ const NotePlaceholder: React.FC = () => {
   };
 
   const handleCloseModal = () => {
-    
     setModalOpen(false);
   };
 

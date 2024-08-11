@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, CardContent, Typography, Button } from "@mui/material";
+import { Card, CardContent, Typography, Button, Box } from "@mui/material";
+import { ClassNames } from "@emotion/react";
 
 function ProductListItem({ item, openModal, page }) {
   return (
@@ -17,11 +18,13 @@ function ProductListItem({ item, openModal, page }) {
           <Typography variant="body2" color="error">
             Sold Out
           </Typography>
-        ) : (
-          <>
+        ) : JSON.parse(localStorage.getItem("user")) ? (
+          <Box display="flex" justifyContent={"space-between"}>
             <Button variant="contained">Buy Now</Button>
             <Button variant="contained">Add to Cart</Button>
-          </>
+          </Box>
+        ) : (
+          <></>
         )}
       </CardContent>
     </Card>
